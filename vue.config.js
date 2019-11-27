@@ -2,6 +2,7 @@
 const path = require('path')
 
 module.exports = {
+  lintOnSave: 'error',
   chainWebpack: config => {
     config.entryPoints
       .get('app')
@@ -10,5 +11,11 @@ module.exports = {
     config.resolve.alias
       .delete('@')
       .set('@', path.resolve(__dirname, 'example'))
+  },
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   }
 }

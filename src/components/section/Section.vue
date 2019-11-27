@@ -4,6 +4,6 @@
 
 <script>
 export default {
- name: 'vc-section' 
+  name: 'vc-section'
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <main 
-  :class="direction ? `vc-is-${direction}` : isHorizontal ? `vc-is-horizontal` : `vc-is-vertical`" 
-  class="vc-main" 
+  <main
+  :class="direction ? `vc-is-${direction}` : isHorizontal ? `vc-is-horizontal` : `vc-is-vertical`"
+  class="vc-main"
   :style="{width:width || '100%', height: height}">
   <slot></slot>
   </main>
@@ -11,32 +11,32 @@
 // import  { checkUserAgent } from '../util/checkUseAgent'
 
 export default {
- name: 'vc-main' ,
- props: {
-   width: {
-     type: String,
-     default: ''
-   },
-   height: {
-     type: String,
-     default : ''
-   },
-   direction: {
-     type: String,
-     default: ''
-   }
- },
- data() {
-   return {
-     isHorizontal: false
-   }
- },
- mounted() {
-   this.checkAgent();
-   this.checkVertical();
- },
- methods: {
-   checkAgent () {
+  name: 'vc-main',
+  props: {
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: String,
+      default: ''
+    },
+    direction: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      isHorizontal: false
+    }
+  },
+  mounted () {
+    this.checkAgent()
+    this.checkVertical()
+  },
+  methods: {
+    checkAgent () {
     // const userAgent = checkUserAgent();
     // if(userAgent && userAgent.hasOwnProperty('browser')){
     //  if(userAgent.browser.includes('IE')) {
@@ -47,14 +47,14 @@ export default {
     //     }
     //   }
     // }
-   },
-   checkVertical () {
-    const list = Array.from(this.$children);
-    if(list.length) {
-      this.isHorizontal = list.some(item => item.width);
+    },
+    checkVertical () {
+      const list = Array.from(this.$children)
+      if (list.length) {
+        this.isHorizontal = list.some(item => item.width)
+      }
     }
-   }
- },
+  }
 }
 </script>
 

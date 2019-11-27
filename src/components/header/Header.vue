@@ -6,14 +6,14 @@
 export default {
   name: 'vc-header',
   props: {
-   width: {
-     type: String,
-     default: ''
-   },
-   height: {
-     type: String,
-     default : ''
-   },
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>

@@ -5,7 +5,7 @@ const components = {}
 requireComponents.keys().forEach(fileName => {
   const name = fileName.match(/(?<=(\/))\w+(?=\/index\.js)/)[0]
   const component = require(`${fileName}`).default
-  
+
   components[name] = component
 })
 
@@ -19,6 +19,3 @@ export default {
     }
   }
 }
-
-
-

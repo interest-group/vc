@@ -6,14 +6,14 @@
 export default {
   name: 'vc-nav',
   props: {
-   width: {
-     type: String,
-     default: ''
-   },
-   height: {
-     type: String,
-     default : 'auto'
-   },
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: String,
+      default: 'auto'
+    }
   }
 }
 </script>
@@ -23,4 +23,3 @@ export default {
     flex: 1 1 auto;
   }
 </style>
-

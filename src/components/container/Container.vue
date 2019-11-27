@@ -1,7 +1,7 @@
 <template>
   <div class="vc-container" :class="direction ? `vc-is-${direction}` : isHorizontal ? `vc-is-horizontal` : `vc-is-vertical`" :style="{width: width, height: height}">
     <slot></slot>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -21,30 +21,30 @@ export default {
       default: ''
     }
   },
-  data() {
+  data () {
     return {
       isHorizontal: false
     }
   },
-  created() {
+  created () {
     // console.log(this.$children,'childrennnnnnn',this.$children.length)
   },
-  mounted() {
-    const list = Array.from(this.$children);
-    if(list.length) {
-      this.isHorizontal = list.some(item => item.width); 
+  mounted () {
+    const list = Array.from(this.$children)
+    if (list.length) {
+      this.isHorizontal = list.some(item => item.width)
     }
     // if(list
-  },
+  }
 }
 </script>
 
-<style scoped> 
+<style scoped>
 /* @import url('../theme/p-class.css');  */
 </style>
 <style scoped>
   .vc-container {
     display: flex;
   }
-  
+
 </style>
