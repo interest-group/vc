@@ -1,0 +1,8 @@
+{
+  "linters": {
+    "**/*{.vue,.js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
