@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'vc-rticle',
+  name: 'vc-article',
   props: {
     width: {
       type: String,

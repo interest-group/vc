@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'leHeader',
+  name: 'vc-header',
   props: {
    width: {
      type: String,

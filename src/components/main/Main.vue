@@ -37,10 +37,10 @@ export default {
  },
  methods: {
    checkAgent () {
-    // const userArent = checkUserAgent();
-    // if(userArent && userArent.hasOwnProperty('browser')){
-    //  if(userArent.browser.includes('IE')) {
-    //   if(parseInt(userArent.ver) <= 8.0) {
+    // const userAgent = checkUserAgent();
+    // if(userAgent && userAgent.hasOwnProperty('browser')){
+    //  if(userAgent.browser.includes('IE')) {
+    //   if(parseInt(userAgent.ver) <= 8.0) {
     //     let body = document.getElementsByTagName['body'][0]
     //     let main = document.createElement('main');
     //     body.appendChild(main)
