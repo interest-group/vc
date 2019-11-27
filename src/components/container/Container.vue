@@ -1,12 +1,12 @@
 <template>
-  <div class="le-container" :class="direction ? `le-is-${direction}` : isHorizontal ? `le-is-horizontal` : `le-is-vertical`" :style="{width: width, height: height}">
+  <div class="vc-container" :class="direction ? `vc-is-${direction}` : isHorizontal ? `vc-is-horizontal` : `vc-is-vertical`" :style="{width: width, height: height}">
     <slot></slot>
   </div>  
 </template>
 
 <script>
 export default {
-  name: 'leContainer',
+  name: 'vc-container',
   props: {
     direction: {
       type: String,
@@ -39,9 +39,11 @@ export default {
 }
 </script>
 
-<style scoped> @import url('../theme/p-class.css'); </style>
+<style scoped> 
+/* @import url('../theme/p-class.css');  */
+</style>
 <style scoped>
-  .le-container {
+  .vc-container {
     display: flex;
   }
   

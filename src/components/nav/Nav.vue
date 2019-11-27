@@ -1,10 +1,10 @@
 <template>
-  <nav class="le-nav" :style="{width:width || '100%', height: height}"><slot></slot></nav>
+  <nav class="vc-nav" :style="{width:width || '100%', height: height}"><slot></slot></nav>
 </template>
 
 <script>
 export default {
-  name: 'leNav',
+  name: 'vc-nav',
   props: {
    width: {
      type: String,
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
-  .le-nav {
+  .vc-nav {
     flex: 1 1 auto;
   }
 </style>

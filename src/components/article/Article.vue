@@ -1,10 +1,10 @@
-<template> 
-  <aside class="le-aside" :style="{width: width || '100%', height:height}"><slot></slot></aside>  
+<template>
+    <article class="vc-article" :style="{width: width || '100%', height:height}"><slot></slot></article>
 </template>
 
 <script>
 export default {
-  name: 'leAside',
+  name: 'vc-rticle',
   props: {
     width: {
       type: String,
@@ -19,9 +19,8 @@ export default {
 </script>
 
 <style scoped>
-  .le-aside {
+  .vc-article {
     flex:1 1 auto;
     align-self: stretch;
   }
 </style>
-

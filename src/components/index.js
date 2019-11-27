@@ -12,7 +12,10 @@ requireComponents.keys().forEach(fileName => {
 export default {
   install: (Vue) => {
     for (let key in components) {
-      Vue.component(`vc-${key}`, components[key])
+      if (!components[key].name) {
+        throw new Error('组件必须添加"name"属性，格式为："vc-{组件名称}"')
+      }
+      Vue.component(components[key].name, components[key])
     }
   }
 }
