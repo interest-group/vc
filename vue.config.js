@@ -1,6 +1,5 @@
 // vue.config.js
 const path = require('path')
-
 module.exports = {
   lintOnSave: 'error',
   chainWebpack: config => {
@@ -11,6 +10,16 @@ module.exports = {
     config.resolve.alias
       .delete('@')
       .set('@', path.resolve(__dirname, 'example'))
+    config.module.rule('md')
+      .test(/\.md/)
+      .use('vue-loader')
+      .loader('vue-loader')
+      .end()
+      .use('vue-markdown-loader')
+      .loader('vue-markdown-loader/lib/markdown-compiler')
+      .options({
+        raw: true
+      })
   },
   devServer: {
     overlay: {
