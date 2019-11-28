@@ -33,7 +33,7 @@
     }
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "npm run lint"
   },
   "browserslist": [
     "> 1%",
