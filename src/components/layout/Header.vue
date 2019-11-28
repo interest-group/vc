@@ -1,6 +1,6 @@
 <template>
-  <header 
-    class="vc-header" 
+  <header
+    class="vc-header"
     :style="{width:width || '100%', height}">
     <slot></slot>
   </header>
@@ -10,14 +10,14 @@
 export default {
   name: 'vc-header',
   props: {
-   width: {
-     type: String,
-     default: ''
-   },
-   height: {
-     type: String,
-     default : ''
-   },
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
