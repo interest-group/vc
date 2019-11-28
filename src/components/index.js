@@ -1,21 +1,19 @@
 const requireComponents = require.context('../components', true, /\w+\/index\.js/)
 
-const components = {}
+let list = []
 
 requireComponents.keys().forEach(fileName => {
-  const name = fileName.match(/(?<=(\/))\w+(?=\/index\.js)/)[0]
   const component = require(`${fileName}`).default
-
-  components[name] = component
+  list = list.concat(component)
 })
 
 export default {
   install: (Vue) => {
-    for (let key in components) {
-      if (!components[key].name) {
-        throw new Error('组件必须添加"name"属性，格式为："vc-{组件名称}"')
+    for (let key of list) {
+      if (!new RegExp('^vc-.*$').test(key.name)) {
+        throw new Error(`组件必须添加"name"属性，格式为："vc-{组件名称}, 错误组件为${key.name}`)
       }
-      Vue.component(components[key].name, components[key])
+      Vue.component(key.name, key)
     }
   }
 }
