@@ -4,6 +4,8 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <router-view></router-view>
     <vc-button></vc-button>
+    <vc-icon name="home"></vc-icon>
+    <vc-icon name="phone"></vc-icon>
   </div>
 </template>
 
