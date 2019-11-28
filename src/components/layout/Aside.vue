@@ -1,5 +1,9 @@
 <template> 
-  <aside class="vc-aside" :style="{width: width || '100%', height:height}"><slot></slot></aside>  
+  <aside 
+    class="vc-aside" 
+    :style="{width: width || '100%', height}">
+    <slot></slot>
+  </aside>  
 </template>
 
 <script>
@@ -18,10 +22,5 @@ export default {
 }
 </script>
 
-<style scoped>
-  .vc-aside {
-    flex:1 1 auto;
-    align-self: stretch;
-  }
-</style>
+
 

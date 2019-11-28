@@ -1,5 +1,9 @@
 <template>
-  <nav class="vc-nav" :style="{width:width || '100%', height: height}"><slot></slot></nav>
+  <nav 
+    class="vc-nav" 
+    :style="{width:width || '100%', height}">
+    <slot></slot>
+  </nav>
 </template>
 
 <script>
@@ -18,9 +22,4 @@ export default {
 }
 </script>
 
-<style scoped>
-  .vc-nav {
-    flex: 1 1 auto;
-  }
-</style>
 

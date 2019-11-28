@@ -1,0 +1,38 @@
+.vc-container {
+  display: flex;
+}
+
+.vc-header {
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.vc-nav {
+  flex: 1 1 auto;
+}
+
+.vc-main {
+  display: flex;
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.vc-article {
+  flex:1 1 auto;
+  align-self: stretch;
+}
+
+.vc-aside {
+  flex:1 1 auto;
+  align-self: stretch;
+}
+
+.vc-footer {
+  flex: 1 1 auto;
+}
+.vc-is-vertical {
+  flex-direction: column
+}
+.vc-is-horizontal {
+  flex-direction: row;
+}

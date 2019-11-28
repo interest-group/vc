@@ -1,5 +1,10 @@
 <template>
-  <div class="vc-container" :class="direction ? `vc-is-${direction}` : isHorizontal ? `vc-is-horizontal` : `vc-is-vertical`" :style="{width: width, height: height}">
+  <div 
+    class="vc-container" 
+    :class="direction ? 
+    `vc-is-${direction}` : isHorizontal ? 
+    `vc-is-horizontal` : `vc-is-vertical`" 
+    :style="{width: width, height: height}">
     <slot></slot>
   </div>  
 </template>
@@ -26,25 +31,12 @@ export default {
       isHorizontal: false
     }
   },
-  created() {
-    // console.log(this.$children,'childrennnnnnn',this.$children.length)
-  },
+  created() {},
   mounted() {
     const list = Array.from(this.$children);
     if(list.length) {
       this.isHorizontal = list.some(item => item.width); 
     }
-    // if(list
   },
 }
 </script>
-
-<style scoped> 
-/* @import url('../theme/p-class.css');  */
-</style>
-<style scoped>
-  .vc-container {
-    display: flex;
-  }
-  
-</style>
