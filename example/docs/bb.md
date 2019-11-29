@@ -1,6 +1,6 @@
 ### dfjdhfjds 
 
-:::demo
+::: demo
 ```HTML
 <div>
 	1321

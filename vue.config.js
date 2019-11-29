@@ -1,7 +1,8 @@
 const path = require('path')
-const configs = require('./config')
+const configs = require('./md')
+
 module.exports = {
-  lintOnSave: 'error',
+  lintOnSave: false, // 'error',
   chainWebpack: config => {
     config.entryPoints
       .get('app')
@@ -21,11 +22,11 @@ module.exports = {
         raw: true,
         ...configs
       })
-  },
-  devServer: {
-    overlay: {
-      warnings: true,
-      errors: true
-    }
   }
+  // devServer: {
+  //   overlay: {
+  //     warnings: true,
+  //     errors: true
+  //   }
+  // }
 }
