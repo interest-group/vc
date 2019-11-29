@@ -73,6 +73,7 @@ export default {
     }
     &-main{
       overflow-x: hidden;
+      padding: 10px;
     }
   }
 </style>

@@ -26,43 +26,47 @@
 
 ### 代码示例
 
-<vc-container height="200px">
-  <vc-header style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-    <div>vc-header</div>
-  </vc-header>
-  <vc-main>
-    <vc-aside style="padding: 10px;background: #3a9fe8;color: #FFF;text-align: center;">
-      <div>vc-aside</div>
-    </vc-aside>
-    <vc-main style="padding: 10px;background: #0f8de9;color: #FFF;text-align: center;">
-      <div>vc-main</div>
-    </vc-main>
-  </vc-main>
-  <vc-footer style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-    <div>vc-footer</div>
-  </vc-footer>
-</vc-container>
+
+
+#### 实例1
+
+这里是描述文字
+
+::: demo
 
 ``` html
-
-<vc-container height="200px">
-  <vc-header style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-    <div>vc-header</div>
-  </vc-header>
-  <vc-main>
-    <vc-aside style="padding: 10px;background: #3a9fe8;color: #FFF;text-align: center;">
-      <div>vc-aside</div>
-    </vc-aside>
-    <vc-main style="padding: 10px;background: #0f8de9;color: #FFF;text-align: center;">
-      <div>vc-main</div>
+<template>
+  <vc-container height="200px">
+    <vc-header style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
+      <div>{{header}}</div>
+    </vc-header>
+    <vc-main>
+      <vc-aside style="padding: 10px;background: #3a9fe8;color: #FFF;text-align: center;">
+        <div>vc-aside</div>
+      </vc-aside>
+      <vc-main style="padding: 10px;background: #0f8de9;color: #FFF;text-align: center;">
+        <div>vc-main</div>
+      </vc-main>
     </vc-main>
-  </vc-main>
-  <vc-footer style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-    <div>vc-footer</div>
-  </vc-footer>
-</vc-container>
-
+    <vc-footer style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
+      <div>vc-footer</div>
+    </vc-footer>
+  </vc-container>
+</template>
+<script>
+export default {
+  props: {
+    msg: String
+  },
+  data () {
+    return {
+      header: 'vc-header'
+    }
+  }
+}
+</script>
 ```
+:::
 
 更多示例...
 
