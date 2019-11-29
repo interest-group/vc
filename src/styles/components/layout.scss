@@ -1,0 +1,29 @@
+.vc-container,
+.vc-main{
+  display: flex;
+}
+
+.vc-main,
+.vc-section,
+.vc-article{
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.vc-header,
+.vc-footer,
+.vc-aside {
+  flex: 0 0 auto;
+  align-self: stretch;
+}
+
+.vc-nav {
+  flex: 1 1 auto;
+}
+
+.vc-is-vertical {
+  flex-direction: column;
+}
+.vc-is-horizontal {
+  flex-direction: row;
+}

@@ -3,16 +3,18 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = []
-const requireRouter = require.context('./pages', true, /\.vue$/)
+export const routes = []
+const requireRouter = require.context('./docs', true, /\.md$/)
 
 requireRouter.keys().forEach(fileName => {
-  const name = fileName.match(/(?<=(\/))\w+(?=\.vue)/)[0]
+  const name = fileName.match(/(?<=(\/)).*(?=\.md)/)[0]
   const route = {
+    meta: {
+      name
+    },
     path: `/${name}`,
-    component: (resolve) => require([`./pages/${name}.vue`], resolve)
+    component: (resolve) => require([`./docs/${name}.md`], resolve)
   }
-
   routes.push(route)
 })
 
