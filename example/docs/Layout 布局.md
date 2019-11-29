@@ -26,45 +26,40 @@
 
 ### 代码示例
 
+#### 经典布局
 
+典型的页面布局
 
-#### 实例1
-
-这里是描述文字
-
-::: demo
+::: demo layout1
 
 ``` html
 <template>
-  <vc-container height="200px">
-    <vc-header style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-      <div>{{header}}</div>
-    </vc-header>
-    <vc-main>
-      <vc-aside style="padding: 10px;background: #3a9fe8;color: #FFF;text-align: center;">
-        <div>vc-aside</div>
-      </vc-aside>
-      <vc-main style="padding: 10px;background: #0f8de9;color: #FFF;text-align: center;">
-        <div>vc-main</div>
-      </vc-main>
-    </vc-main>
-    <vc-footer style="padding: 10px 0;background: #7CBCE9;color: #FFF;text-align: center;">
-      <div>vc-footer</div>
-    </vc-footer>
-  </vc-container>
+  <div>
+    <vc-container>
+      <vc-header>vc-header</vc-header>
+      <vc-container>vc-container</vc-container>
+      <vc-footer>vc-footer</vc-footer>
+    </vc-container>
+
+    <vc-container>
+      <vc-header>vc-header</vc-header>
+      <vc-container>
+        <vc-aside>vc-aside</vc-aside>
+        <vc-main>vc-main</vc-main>
+      </vc-container>
+      <vc-footer>vc-footer</vc-footer>
+    </vc-container>
+
+    <vc-container>
+      <vc-aside>vc-aside</vc-aside>
+      <vc-container>
+        <vc-header>vc-header</vc-header>
+        <vc-main>vc-main</vc-main>
+        <vc-footer>vc-footer</vc-footer>
+      </vc-container>
+    </vc-container>
+  </div>
 </template>
-<script>
-export default {
-  props: {
-    msg: String
-  },
-  data () {
-    return {
-      header: 'vc-header'
-    }
-  }
-}
-</script>
 ```
 :::
 
