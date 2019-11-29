@@ -6,10 +6,9 @@
       </div>
     </vc-header>
     <vc-main>
-      <!--todo 替换 slide-down 组件-->
-      <div class="demo-main" v-show="visible">
+      <vc-slide-down class="demo-main" :value="visible">
         <slot name="highlight"></slot>
-      </div>
+      </vc-slide-down>
     </vc-main>
     <vc-footer>
       <div class="demo-footer">
@@ -59,6 +58,9 @@ export default {
   }
   &-main{
     border-bottom: 1px solid #eee;
+    /deep/ pre{
+      margin: 0;
+    }
   }
   &-footer{
     text-align: center;

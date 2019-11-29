@@ -1,1 +1,5 @@
-@import './components/layout.scss'
+@import "variables";
+@import "transition";
+
+@import "./components/slide-down";
+@import './components/layout.scss';
