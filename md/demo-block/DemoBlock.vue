@@ -58,9 +58,6 @@ export default {
   }
   &-main{
     border-bottom: 1px solid #eee;
-    /deep/ pre{
-      margin: 0;
-    }
   }
   &-footer{
     text-align: center;

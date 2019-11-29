@@ -3,10 +3,10 @@ import App from './App.vue'
 import router from './router'
 
 import VC from '../src'
-import '../src/styles/index.scss'
-
 import DemoBlock from '../md/demo-block'
-import '../md/styles/md.scss'
+
+import '../src/styles/index.scss'
+import '../md/styles/index.scss'
 import './docs-styles/index.scss'
 
 Vue.use(VC)
