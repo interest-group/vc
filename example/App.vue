@@ -1,7 +1,7 @@
 <template>
   <vc-container class="app">
     <vc-header class="app-header">
-      <img class="app-header-logo" alt="Vue logo" src="./assets/logo.png">
+      <!-- <img class="app-header-logo" alt="Vue logo" src="./assets/logo.png"> -->
       <h1 class="app-header-title">VC - Vue Components</h1>
     </vc-header>
     <vc-container class="app-container">

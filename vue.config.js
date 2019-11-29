@@ -1,5 +1,5 @@
-// vue.config.js
 const path = require('path')
+const configs = require('./config')
 module.exports = {
   lintOnSave: 'error',
   chainWebpack: config => {
@@ -18,7 +18,8 @@ module.exports = {
       .use('vue-markdown-loader')
       .loader('vue-markdown-loader/lib/markdown-compiler')
       .options({
-        raw: true
+        raw: true, 
+        ...configs
       })
   },
   devServer: {
