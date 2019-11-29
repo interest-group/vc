@@ -81,7 +81,9 @@ import Button from './Button'
 
 // ...
 
-export default Button
+export default [
+    Button
+]
 ```
 
 按照这种格式创建组件，不需要再其他地方引入注册，可以直接在案例代码中使用，如：

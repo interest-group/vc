@@ -1,5 +1,5 @@
 <template>
-  <footer class="vc-footer" :style="{width:width || '100%',height: height}"><slot></slot></footer>
+  <footer class="vc-footer" :style="{width, height}"><slot></slot></footer>
 </template>
 
 <script>
@@ -17,9 +17,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .vc-footer {
-    flex: 1 1 auto;
-  }
-</style>
