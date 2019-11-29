@@ -1,10 +1,10 @@
 <template>
-  <nav class="vc-nav" :style="{width:width || '100%', height: height}"><slot></slot></nav>
+  <aside class="vc-aside" :style="{width, height}"><slot></slot></aside>
 </template>
 
 <script>
 export default {
-  name: 'vc-nav',
+  name: 'vc-aside',
   props: {
     width: {
       type: String,
@@ -17,9 +17,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .vc-nav {
-    flex: 1 1 auto;
-  }
-</style>

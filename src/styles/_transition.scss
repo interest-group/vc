@@ -1,0 +1,58 @@
+// 该文档用于定义样式动画
+
+// 拉下
+.vc-drop-down{
+  &-enter{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  &-enter-active{
+    transition: all .2s;
+  }
+}
+
+// 上方滑入
+.vc-top-slide{
+  &-enter-active,
+  &-leave-active{
+    transition: transform .2s ease;
+  }
+  &-enter,
+  &-leave-to{
+    transform: translateY(-100%);
+  }
+}
+
+// 下方滑入
+.vc-bottom-slide{
+  &-enter-active,
+  &-leave-active{
+    transition: transform .2s ease;
+  }
+  &-enter,
+  &-leave-to{
+    transform: translateY(100%);
+  }
+}
+
+// 透明度
+.vc-opacity{
+  &-enter-active,
+  &-leave-active{
+    transition: opacity .2s ease;
+  }
+  &-enter,
+  &-leave-to{
+    opacity: 0;
+  }
+}
+
+// 旋转
+@keyframes vc-rotate{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
