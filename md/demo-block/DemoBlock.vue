@@ -57,6 +57,8 @@ export default {
     border-bottom: 1px solid #eee;
   }
   &-main{
+    color: #333333;
+    font-size: 13px;
     border-bottom: 1px solid #eee;
   }
   &-footer{

@@ -1,6 +1,8 @@
 # Layout 布局
 
+
 ## 组件概述
+
 
 `<vc-container></vc-container>` : 布局容器组件
 
@@ -24,11 +26,15 @@
 
 可为容器指定direction属性，强制设置容器组件的主轴方向
 
-### 代码示例
 
-#### 经典布局
+## 代码示例
+
+
+### 经典布局
+
 
 典型的页面布局
+
 
 ::: demo layout1
 
@@ -63,7 +69,19 @@
 ```
 :::
 
-更多示例...
-
 ## API
-...
+
+#### aside props
+
+|属性|说明|类型|默认值|
+|-|-|-|-|
+|width|宽度|number\|String|-|
+|height|高度|number\|String|-|
+
+#### container/main props
+
+|属性|说明|类型|默认值|
+|-|-|-|-|
+|width|宽度|number\|String|-|
+|height|高度|number\|String|-|
+|direction|主轴方向,可选垂直vertical,水平horizontal,默认自动|String|-|
