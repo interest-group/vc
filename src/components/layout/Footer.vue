@@ -1,19 +1,9 @@
 <template>
-  <footer class="vc-footer" :style="{width, height}"><slot></slot></footer>
+  <footer class="vc-footer"><slot></slot></footer>
 </template>
 
 <script>
 export default {
-  name: 'vc-footer',
-  props: {
-    width: {
-      type: String,
-      default: ''
-    },
-    height: {
-      type: String,
-      default: ''
-    }
-  }
+  name: 'vc-footer'
 }
 </script>

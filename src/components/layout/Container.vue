@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes" :style="{width, height}"><slot></slot></div>
+  <div :class="classes" :style="styles"><slot></slot></div>
 </template>
 
 <script>
@@ -14,11 +14,11 @@ export default {
       default: ''
     },
     width: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     height: {
-      type: String,
+      type: [String, Number],
       default: ''
     }
   },
@@ -37,6 +37,16 @@ export default {
           'vc-is-vertical': !this.direction && !this.isHorizontal
         }
       ]
+    },
+    styles () {
+      const styles = {}
+      if (this.width) {
+        styles.width = `${this.width}px`
+      }
+      if (this.height) {
+        styles.height = `${this.height}px`
+      }
+      return styles
     }
   },
   mounted () {
