@@ -1,1 +1,81 @@
-$cursor-disabled: not-allowed;
+// 常用颜色
+
+$blue-color: #5575c7 !default;
+$blue-color__lighten: lighten($blue-color, 10%) !default;
+$blue-color__darken: darken($blue-color, 10%) !default;
+
+$green-color: #63ce63 !default;
+$green-color__lighten: lighten($green-color, 10%) !default;
+$green-color__darken: darken($green-color, 10%) !default;
+
+$orange-color: #ffbf2f !default;
+$orange-color__lighten: lighten($orange-color, 10%) !default;
+$orange-color__darken: darken($orange-color, 10%) !default;
+
+$red-color: #e52b20 !default;
+$red-color__lighten: lighten($red-color, 10%) !default;
+$red-color__darken: darken($red-color, 10%) !default;
+
+// 主色
+
+$primary-color: $blue-color !default;
+$primary-color__lighten: lighten($primary-color, 10%) !default;
+$primary-color__darken: darken($primary-color, 10%) !default;
+
+// 语义色
+
+$error-color: $red-color !default;
+$warning-color: $orange-color !default;
+$info-color: $blue-color !default;
+$success-color: $green-color !default;
+
+// 字体
+
+$font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+
+// 字号和行高
+
+$heading-super-font-size: 40px !default;
+$heading-super-line-height: 48px !default;
+
+$heading-large-font-size: 32px !default;
+$heading-large-line-height: 40px !default;
+
+$heading-middle-font-size: 27px !default;
+$heading-middle-line-height: 32px !default;
+
+$heading-small-font-size: 19px !default;
+$heading-small-line-height: 27px !default;
+
+$bold-large-font-size: 16px !default;
+$bold-large-line-height: 27px !default;
+
+$bold-middle-font-size: 14px !default;
+$bold-middle-line-height: 16px !default;
+
+$bold-small-font-size: 11px !default;
+$bold-small-line-height: 16px !default;
+
+$regular-large-font-size: 16px !default;
+$regular-large-line-height: 27px !default;
+
+$regular-middle-font-size: 14px !default;
+$regular-middle-line-height: 16px !default;
+
+$regular-small-font-size: 11px !default;
+$regular-small-line-height: 16px !default;
+
+// 边框
+
+$border-color: #DCDFE6 !default;
+$border-color__lighten: lighten($blue-color, 10%) !default;
+$border-color__darken: darken($blue-color, 10%) !default;
+
+// 阴影
+
+$box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
+$box-shadow-lighten: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$box-shadow-darken: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
+
+// cursor
+$cursor-disabled: not-allowed !default;
