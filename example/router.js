@@ -1,9 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import home from './pages/home'
 
 Vue.use(VueRouter)
 
-export const routes = []
+const pagesRoutes = [
+  {
+    path: '/',
+    component: home
+  }
+]
+
+export const componentRoutes = []
+
 const requireRouter = require.context('./docs', true, /\.md$/)
 
 requireRouter.keys().forEach(fileName => {
@@ -15,11 +24,11 @@ requireRouter.keys().forEach(fileName => {
     path: `/${name}`,
     component: (resolve) => require([`./docs/${name}.md`], resolve)
   }
-  routes.push(route)
+  componentRoutes.push(route)
 })
 
 const router = new VueRouter({
-  routes
+  routes: [ ...pagesRoutes, ...componentRoutes ]
 })
 
 export default router

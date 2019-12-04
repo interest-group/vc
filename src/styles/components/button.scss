@@ -1,0 +1,71 @@
+$btn-prefix: #{$prefix}-btn;
+
+@mixin sematic-button ($color, $backgroundColor) {
+  color: $color;
+  background-color: $backgroundColor;
+
+  &:hover {
+    background-color: darken($backgroundColor, 10%);
+  }
+
+  &.disabled {
+    background-color: lighten($backgroundColor, 10%);
+  }
+}
+
+.#{$btn-prefix} {
+  display: inline-block;
+  padding: $button-padding;
+
+  border: $button-border-size $button-border-style $button-border-color;
+  border-radius: $button-border-radius;
+  box-shadow: $button-border-box-shadow;
+  background-color: $white-color;
+
+  font-size: $button-font-size;
+  line-height: $button-line-height;
+
+  transition: all .1s ease;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $light-color;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: $grey-color;
+  }
+
+  &.#{$btn-prefix}__info {
+    @include sematic-button($white-color, $button-background-color-info)
+  }
+  &.#{$btn-prefix}__success {
+    @include sematic-button($white-color, $button-background-color-success)
+  }
+  &.#{$btn-prefix}__warning {
+    @include sematic-button($white-color, $button-background-color-warning)
+  }
+  &.#{$btn-prefix}__error {
+    @include sematic-button($white-color, $button-background-color-error)
+  }
+
+  &.#{$btn-prefix}__large {
+    padding: $button-padding-large;
+    font-size: $button-font-size-large;
+  }
+  
+  &.#{$btn-prefix}__middle {
+    padding: $button-padding-middle;
+    font-size: $button-font-size-middle;
+  }
+
+  &.#{$btn-prefix}__small {
+    padding: $button-padding-small;
+    font-size: $button-font-size-small;
+  }
+}

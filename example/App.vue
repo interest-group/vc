@@ -1,33 +1,24 @@
 <template>
   <vc-container class="app">
     <vc-header class="app-header">
-      <!-- <img class="app-header-logo" alt="Vue logo" src="./assets/logo.png"> -->
-      <h1 class="app-header-title">VC - Vue Components</h1>
+      <img class="app-header-logo" alt="Vue logo" src="./assets/logo.png">
+      <h1 class="app-header-title heading-middle">Vue Components</h1>
     </vc-header>
     <vc-container class="app-container">
-      <vc-aside class="app-aside">
-        <ul>
-          <li v-for="(route, index) in routes" :key="index">
-            <router-link :to="route.path">{{route.meta.name}}</router-link>
-          </li>
-        </ul>
-      </vc-aside>
-      <vc-main class="app-main">
-        <router-view></router-view>
-      </vc-main>
+      <router-view></router-view>
     </vc-container>
   </vc-container>
 </template>
 
 <script>
-import { routes } from './router'
+import { componentRoutes } from './router'
 export default {
   name: 'app',
   components: {
   },
   data () {
     return {
-      routes
+      routes: componentRoutes
     }
   }
 }
@@ -49,19 +40,19 @@ export default {
   .app {
     height: 100%;
     &-header {
-      height: 60px;
+      height: 80px;
       z-index: 1500;
       background-color: #FFF;
       display: flex;
       align-items: center;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      transition: all .25s ease;
+
       &-logo {
-        margin-left: 20px;
-        width: 20px;
+        margin-left: 40px;
+        width: 60px;
       }
       &-title {
         margin: 0 20px;
-        font-size: 20px;
       }
     }
     &-container {

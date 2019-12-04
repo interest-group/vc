@@ -4,3 +4,39 @@
 @import "./components/icon";
 @import './components/layout.scss';
 @import "./components/slide-down";
+@import "./components/button";
+
+html, body {
+  color: $black-color;
+  font-family: $font-family;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+.heading-super {
+  font-size: $heading-super-font-size;
+  line-height: $heading-super-line-height;
+}
+
+.heading-large {
+  font-size: $heading-large-font-size;
+  line-height: $heading-large-line-height;
+}
+
+.heading-middle {
+  font-size: $heading-middle-font-size;
+  line-height: $heading-middle-line-height;
+}
+
+.paragraph {
+  font-size: $paragraph-font-size;
+  line-height: $paragraph-line-height;
+}
+
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}

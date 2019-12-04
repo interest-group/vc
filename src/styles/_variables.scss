@@ -1,6 +1,10 @@
+// 类名前缀
+
+$prefix: vc;
+
 // 常用颜色
 
-$blue-color: #5575c7 !default;
+$blue-color: #5575c8 !default;
 $blue-color__lighten: lighten($blue-color, 10%) !default;
 $blue-color__darken: darken($blue-color, 10%) !default;
 
@@ -15,6 +19,12 @@ $orange-color__darken: darken($orange-color, 10%) !default;
 $red-color: #e52b20 !default;
 $red-color__lighten: lighten($red-color, 10%) !default;
 $red-color__darken: darken($red-color, 10%) !default;
+
+$white-color: #ffffff !default;
+$black-color: #353c42 !default;
+$dark-color: #ccced0 !default;
+$grey-color: #ececee !default;
+$light-color: #f9f9fb !default;
 
 // 主色
 
@@ -65,6 +75,9 @@ $regular-middle-line-height: 16px !default;
 $regular-small-font-size: 11px !default;
 $regular-small-line-height: 16px !default;
 
+$paragraph-font-size: 20px !default;
+$paragraph-line-height: 32px !default;
+
 // 边框
 
 $border-color: #DCDFE6 !default;
@@ -79,3 +92,26 @@ $box-shadow-darken: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !de
 
 // cursor
 $cursor-disabled: not-allowed !default;
+
+// 按钮
+
+$button-border-size: 0 !default;
+$button-border-style: solid !default;
+$button-border-color: $blue-color !default;
+$button-border-radius: 4px !default;
+$button-border-box-shadow: 0px 1px 2px rgba(0, 0, 0, .12) !default;
+$button-font-size: 14px !default;
+$button-line-height: 1 !default;
+$button-padding: 10px 18px !default;
+
+$button-background-color-info: $info-color;
+$button-background-color-success: $success-color;
+$button-background-color-warning: $warning-color;
+$button-background-color-error: $error-color;
+
+$button-padding-large: 12px 20px;
+$button-font-size-large: 16px;
+$button-padding-middle: $button-padding;
+$button-font-size-middle: 14px;
+$button-padding-small: 6px 10px;
+$button-font-size-small: 12px;
