@@ -11,8 +11,13 @@ html, body {
   font-family: $font-family;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6,p {
   margin: 0;
+}
+
+a {
+  color: $black-color;
+  text-decoration: none;
 }
 
 .heading-super {
@@ -30,13 +35,30 @@ h1,h2,h3,h4,h5,h6 {
   line-height: $heading-middle-line-height;
 }
 
+.heading-small {
+  font-size: $heading-small-font-size;
+  line-height: $heading-small-line-height;
+}
+
 .paragraph {
   font-size: $paragraph-font-size;
   line-height: $paragraph-line-height;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
 }
 
 .clear:after {
   content: '';
   display: block;
   clear: both;
+}
+
+.bd-t {
+  border-top: 1px solid $grey-color;
 }
