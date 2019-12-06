@@ -6,8 +6,8 @@
         <h1 class="app-header-title heading-middle">Vue Components</h1>
         <ul class="app-header-nav">
           <li><router-link class="heading-small" to="/">Home</router-link></li>
-          <li><router-link class="heading-small" to="/layout">Components</router-link></li>
-          <li><a class="heading-small" href="https://github.com/interest-group/vc" target="_blank">Github</a></li>
+          <li><router-link class="heading-small" to="/component/bb">Components</router-link></li>
+          <li><a class="heading-small" href="https://github.com/interest-group/vc">Github</a></li>
         </ul>
       </div>
     </vc-header>

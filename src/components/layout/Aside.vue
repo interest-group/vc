@@ -8,7 +8,7 @@ export default {
   props: {
     width: {
       type: [String, Number],
-      default: ''
+      default: 200
     },
     height: {
       type: [String, Number],
