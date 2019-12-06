@@ -1,0 +1,17 @@
+$prefix-menu: $prefix + '-menu';
+
+.#{$prefix-menu} {
+  user-select: none;
+}
+
+.#{$prefix-menu}__item {
+  line-height: 40px;
+  
+  a {
+    display: block;
+  }
+
+  span {
+    cursor: default;
+  }
+}
