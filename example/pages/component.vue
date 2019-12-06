@@ -10,6 +10,7 @@
     </vc-aside>
     <vc-main class="components-page__body">
       <router-view></router-view>
+      <!-- <p class="vc-mg-l-25">1312</p> -->
     </vc-main>
   </vc-container>
 </template>
