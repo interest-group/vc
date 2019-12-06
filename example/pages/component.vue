@@ -1,16 +1,14 @@
 <template>
-  <vc-container class="components-page">
-    <vc-aside class="components-page__aside">
-      <ul>
-        <li v-for="(route, index) in routes" :key="index">
-          <router-link :to="{name: route.name}">{{route.meta.name}}</router-link>
-        </li>
-      </ul>
-      <vc-menu>
-        <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route"></vc-menu-item>
+  <vc-container class="component-page">
+    <vc-aside class="component-page__aside">
+      <vc-menu :router="router">
+        <vc-menu-item-group title="basic">
+          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
+        </vc-menu-item-group>
       </vc-menu>
     </vc-aside>
-    <vc-main class="components-page__body">
+    <vc-main class="component-page__body">
+      <vc-button type="error" @click.native="toggleRouter">toggle router: {{router}}</vc-button>
       <router-view></router-view>
     </vc-main>
   </vc-container>
@@ -19,13 +17,30 @@
 <script>
 import { componentRoutes } from '@/router'
 export default {
-  name: 'components-page',
+  name: 'component-page',
   components: {
   },
   data () {
     return {
+      router: true,
       routes: componentRoutes
+    }
+  },
+  methods: {
+    toggleRouter () {
+      this.router = !this.router
+      console.log(this.router)
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.component-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  .component-page__body {
+  }
+}
+</style>
