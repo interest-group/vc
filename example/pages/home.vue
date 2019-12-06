@@ -4,10 +4,10 @@
       <div class="banner clear">
         <div class="desc">
           <h3 class="heading-super">中后台快速开发的组件库</h3>
-          <p class="paragraph">Vue Components 是一套基于 Vue 开发的组件库，集成大量常用的UI组件，帮助开发者快速完成PC端的中后台产品开发</p>
-          <vc-button type="info" size="large">
+          <p class="paragraph">VC 是一套基于 Vue 开发的组件库，集成大量常用的UI组件，帮助开发者快速完成PC端的中后台产品开发</p>
+          <vc-button type="info" size="large" @click="$router.push({path: '/layout'})">
             快速开始
-            <vc-icon name=arrow-right></vc-icon>
+            <vc-icon name="arrow-right"></vc-icon>
           </vc-button>
         </div>
         <img class="fr" src="../assets/svg/home-banner1.svg" alt="">

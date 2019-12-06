@@ -9,11 +9,9 @@
 export default {
   name: 'vc-menu',
   props: {
-    router: Boolean
-  },
-  provide () {
-    return {
-      menu: this
+    router: {
+      type: Boolean,
+      default: true
     }
   }
 }

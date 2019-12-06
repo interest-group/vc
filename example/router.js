@@ -6,7 +6,7 @@ import notFound from './pages/404'
 
 Vue.use(VueRouter)
 
-const pagesRoutes = [
+let pagesRoutes = [
   {
     path: '/',
     name: 'home-page',
@@ -36,13 +36,15 @@ requireRouter.keys().forEach(fileName => {
     meta: {
       name
     },
-    path: `${name.match(/\w+/)[0].toLowerCase()}`,
+    path: `/${name.match(/\w+/)[0].toLowerCase()}`,
     name: name.match(/\w+/)[0].toLowerCase(),
     component: (resolve) => require([`./docs/${name}.md`], resolve)
   }
   componentRoutes.push(route)
 })
 
+pagesRoutes = pagesRoutes.concat(componentRoutes)
+console.log(pagesRoutes)
 const router = new VueRouter({
   routes: [ ...pagesRoutes ]
 })

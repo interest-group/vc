@@ -1,13 +1,11 @@
 <template>
   <vc-container class="components-page">
     <vc-aside class="components-page__aside">
-      <ul>
-        <li v-for="(route, index) in routes" :key="index">
-          <router-link :to="{name: route.name}">{{route.meta.name}}</router-link>
-        </li>
-      </ul>
-      <vc-menu>
-        <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route"></vc-menu-item>
+      <vc-menu :router="router">
+        <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route" >
+          {{route.meta.name}}
+        </vc-menu-item>
+        <!-- <vc-button @click="router = !router">改变点击状态</vc-button> -->
       </vc-menu>
     </vc-aside>
     <vc-main class="components-page__body">
@@ -24,7 +22,8 @@ export default {
   },
   data () {
     return {
-      routes: componentRoutes
+      routes: componentRoutes,
+      router: true
     }
   }
 }
