@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <vc-container class="components-page">
     <vc-aside class="components-page__aside">
       <vc-menu :router="router">
@@ -7,14 +6,6 @@
           {{route.meta.name}}
         </vc-menu-item>
         <!-- <vc-button @click="router = !router">改变点击状态</vc-button> -->
-=======
-  <vc-container class="component-page">
-    <vc-aside class="component-page__aside">
-      <vc-menu :router="router">
-        <vc-menu-item-group title="basic">
-          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
-        </vc-menu-item-group>
->>>>>>> feature-menu
       </vc-menu>
     </vc-aside>
     <vc-main class="component-page__body">
