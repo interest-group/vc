@@ -1,6 +1,38 @@
+@import 'common';
 // 类名前缀
 
 $prefix: vc;
+
+//尺寸
+$fs-26: 26px;
+$fs-25: 25px;
+$fs-24: 24px;
+$fs-23: 23px;
+$fs-23: 23px;
+$fs-22: 22px;
+$fs-21: 21px;
+$fs-20: 20px;
+$fs-19: 19px;
+$fs-18: 18px;
+$fs-17: 17px;
+$fs-16: 16px;
+$fs-15: 15px;
+$fs-14: 14px;
+$fs-13: 13px;
+$fs-12: 12px;
+$fs-11: 11px;
+$fs-10: 10px;
+$fs-9: 9px;
+$fs-8: 8px;
+$fs-7: 7px;
+$fs-6: 6px;
+$fs-5: 5px;
+$fs-4: 4px;
+$fs-3: 3px;
+$fs-2: 2px;
+$fs-1: 1px;
+$fs-0: 0px;
+
 
 // 常用颜色
 
@@ -116,3 +148,19 @@ $button-font-size-middle: 14px;
 $button-padding-small: 6px 10px;
 $button-font-size-small: 12px;
 
+
+$list: (mg, pd);
+$list-item: (l, t, b, r);
+
+// 生成margin , padding
+@each $item in $list {
+  @each $var in $list-item {
+    @for $i from 0 through 26 {
+      .#{$prefix}-#{$item}-#{$var}-#{$i} {
+        #{format-type($item)}: {
+          #{format-type($var)}: #{$i}px
+        }
+      }
+    }
+  }
+}

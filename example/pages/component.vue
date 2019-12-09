@@ -11,6 +11,7 @@
     <vc-main class="component-page__body">
       <vc-button type="error" @click.native="toggleRouter">toggle router: {{router}}</vc-button>
       <router-view></router-view>
+      <!-- <p class="vc-mg-l-25">1312</p> -->
     </vc-main>
   </vc-container>
 </template>
