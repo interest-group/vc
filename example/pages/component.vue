@@ -1,14 +1,16 @@
 <template>
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
-      <vc-menu :router="router">
-        <vc-menu-item-group title="basic">
-          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
-        </vc-menu-item-group>
-      </vc-menu>
+
+      <router-link v-for="(route, index) in routes" :key="index" :to="route">{{route.meta.name}}</router-link>
+      <!--<vc-menu :router="router">-->
+        <!--<vc-menu-item-group title="basic">-->
+          <!--<vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>-->
+        <!--</vc-menu-item-group>-->
+      <!--</vc-menu>-->
     </vc-aside>
     <vc-main class="component-page__body">
-      <vc-button type="error" @click.native="toggleRouter">toggle router: {{router}}</vc-button>
+      <!--<vc-button type="error" @click.native="toggleRouter">toggle router: {{router}}</vc-button>-->
       <router-view></router-view>
       <!-- <p class="vc-mg-l-25">1312</p> -->
     </vc-main>
@@ -41,6 +43,11 @@ export default {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  &__aside > a{
+    display: block;
+    line-height: 20px;
+    margin: 5px 0;
+  }
   .component-page__body {
   }
 }
