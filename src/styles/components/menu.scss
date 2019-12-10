@@ -2,16 +2,19 @@ $prefix-menu: $prefix + '-menu';
 
 .#{$prefix-menu} {
   user-select: none;
+  &-item{
+    display: block;
+    line-height: 40px;
+  }
+  &-group{
+    &-title{
+      color: #ccc;
+    }
+  }
 }
 
-.#{$prefix-menu}__item {
-  line-height: 40px;
-  
-  a {
-    display: block;
-  }
-
-  span {
-    cursor: default;
+.#{$prefix}-sub-menu {
+  &-title{
+    color: #ccc;
   }
 }
