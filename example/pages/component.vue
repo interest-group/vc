@@ -1,14 +1,14 @@
 <template>
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
-      <vc-menu :router="router" :unique="true">
-        <vc-sub-menu>
+      <vc-menu :router="router" :unique="true" :open-names="openNames">
+        <vc-sub-menu name="1">
           <h3 class="heading-small" slot="title">开发指南</h3>
           <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
-          <vc-sub-menu>
+          <vc-sub-menu name="2">
             <h3 class="heading-small" slot="title">嵌套子</h3>
             <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
-            <vc-sub-menu>
+            <vc-sub-menu name="3">
               <h3 class="heading-small" slot="title">嵌套孙</h3>
               <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
             </vc-sub-menu>
@@ -35,6 +35,7 @@ export default {
   },
   data () {
     return {
+      openNames: [1, 3],
       router: true,
       routes: componentRoutes
     }

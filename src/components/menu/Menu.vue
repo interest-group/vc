@@ -11,6 +11,7 @@ export default {
   name: 'vc-menu',
   props: {
     router: Boolean,
+    openNames: Array,
     textColor: {
       type: String,
       default: '#353c42'
@@ -35,6 +36,19 @@ export default {
       childSubMenus: {}
     }
   },
+  computed: {
+    closeNames () {
+      const subMenuNames = Object.keys(this.subMenus)
+      const openNames = new Set(this.openNames)
+      const closeNames = [...subMenuNames].filter(openName => !openNames.has(openName) && !openNames.has(Number(openName)))
+      return closeNames
+    }
+  },
+  watch: {
+    openNames (value) {
+      this.openSubMenus(value)
+    }
+  },
   provide () {
     return {
       menu: this,
@@ -45,7 +59,6 @@ export default {
     EventBus.$on('menu-item-created', this.getMenuItems)
     EventBus.$on('sub-menu-created', this.getSubMenus)
     EventBus.$on('menu-item-click', this.onMenuItemClick)
-    EventBus.$on('sub-menu-click', this.onSubMenuClick)
   },
   methods: {
     getMenuItems (menuItem) {
@@ -59,19 +72,11 @@ export default {
       this.$set(this.menuItems, menuItem._uid, menuItem)
     },
     getSubMenus (subMenu) {
-      this.$set(this.subMenus, subMenu._uid, subMenu)
-    },
-    onSubMenuClick (subMenu) {
-      if (this.unique && !subMenu.isShow) {
-        for (let key in this.subMenus) {
-          this.subMenus[key].isShow = false
-        }
-      }
-      subMenu.isShow = !subMenu.isShow
-      this.$set(this.subMenus, subMenu._uid, subMenu)
+      this.$set(this.subMenus, subMenu.name, subMenu)
+      this.openSubMenus()
     },
     addChildSubMenu (subMenu) {
-      this.$set(this.childSubMenus, subMenu._uid, subMenu)
+      this.$set(this.childSubMenus, subMenu.name, subMenu)
     },
     toggleChildSubMenu (subMenu) {
       // 关闭同级的subMenu
@@ -82,7 +87,22 @@ export default {
       }
 
       subMenu.isShow = !subMenu.isShow
-      this.$set(this.childSubMenus, subMenu._uid, subMenu)
+      this.$set(this.childSubMenus, subMenu.name, subMenu)
+    },
+    openSubMenus (openNames) {
+      openNames = openNames || this.openNames
+
+      openNames.forEach(name => {
+        this.subMenus[name] && this.toggleSubMenu(this.subMenus[name], true)
+      })
+
+      this.closeNames.forEach(name => {
+        this.subMenus[name] && this.toggleSubMenu(this.subMenus[name], false)
+      })
+    },
+    toggleSubMenu (subMenu, status) {
+      subMenu.isShow = status
+      this.$set(this.subMenus, subMenu.name, subMenu)
     }
   }
 }

@@ -19,7 +19,11 @@ export default {
     [SlideDown.name]: SlideDown
   },
   props: {
-    title: String
+    title: String,
+    name: {
+      type: [String, Number],
+      required: true
+    }
   },
   inject: ['subMenu'],
   provide () {
@@ -39,7 +43,6 @@ export default {
   },
   methods: {
     onClick () {
-      // EventBus.$emit('sub-menu-click', this)
       this.subMenu.toggleChildSubMenu(this)
       this.$nextTick(() => {
         if (!this.isShow) {
@@ -60,7 +63,7 @@ export default {
       }
     },
     addChildSubMenu (subMenu) {
-      this.$set(this.childSubMenus, subMenu._uid, subMenu)
+      this.$set(this.childSubMenus, subMenu.name, subMenu)
     },
     toggleChildSubMenu (subMenu) {
       if (this.unique && !subMenu.isShow) {
@@ -70,7 +73,7 @@ export default {
       }
 
       subMenu.isShow = !subMenu.isShow
-      this.$set(this.childSubMenus, subMenu._uid, subMenu)
+      this.$set(this.childSubMenus, subMenu.name, subMenu)
     }
   }
 }
