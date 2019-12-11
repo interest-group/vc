@@ -4,9 +4,11 @@
 </template>
 
 <script>
-import { oneOf, bubbling } from '../../utils/assist'
+import { oneOf } from '../../utils/assist'
+import emitter from '../../mixins/emitter'
 export default {
   name: 'vc-menu-item',
+  mixins: [emitter],
   props: {
     name: {
       type: [String, Number],
@@ -76,7 +78,7 @@ export default {
     },
     handleActive () {
       this.active = true
-      bubbling(this, 'vc-menu', 'menu-item-active', this.name)
+      this.bubbling('vc-menu', false, 'menu-item-active', this.name)
     }
   }
 }

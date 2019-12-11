@@ -11,9 +11,10 @@
 <script>
 import Icon from '../icon'
 import SlideDown from '../slide-down'
-import { bubbling } from '../../utils/assist'
+import emitter from '../../mixins/emitter'
 export default {
   name: 'vc-sub-menu',
+  mixins: [emitter],
   components: { SlideDown, Icon },
   props: {
     name: {
@@ -45,15 +46,31 @@ export default {
     }
   },
   mounted () {
-    this.$on('update-active', (names) => {
-      this.active = names.includes(this.name)
-    })
+    this.$on('update-active', this.handleUpdateActive)
+    this.$on('sub-menu-active', this.handleUpdateOpened)
   },
   methods: {
-    handleClick (event) {
+    handleClick () {
       if (this.disabled) return
       this.active = !this.active
-      bubbling(this, 'vc-menu', 'sub-menu-active', this.name, this.active)
+      if (this.active) {
+        // 通知父组件激活
+        this.bubbling(['vc-menu', 'vc-sub-menu'], false, 'sub-menu-active', this.name)
+      } else {
+        // 关闭所有子嵌套组件
+        this.broadcast('vc-sub-menu', true, 'update-active', [])
+      }
+    },
+    // 检查是否保持激活
+    handleUpdateActive (names) {
+      this.active = names.includes(this.name)
+    },
+    handleUpdateOpened (name) {
+      const [parent] = this.findParentComponents('vc-menu')
+      if (parent && parent.accordion) {
+        // 手风琴模式关闭其他子组件
+        this.broadcast('vc-sub-menu', false, 'update-active', [name])
+      }
     }
   }
 }

@@ -242,7 +242,6 @@
 |事件名|说明|参数|
 |-|-|-|
 |change|切换菜单时触发|name|
-|open-change|切换子菜单时触发|当前展开子菜单 name 集合|
 
 #### menu-item props
 

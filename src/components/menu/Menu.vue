@@ -2,9 +2,11 @@
   <ul :class="classes"><slot></slot></ul>
 </template>
 <script>
-import { oneOf, broadcast } from '../../utils/assist'
+import { oneOf } from '../../utils/assist'
+import emitter from '../../mixins/emitter'
 export default {
   name: 'vc-menu',
+  mixins: [emitter],
   props: {
     mode: {
       validator (value) {
@@ -35,8 +37,7 @@ export default {
   },
   data () {
     return {
-      activeName: this.value,
-      openedNames: []
+      activeName: this.value
     }
   },
   computed: {
@@ -55,46 +56,34 @@ export default {
         this.activeName = value
       }
     },
-    openNames (names) {
-      this.openedNames = names
-    },
     /** 内部属性 **/
     activeName () {
-      this.updateActiveName()
-    },
-    openedNames () {
-      this.updateOpenedNames()
+      this.broadcastActive()
     }
   },
   mounted () {
-    this.$on('menu-item-active', this.changeActive)
-    this.$on('sub-menu-active', this.changeOpened)
-    this.openedNames = [...this.openNames]
-    this.updateActiveName()
+    this.$on('menu-item-active', this.handleUpdateActive)
+    this.$on('sub-menu-active', this.handleUpdateOpened)
+    this.broadcastActive()
+    // 所有子组件初始化激活状态
+    this.broadcast('vc-sub-menu', true, 'update-active', this.openNames)
   },
   methods: {
     // 切换激活菜单
-    changeActive (name) {
+    handleUpdateActive (name) {
       this.activeName = name
       this.$emit('input', name)
       this.$emit('change', name)
     },
-    // 切换展开子菜单
-    changeOpened (name, active) {
-      if (active && this.accordion) {
-        this.openedNames = [name]
-      } else if (active) {
-        this.openedNames.push(name)
-      } else {
-        this.openedNames = this.openedNames.filter(item => item !== name)
+    // 激活子组件
+    handleUpdateOpened (name) {
+      // 手风琴模式关闭其他子组件
+      if (this.accordion) {
+        this.broadcast('vc-sub-menu', false, 'update-active', [name])
       }
-      this.$emit('open-change', this.openedNames)
     },
-    updateActiveName () {
-      broadcast(this, 'vc-menu-item', 'update-active', this.activeName)
-    },
-    updateOpenedNames () {
-      broadcast(this, 'vc-sub-menu', 'update-active', this.openedNames)
+    broadcastActive () {
+      this.broadcast('vc-menu-item', true, 'update-active', this.activeName)
     }
   }
 }
