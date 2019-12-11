@@ -1,0 +1,61 @@
+
+.upload-box { 
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .img-list {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    padding: 0 5px;
+    .img-item{
+      position: relative;
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+      }
+      .upload-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        width: 80px;
+        height: 80px;
+        background: #000;
+        opacity: 0.3;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          opacity: 1;
+          font-size: 2.5vh;
+          color: red;
+        }
+      }
+    }
+  }
+  .img-add  {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 30px;
+    color: #777777;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    input{
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 9;
+      width: 80px;
+      height: 80px;
+      background: #ccc;
+      opacity: 0;
+    }
+  }
+}
