@@ -56,7 +56,7 @@ export default {
       const file = e.target.files.item(0)
       if (!file) return
       if (file.size > this.maxfileSize) {
-        console.log('文件大小不能超过2M')
+        console.log('文件大小不能超过2M!')
         return
       }
       this.fileName.push({ file })
