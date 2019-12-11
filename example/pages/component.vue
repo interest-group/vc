@@ -1,11 +1,19 @@
 <template>
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
-      <vc-menu :router="router">
-        <vc-menu-item-group>
+      <vc-menu :router="router" :unique="true">
+        <vc-sub-menu>
           <h3 class="heading-small" slot="title">开发指南</h3>
           <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
-        </vc-menu-item-group>
+          <vc-sub-menu>
+            <h3 class="heading-small" slot="title">嵌套子</h3>
+            <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
+            <vc-sub-menu>
+              <h3 class="heading-small" slot="title">嵌套孙</h3>
+              <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
+            </vc-sub-menu>
+          </vc-sub-menu>
+        </vc-sub-menu>
         <vc-menu-item-group>
           <h3 class="heading-small" slot="title">组件</h3>
           <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>

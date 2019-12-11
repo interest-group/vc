@@ -22,22 +22,30 @@ export default {
     activeBackgroundColor: {
       type: String,
       default: '#f9f9fb'
-    }
+    },
+    unique: Boolean
   },
   data () {
     return {
       // 存放menuItem组件实例
-      menuItems: {}
+      menuItems: {},
+      // 存放subMenu组件实例
+      subMenus: {},
+      // 存放最靠近的子级subMenu实例
+      childSubMenus: {}
     }
   },
   provide () {
     return {
-      menu: this
+      menu: this,
+      subMenu: this
     }
   },
   created () {
     EventBus.$on('menu-item-created', this.getMenuItems)
+    EventBus.$on('sub-menu-created', this.getSubMenus)
     EventBus.$on('menu-item-click', this.onMenuItemClick)
+    EventBus.$on('sub-menu-click', this.onSubMenuClick)
   },
   methods: {
     getMenuItems (menuItem) {
@@ -49,6 +57,32 @@ export default {
       }
       menuItem.active = true
       this.$set(this.menuItems, menuItem._uid, menuItem)
+    },
+    getSubMenus (subMenu) {
+      this.$set(this.subMenus, subMenu._uid, subMenu)
+    },
+    onSubMenuClick (subMenu) {
+      if (this.unique && !subMenu.isShow) {
+        for (let key in this.subMenus) {
+          this.subMenus[key].isShow = false
+        }
+      }
+      subMenu.isShow = !subMenu.isShow
+      this.$set(this.subMenus, subMenu._uid, subMenu)
+    },
+    addChildSubMenu (subMenu) {
+      this.$set(this.childSubMenus, subMenu._uid, subMenu)
+    },
+    toggleChildSubMenu (subMenu) {
+      // 关闭同级的subMenu
+      if (this.unique && !subMenu.isShow) {
+        for (let key in this.childSubMenus) {
+          this.childSubMenus[key].isShow = false
+        }
+      }
+
+      subMenu.isShow = !subMenu.isShow
+      this.$set(this.childSubMenus, subMenu._uid, subMenu)
     }
   }
 }
