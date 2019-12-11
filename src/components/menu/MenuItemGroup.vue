@@ -1,7 +1,7 @@
 <template>
   <li class="vc-menu-group">
     <div class="vc-menu-group-title"><slot name="title">{{title}}</slot></div>
-    <ul><slot></slot></ul>
+    <ul class="vc-menu-group-content"><slot></slot></ul>
   </li>
 </template>
 

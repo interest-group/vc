@@ -75,13 +75,13 @@
 
 |属性|说明|类型|默认值|
 |-|-|-|-|
-|width|宽度|number\|String|-|
-|height|高度|number\|String|-|
+|width|宽度|Number\|String|-|
+|height|高度|Number\|String|-|
 
 #### container/main props
 
 |属性|说明|类型|默认值|
 |-|-|-|-|
-|width|宽度|number\|String|-|
-|height|高度|number\|String|-|
+|width|宽度|Number\|String|-|
+|height|高度|Number\|String|-|
 |direction|主轴方向,可选垂直vertical,水平horizontal,默认自动|String|-|

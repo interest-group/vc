@@ -1,16 +1,20 @@
 <template>
   <li :class="classes">
-    <div class="vc-sub-menu-title" @click="handleClick"><slot name="title">{{title}}</slot></div>
+    <div class="vc-sub-menu-title" @click="handleClick">
+      <slot name="title">{{title}}</slot>
+      <Icon class="vc-sub-menu-icon" name="arrow-down2"></Icon>
+    </div>
     <SlideDown v-model="active"><slot></slot></SlideDown>
   </li>
 </template>
 
 <script>
+import Icon from '../icon'
 import SlideDown from '../slide-down'
 import { bubbling } from '../../utils/assist'
 export default {
   name: 'vc-sub-menu',
-  components: { SlideDown },
+  components: { SlideDown, Icon },
   props: {
     name: {
       type: [String, Number],
@@ -49,9 +53,7 @@ export default {
     handleClick (event) {
       if (this.disabled) return
       this.active = !this.active
-      if (this.active) {
-        bubbling(this, 'vc-menu', 'sub-menu-active', this.name)
-      }
+      bubbling(this, 'vc-menu', 'sub-menu-active', this.name, this.active)
     }
   }
 }

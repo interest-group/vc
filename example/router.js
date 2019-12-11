@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import home from './pages/home'
 import component from './pages/component'
 import notFound from './pages/404'
+import develop from './pages/develop'
 
 Vue.use(VueRouter)
 
@@ -16,8 +17,12 @@ let pagesRoutes = [
     path: '/component',
     name: 'component-page',
     component: component,
-    redirect: '/component/',
     children: []
+  },
+  {
+    path: '/develop',
+    name: 'develop-page',
+    component: develop
   },
   {
     path: '*',
@@ -30,21 +35,20 @@ export const componentRoutes = pagesRoutes.find(route => route.name === 'compone
 
 const requireRouter = require.context('./docs', true, /\.md$/)
 
-requireRouter.keys().forEach(fileName => {
-  const name = fileName.match(/(?<=(\/)).*(?=\.md)/)[0]
+requireRouter.keys().forEach(requireName => {
+  const fileName = requireName.match(/(?<=(\/)).*(?=\.md)/)[0]
+  const eName = fileName.match(/\w+/)[0].toLowerCase()
   const route = {
     meta: {
-      name
+      name: fileName
     },
-    path: `/${name.match(/\w+/)[0].toLowerCase()}`,
-    name: name.match(/\w+/)[0].toLowerCase(),
-    component: (resolve) => require([`./docs/${name}.md`], resolve)
+    path: eName,
+    name: eName,
+    component: (resolve) => require([`./docs/${fileName}.md`], resolve)
   }
   componentRoutes.push(route)
 })
 
-pagesRoutes = pagesRoutes.concat(componentRoutes)
-console.log(pagesRoutes)
 const router = new VueRouter({
   routes: [ ...pagesRoutes ]
 })

@@ -1,6 +1,6 @@
 <template>
   <a v-if="to" :href="href" :target="target" :class="classes" @click="handleClick"><slot></slot></a>
-  <li v-else="" :class="classes"><slot></slot></li>
+  <li v-else="" :class="classes" @click="!disabled && handleActive()"><slot></slot></li>
 </template>
 
 <script>
@@ -14,10 +14,6 @@ export default {
     },
     to: {
       type: [Object, String]
-    },
-    tag: {
-      type: String,
-      default: 'a'
     },
     replace: {
       type: Boolean,
@@ -76,6 +72,9 @@ export default {
       } else {
         window.location.href = this.to
       }
+      this.handleActive()
+    },
+    handleActive () {
       this.active = true
       bubbling(this, 'vc-menu', 'menu-item-active', this.name)
     }

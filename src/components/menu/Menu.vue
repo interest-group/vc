@@ -1,7 +1,5 @@
 <template>
-  <ul class="vc-menu">
-    <slot></slot>
-  </ul>
+  <ul :class="classes"><slot></slot></ul>
 </template>
 <script>
 import { oneOf, broadcast } from '../../utils/assist'
@@ -13,6 +11,12 @@ export default {
         return oneOf(value, ['horizontal', 'vertical'])
       },
       default: 'vertical'
+    },
+    theme: {
+      validator (value) {
+        return oneOf(value, ['light', 'dark'])
+      },
+      default: 'light'
     },
     value: {
       type: [String, Number],
@@ -35,6 +39,15 @@ export default {
       openedNames: []
     }
   },
+  computed: {
+    classes () {
+      return [
+        'vc-menu',
+        `vc-menu-${this.mode}`,
+        `vc-menu-${this.theme}`
+      ]
+    }
+  },
   watch: {
     /** 外部属性 **/
     value (value) {
@@ -49,26 +62,33 @@ export default {
     activeName () {
       this.updateActiveName()
     },
-    openedNames (names) {
-      if (this.accordion && names.length > 1) {
-        this.openedNames = [names[0]]
-      } else {
-        this.updateOpenedNames()
-      }
+    openedNames () {
+      this.updateOpenedNames()
     }
   },
   mounted () {
-    this.openedNames = [...this.openNames]
     this.$on('menu-item-active', this.changeActive)
     this.$on('sub-menu-active', this.changeOpened)
+    this.openedNames = [...this.openNames]
+    this.updateActiveName()
   },
   methods: {
+    // 切换激活菜单
     changeActive (name) {
       this.activeName = name
       this.$emit('input', name)
+      this.$emit('change', name)
     },
-    changeOpened (name) {
-      this.openedNames.unshift(name)
+    // 切换展开子菜单
+    changeOpened (name, active) {
+      if (active && this.accordion) {
+        this.openedNames = [name]
+      } else if (active) {
+        this.openedNames.push(name)
+      } else {
+        this.openedNames = this.openedNames.filter(item => item !== name)
+      }
+      this.$emit('open-change', this.openedNames)
     },
     updateActiveName () {
       broadcast(this, 'vc-menu-item', 'update-active', this.activeName)
