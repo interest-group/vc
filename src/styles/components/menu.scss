@@ -6,12 +6,24 @@ $prefix-menu: $prefix + '-menu';
 
 .#{$prefix-menu}__item {
   line-height: 40px;
+  cursor: default;
   
-  a {
-    display: block;
+  &.is-router {
+    cursor: pointer;
   }
 
-  span {
-    cursor: default;
+  &.is-active {
+
+  }
+}
+
+.#{$prefix-menu}-item-group {
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+
+  &__title {
+    margin-bottom: 16px;
   }
 }

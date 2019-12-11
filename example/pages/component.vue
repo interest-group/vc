@@ -2,7 +2,12 @@
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
       <vc-menu :router="router">
-        <vc-menu-item-group title="basic">
+        <vc-menu-item-group>
+          <h3 class="heading-small" slot="title">开发指南</h3>
+          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
+        </vc-menu-item-group>
+        <vc-menu-item-group>
+          <h3 class="heading-small" slot="title">组件</h3>
           <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
         </vc-menu-item-group>
       </vc-menu>
@@ -40,6 +45,11 @@ export default {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+
+  .component-page__aside {
+
+  }
+
   .component-page__body {
   }
 }
