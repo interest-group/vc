@@ -55,7 +55,7 @@ export default {
     handleClick (item, index) {
       this.index = index
       this.$emit('input', index)
-      this.$emit('change', item) // 向父组件传递事件
+      this.$emit('change', item) // 向父组件传递事件;
     },
     // 动画
     setActive () {
