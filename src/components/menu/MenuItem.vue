@@ -2,7 +2,7 @@
   <li
     class="vc-menu__item"
     :class="{
-      'is-router': menu.router,
+      'is-router': rootMenu.router,
       'is-active': active
     }"
     :style="{ ...activeStyle }"
@@ -17,7 +17,7 @@
 import EventBus from './event-bus'
 export default {
   name: 'vc-menu-item',
-  inject: ['menu'],
+  inject: ['rootMenu'],
   props: {
     route: Object
   },
@@ -29,7 +29,7 @@ export default {
   computed: {
     activeStyle () {
       if (this.active) {
-        return { color: this.menu.activeTextColor }
+        return { color: this.rootMenu.activeTextColor }
       } else {
         return {}
       }
@@ -40,11 +40,11 @@ export default {
   },
   methods: {
     onClick () {
-      if (this.menu.router) this.$router.push(this.route)
+      if (this.rootMenu.router) this.$router.push(this.route)
       EventBus.$emit('menu-item-click', this)
     },
     onMouseEnter () {
-      this.$el.style.backgroundColor = this.menu.activeBackgroundColor
+      this.$el.style.backgroundColor = this.rootMenu.activeBackgroundColor
     },
     onMouseLeave () {
       this.$el.style.backgroundColor = ''

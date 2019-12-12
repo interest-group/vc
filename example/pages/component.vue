@@ -1,7 +1,7 @@
 <template>
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
-      <vc-menu :router="router" :unique="true" :open-names="openNames">
+      <vc-menu :router="router" :unique="true" :default-opened-menus="openNames" :close-child="true">
         <vc-sub-menu name="1">
           <h3 class="heading-small" slot="title">开发指南</h3>
           <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
@@ -13,6 +13,10 @@
               <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
             </vc-sub-menu>
           </vc-sub-menu>
+        </vc-sub-menu>
+        <vc-sub-menu name="4">
+          <h3 class="heading-small" slot="title">开发指南222</h3>
+          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>
         </vc-sub-menu>
         <vc-menu-item-group>
           <h3 class="heading-small" slot="title">组件</h3>

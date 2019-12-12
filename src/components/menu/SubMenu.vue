@@ -13,6 +13,7 @@
 <script>
 import SlideDown from '../slide-down'
 import EventBus from './event-bus'
+import mixin from './mixin'
 export default {
   name: 'vc-sub-menu',
   components: {
@@ -21,58 +22,36 @@ export default {
   props: {
     title: String,
     name: {
-      type: [String, Number],
+      type: [Number, String],
       required: true
     }
   },
-  inject: ['subMenu'],
+  inject: ['rootMenu', 'parentMenu'],
   provide () {
     return {
-      subMenu: this
+      parentMenu: this
     }
   },
+  mixins: [mixin],
   data () {
     return {
-      isShow: false,
       childSubMenus: {}
+    }
+  },
+  computed: {
+    isShow () {
+      return this.rootMenu.openedMenus.indexOf(this.name) > -1 || this.rootMenu.openedMenus.indexOf(Number(this.name)) > -1
     }
   },
   created () {
     EventBus.$emit('sub-menu-created', this)
-    this.subMenu.addChildSubMenu(this)
+    this.parentMenu.addChildSubMenu(this)
   },
   methods: {
     onClick () {
-      this.subMenu.toggleChildSubMenu(this)
-      this.$nextTick(() => {
-        if (!this.isShow) {
-          this.closeChildSubMen(this.childSubMenus)
-        }
-      })
-    },
-    closeChildSubMen (childSubMenus) {
-      // 递归关闭当前subMenu的子级subMenu
-      if (Object.keys(childSubMenus).length) {
-        for (let key in childSubMenus) {
-          childSubMenus[key].isShow = false
-
-          if (childSubMenus[key].childSubMenus) {
-            this.closeChildSubMen(childSubMenus[key].childSubMenus)
-          }
-        }
-      }
+      this.parentMenu.toggleChildSubMenu(this)
     },
     addChildSubMenu (subMenu) {
-      this.$set(this.childSubMenus, subMenu.name, subMenu)
-    },
-    toggleChildSubMenu (subMenu) {
-      if (this.unique && !subMenu.isShow) {
-        for (let key in this.childSubMenus) {
-          this.childSubMenus[key].isShow = false
-        }
-      }
-
-      subMenu.isShow = !subMenu.isShow
       this.$set(this.childSubMenus, subMenu.name, subMenu)
     }
   }

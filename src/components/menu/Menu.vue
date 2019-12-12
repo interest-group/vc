@@ -7,11 +7,12 @@
 </template>
 <script>
 import EventBus from './event-bus'
+import mixin from './mixin'
 export default {
   name: 'vc-menu',
   props: {
     router: Boolean,
-    openNames: Array,
+    defaultOpenedMenus: Array,
     textColor: {
       type: String,
       default: '#353c42'
@@ -24,8 +25,10 @@ export default {
       type: String,
       default: '#f9f9fb'
     },
+    closeChild: Boolean,
     unique: Boolean
   },
+  mixins: [mixin],
   data () {
     return {
       // 存放menuItem组件实例
@@ -33,26 +36,30 @@ export default {
       // 存放subMenu组件实例
       subMenus: {},
       // 存放最靠近的子级subMenu实例
-      childSubMenus: {}
+      childSubMenus: {},
+      // 存放打开menu，值为menu的name值
+      openedMenus: this.defaultOpenedMenus.map(name => String(name))
     }
   },
   computed: {
-    closeNames () {
-      const subMenuNames = Object.keys(this.subMenus)
-      const openNames = new Set(this.openNames)
-      const closeNames = [...subMenuNames].filter(openName => !openNames.has(openName) && !openNames.has(Number(openName)))
-      return closeNames
+    isRootMenu: {
+      get: () => {
+        return true
+      },
+      set: () => {
+        throw new Error('内置属性，不允许修改')
+      }
     }
   },
   watch: {
-    openNames (value) {
-      this.openSubMenus(value)
+    defaultOpenedMenus (value) {
+      this.openedMenu = value.map(name => String(name))
     }
   },
   provide () {
     return {
-      menu: this,
-      subMenu: this
+      rootMenu: this,
+      parentMenu: this
     }
   },
   created () {
@@ -73,36 +80,10 @@ export default {
     },
     getSubMenus (subMenu) {
       this.$set(this.subMenus, subMenu.name, subMenu)
-      this.openSubMenus()
+      this.$set(this, 'openedMenus', this.defaultOpenedMenus.map(name => String(name)))
     },
     addChildSubMenu (subMenu) {
       this.$set(this.childSubMenus, subMenu.name, subMenu)
-    },
-    toggleChildSubMenu (subMenu) {
-      // 关闭同级的subMenu
-      if (this.unique && !subMenu.isShow) {
-        for (let key in this.childSubMenus) {
-          this.childSubMenus[key].isShow = false
-        }
-      }
-
-      subMenu.isShow = !subMenu.isShow
-      this.$set(this.childSubMenus, subMenu.name, subMenu)
-    },
-    openSubMenus (openNames) {
-      openNames = openNames || this.openNames
-
-      openNames.forEach(name => {
-        this.subMenus[name] && this.toggleSubMenu(this.subMenus[name], true)
-      })
-
-      this.closeNames.forEach(name => {
-        this.subMenus[name] && this.toggleSubMenu(this.subMenus[name], false)
-      })
-    },
-    toggleSubMenu (subMenu, status) {
-      subMenu.isShow = status
-      this.$set(this.subMenus, subMenu.name, subMenu)
     }
   }
 }
