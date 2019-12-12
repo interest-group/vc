@@ -17,16 +17,18 @@
 import EventBus from './event-bus'
 export default {
   name: 'vc-menu-item',
-  inject: ['rootMenu'],
+  inject: ['rootMenu', 'parentMenu'],
   props: {
-    route: Object
-  },
-  data () {
-    return {
-      active: false
+    route: [Object, String],
+    name: {
+      type: [Number, String],
+      required: true
     }
   },
   computed: {
+    active () {
+      return this.name === this.rootMenu.activeItemName
+    },
     activeStyle () {
       if (this.active) {
         return { color: this.rootMenu.activeTextColor }
@@ -48,6 +50,19 @@ export default {
     },
     onMouseLeave () {
       this.$el.style.backgroundColor = ''
+    },
+    getParentSubMenuNames (parentMenu) {
+      let names = [parentMenu.name]
+      if (parentMenu.parentMenu && parentMenu.parentMenu.name && !parentMenu.isRootMenu) {
+        parentMenu = parentMenu.parentMenu
+        names = names.concat(this.getParentSubMenuNames(parentMenu))
+      }
+      return names
+    },
+    openParentSubMenus () {
+      if (!this.parentMenu || !this.parentMenu.name) return
+      let names = this.getParentSubMenuNames(this.parentMenu)
+      this.$set(this.rootMenu, 'openedNames', names)
     }
   }
 }
