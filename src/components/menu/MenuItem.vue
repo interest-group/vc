@@ -3,7 +3,8 @@
     class="vc-menu__item"
     :class="{
       'is-router': rootMenu.router,
-      'is-active': active
+      'is-active': active,
+      'is-disabled': disabled
     }"
     :style="{ ...activeStyle }"
     @click="onClick"
@@ -20,6 +21,7 @@ export default {
   inject: ['rootMenu', 'parentMenu'],
   props: {
     route: [Object, String],
+    disabled: Boolean,
     name: {
       type: [Number, String],
       required: true
@@ -42,10 +44,12 @@ export default {
   },
   methods: {
     onClick () {
-      if (this.rootMenu.router) this.$router.push(this.route)
+      if (this.disabled) return
+      if (this.rootMenu.router && !this.rootMenu.equalCurrentRoute(this)) this.$router.push(this.route)
       EventBus.$emit('menu-item-click', this)
     },
     onMouseEnter () {
+      if (this.disabled) return
       this.$el.style.backgroundColor = this.rootMenu.activeBackgroundColor
     },
     onMouseLeave () {

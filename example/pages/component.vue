@@ -4,7 +4,7 @@
       <vc-menu :router="router" :unique="true" :default-opened-menus="openNames" :close-child="true">
         <vc-menu-item-group>
           <h3 slot="title">开发指南</h3>
-          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route" :name="route.name">{{route.meta.name}}</vc-menu-item>
+          <vc-menu-item v-for="(route, index) in routes" :key="index" :route="route" disabled :name="route.name">{{route.meta.name}}</vc-menu-item>
         </vc-menu-item-group>
         <vc-menu-item-group>
           <h3 slot="title">组件</h3>

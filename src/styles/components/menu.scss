@@ -25,6 +25,11 @@ $prefix-menu: $prefix + '-menu';
   &.is-active {
 
   }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
 }
 
 .#{$prefix-menu}-item-group {
