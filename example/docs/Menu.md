@@ -21,7 +21,7 @@
 
 设置属性 `theme` 为 light、dark 可以选择主题
 
-<!-- 
+
 ::: demo menu
 
 ``` html
@@ -74,14 +74,14 @@
   </div>
 </template>
 ```
-::: -->
+:::
 
 ### 菜单分组
 
 使用 `<vc-menu-item-group></vc-menu-item-group>` 组件进行分组
 
 
-<!-- ::: demo menu
+::: demo menu
 
 ``` html
 <template>
@@ -117,7 +117,7 @@
   </vc-menu>
 </template>
 ```
-::: -->
+:::
 
 ### 子菜单
 
@@ -234,32 +234,36 @@
 |属性|说明|类型|默认值|
 |-|-|-|-|
 |value|激活的菜单，可使用 v-model 双向绑定|Number\|String|-|
-|theme|主题，可选值为 `light`、`dark`|String|light|
-|open-names|展开的子菜单 name 集合|Array|\[\]|
+|router|控制是否开启`vue-router`模式，在激活菜单项的时候，<br /><br />将会以菜单项`route`属性值作为跳转的目标|Boolean|`false`|
+|unique|同级子菜单`<vc-sub-menu>`仅可展开一个，手风琴模式|Boolean|`false`|
+|close-child|关闭该菜单`<vc-sub-menu>`同时关闭改菜单下的所有子级菜单|Boolean|`false`|
+|background-color|菜单的背景颜色|String|`#ffffff`|
+|active-text-color|激活的菜单项文字颜色|String|`#5575c8`|
+|active-background-color|菜单项`hover`高亮背景颜色|String|`#f9f9fb`|
+|default-opened-menus|默认展开的子菜单（`<vc-sub-menu>`） name 集合|Array|\[\]|
 
 #### menu events
 
 |事件名|说明|参数|
 |-|-|-|
-|change|切换菜单时触发|name|
+|select|切换菜单项`<vc-menu-item>`时触发的回调|name|
+|open|子菜单`<vc-sub-menu>`展示时触发的回调|name|
+|close|子菜单`<vc-sub-menu>`关闭时触发的回调|name|
 
 #### menu-item props
 
 |属性|说明|类型|默认值|
 |-|-|-|-|
-|name|菜单项的唯一标识，必填|String\|Number|-|
-|to|跳转的链接，支持 `vue-router` 对象|String\|Object|-|
-|replace|路由跳转时，开启 replace 将不会向 history 添加新记录|Boolean|false|
-|target|a 链接的 target 属性|String|_self|
+|name|菜单项的唯一标识，**必填**|String\|Number|-|
+|route|配合`<vc-menu>`的router属性使用，<br /><br />其值可以使`vue-router`的`route`对象或者`route.paht`|String \| Object|-|
 |disabled|是否禁用|Boolean|false|
 
 #### sub-menu props
 
 |属性|说明|类型|默认值|
 |-|-|-|-|
-|name|子菜单项的唯一标识，必填|String\|Number|-|
+|name|子菜单项的唯一标识，**必填**|String\|Number|-|
 |title|子菜单标题|String|-|
-|disabled|是否禁用|Boolean|false|
 
 #### sub-menu slot
 
