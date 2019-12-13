@@ -21,7 +21,7 @@ export default {
         return !node || node.addEventListener
       }
     },
-    // 滚动多少距离开始显示组件
+    // 滚动多少距离开始显示组件!
     offset: {
       type: Number,
       default: 60
