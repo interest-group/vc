@@ -1,18 +1,13 @@
 <template>
   <vc-container class="component-page">
     <vc-aside class="component-page__aside">
-
-      <router-link v-for="(route, index) in routes" :key="index" :to="route">{{route.meta.name}}</router-link>
-      <!--<vc-menu :router="router">-->
-        <!--<vc-menu-item-group title="basic">-->
-          <!--<vc-menu-item v-for="(route, index) in routes" :key="index" :route="route">{{route.meta.name}}</vc-menu-item>-->
-        <!--</vc-menu-item-group>-->
-      <!--</vc-menu>-->
+      <vc-menu v-model="menu">
+        <vc-menu-item v-for="(route, index) in routes" :key="index"
+                      :name="route.name" :to="route">{{route.meta.name}}</vc-menu-item>
+      </vc-menu>
     </vc-aside>
     <vc-main class="component-page__body">
-      <!--<vc-button type="error" @click.native="toggleRouter">toggle router: {{router}}</vc-button>-->
       <router-view></router-view>
-      <!-- <p class="vc-mg-l-25">1312</p> -->
     </vc-main>
   </vc-container>
 </template>
@@ -25,8 +20,8 @@ export default {
   },
   data () {
     return {
-      router: true,
-      routes: componentRoutes
+      routes: componentRoutes,
+      menu: this.$route.name
     }
   },
   methods: {
@@ -40,15 +35,16 @@ export default {
 
 <style lang="scss" scoped>
 .component-page {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  &__aside > a{
-    display: block;
-    line-height: 20px;
-    margin: 5px 0;
+  height: 100%;
+  &__aside {
+    height: 100%;
+    overflow: auto;
   }
-  .component-page__body {
+  &__body {
+    height: 100%;
+    overflow: auto;
+    padding-left: 20px;
+    padding-right: 30px;
   }
 }
 </style>

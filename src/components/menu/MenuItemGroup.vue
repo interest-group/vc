@@ -1,20 +1,17 @@
 <template>
-  <li class="vc-menu-item-group">
-    <div class="vc-menu-item-group__title">
-      <template v-if="title">{{title}}</template>
-      <slot v-else name="title"></slot>
-    </div>
-    <ul>
-      <slot></slot>
-    </ul>
+  <li class="vc-menu-group">
+    <div class="vc-menu-group-title"><slot name="title">{{title}}</slot></div>
+    <ul class="vc-menu-group-content"><slot></slot></ul>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'vc-menu-item-group',
+  name: 'vc-menu-group',
   props: {
-    title: String
+    title: {
+      type: String
+    }
   }
 }
 </script>
