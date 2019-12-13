@@ -1,0 +1,25 @@
+.demo-border {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+
+  & > div {
+    min-width: 16%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+  }
+}
+
+.demo-shadow {
+  display: flex;
+  justify-content: space-between;
+
+  & > div {
+    min-width: 30%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+  }
+}

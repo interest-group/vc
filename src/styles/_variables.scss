@@ -1,4 +1,3 @@
-@import 'common';
 // 类名前缀
 
 $prefix: vc;
@@ -148,19 +147,3 @@ $button-font-size-middle: 14px;
 $button-padding-small: 6px 10px;
 $button-font-size-small: 12px;
 
-
-$list: (mg, pd);
-$list-item: (l, t, b, r);
-
-// 生成margin , padding
-@each $item in $list {
-  @each $var in $list-item {
-    @for $i from 0 through 26 {
-      .#{$prefix}-#{$item}-#{$var}-#{$i} {
-        #{format-type($item)}: {
-          #{format-type($var)}: #{$i}px
-        }
-      }
-    }
-  }
-}
