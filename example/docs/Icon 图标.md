@@ -15,14 +15,13 @@
 ## 图标集合
 
 <div class="vc-icon_box">
-  <div class="vc-icon_item" v-for="(item, index) in iconList" :key="index">
+  <div class="vc-icon_item" v-for="(item, index) in iconList" :key="index" @click="onCopy(item)">
     <div class="vc-icon_item-content">
       <vc-icon :name="item.className" size="30"></vc-icon>
       <p class="vc-icon_text">{{item.className}}</p>
     </div>
   </div>
 </div>
-
 
 ## API
 ...
@@ -62,5 +61,16 @@ export default {
       ]
     }
   },
+  methods: {
+    onCopy(item) {
+      let textarea = document.createElement('textarea')
+      textarea.innerHTML = `<vc-icon name="${item.className}"></vc-icon>`
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand("copy")
+      alert('复制成功')
+      document.body.removeChild(textarea)
+    }
+  }
 }
 </script>
