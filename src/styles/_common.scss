@@ -21,3 +21,153 @@ $version: '0.0.1';
     @return bottom;
   }
 }
+
+// 生成margin , padding
+
+$list: (mg, pd);
+$list-item: (l, t, b, r);
+
+@each $item in $list {
+  @each $var in $list-item {
+    @for $i from 0 through 26 {
+      .#{$prefix}-#{$item}-#{$var}-#{$i} {
+        #{format-type($item)}: {
+          #{format-type($var)}: #{$i}px
+        }
+      }
+    }
+  }
+}
+
+// 文字颜色
+
+$text-colors: (
+  success: $success-color,
+  error: $error-color,
+  warning: $warning-color,
+  info: $info-color
+);
+
+@each $key, $value in $text-colors {
+  .text-#{$key} {
+    color: $value;
+  }
+}
+
+// 文字-标题
+$heading-types: (
+  super: (
+    font-size: $heading-super-font-size,
+    line-height: $heading-super-line-height
+  ),
+  large: (
+    font-size: $heading-large-font-size,
+    line-height: $heading-large-line-height
+  ),
+  middle: (
+    font-size: $heading-middle-font-size,
+    line-height: $heading-middle-line-height
+  ),
+  small: (
+    font-size: $heading-small-font-size,
+    line-height: $heading-small-line-height
+  ),
+);
+
+@each $key, $value in $heading-types {
+  .heading-#{$key} {
+    font-size: map-get($value, "font-size");
+    line-height: map-get($value, "line-height");
+  }
+}
+
+// 文字段落
+
+.paragraph {
+  font-size: $paragraph-font-size;
+  line-height: $paragraph-line-height;
+}
+
+// 文字-regular
+
+$text-regular-types: (
+  large: (
+    font-size: $regular-large-font-size,
+    line-height: $regular-large-line-height
+  ),
+  middle: (
+    font-size: $regular-middle-font-size,
+    line-height: $regular-middle-line-height
+  ),
+  small: (
+    font-size: $regular-small-font-size,
+    line-height: $regular-small-line-height
+  )
+);
+
+@each $key, $value in $text-regular-types {
+  .text-#{$key} {
+    font-size: map-get($value, "font-size");
+    line-height: map-get($value, "line-height");
+    font-weight: normal;
+  }
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+// 阴影
+
+.shadow {
+  box-shadow: $box-shadow;
+}
+
+.shadow-light {
+  box-shadow: $box-shadow-lighten;
+}
+
+.shadow-dark {
+  box-shadow: $box-shadow-darken;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+// 边框
+
+.bd {
+  border: 1px solid $grey-color;
+}
+
+$border-position: (top, right, bottom, left);
+
+@each $position in $border-position {
+  .bd-#{$position} {
+    border-#{$position}: 1px solid $grey-color;
+  }
+}
+
+$border-colors: (
+  success: $success-color,
+  error: $error-color,
+  warning: $warning-color,
+  info: $info-color
+);
+
+@each $key, $value in $border-colors {
+  .bd-#{$key} {
+    border-color: $value;
+  }
+}

@@ -1,17 +1,85 @@
 $prefix-menu: $prefix + '-menu';
 
 .#{$prefix-menu} {
+  list-style: none;
   user-select: none;
+  height: 100%;
+  &-item{
+    padding: 14px 20px;
+    line-height: 20px;
+    font-size: 14px;
+    display: block;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    &-disabled{
+      opacity: .25;
+      cursor: not-allowed;
+      background: none!important;
+    }
+  }
+  &-group{
+    &-title{
+      cursor: default;
+      padding: 14px 20px;
+      line-height: 20px;
+      font-size: 14px;
+    }
+    &-content{
+      list-style: none;
+    }
+  }
 }
 
-.#{$prefix-menu}__item {
-  line-height: 40px;
-  
-  a {
-    display: block;
+.#{$prefix}-sub-menu {
+  &-title{
+    padding: 14px 10px;
+    line-height: 20px;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
   }
+  &-icon{
+    position: absolute;
+    right: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  &-active .#{$prefix}-sub-menu-icon{
+    transform: rotate(180deg);
+  }
+}
 
-  span {
-    cursor: default;
+$vc-menu-theme: (light, dark);
+
+$vc-menu-bg: (light: #FFF, dark: #545C64);
+$vc-menu-item-color: (light: #555, dark: #FFF);
+$vc-menu-item-gb-hover: (light: #ecf5ff, dark: #434A50);
+$vc-menu-item-color-active: (light: #409eff, dark: #FFD04B);
+$vc-menu-group-title-color: (light: #999, dark: #9096A2);
+
+@each $theme in $vc-menu-theme {
+  .#{$prefix-menu}-#{$theme} {
+    background-color: map-get($vc-menu-bg, $theme);
+    .#{$prefix-menu} {
+      &-item{
+        color: map-get($vc-menu-item-color, $theme);
+        &-active{
+          color: map-get($vc-menu-item-color-active, $theme);
+        }
+        &:hover{
+          background-color: map-get($vc-menu-item-gb-hover, $theme);
+        }
+      }
+      &-group-title{
+        color: map-get($vc-menu-group-title-color, $theme);
+      }
+    }
+    .#{$prefix}-sub-menu-title {
+      color: map-get($vc-menu-item-color, $theme);
+      &:hover{
+        background-color: map-get($vc-menu-item-gb-hover, $theme);
+      }
+    }
   }
 }
