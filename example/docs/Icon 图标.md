@@ -1,25 +1,66 @@
-# Icon 布局
+# Icon图标
 
-## 组件概述
+提供了一套常用的图标集合。
 
-图标xxx
+## 使用方法
 
-### 代码示例
-
-#### 实例1
-
-这里是描述文字
-
-::: demo
-
+直接通过设置名字为 ```iconName``` 来使用即可。例如：
+::: demo 
 ``` html
-<template>
-  <vc-icon name="home"></vc-icon>
-</template>
+<vc-icon name="home"></vc-icon> 
+<vc-icon name="tv"></vc-icon> 
+<vc-icon name="laptop"></vc-icon>
 ```
 :::
+## 图标集合
 
-更多示例...
+<div class="vc-icon_box">
+  <div class="vc-icon_item" v-for="(item, index) in iconList" :key="index">
+    <div class="vc-icon_item-content">
+      <vc-icon :name="item.className" size="30"></vc-icon>
+      <p class="vc-icon_text">{{item.className}}</p>
+    </div>
+  </div>
+</div>
+
 
 ## API
 ...
+
+<script>
+export default {
+  data() {
+    return {
+      iconList: [
+        {
+          className: 'home'
+        },
+        {
+          className: 'tv'
+        },
+        {
+          className: 'laptop'
+        },
+        {
+          className: 'windows8'
+        },
+        {
+          className: 'appleinc'
+        },
+        {
+          className: 'android'
+        },
+        {
+          className: 'system'
+        },
+        {
+          className: 'tablet'
+        },
+        {
+          className: 'mobile'
+        }
+      ]
+    }
+  },
+}
+</script>

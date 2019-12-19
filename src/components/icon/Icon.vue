@@ -25,8 +25,8 @@ export default {
   computed: {
     classes () {
       return [
-        'vc-icon',
-        `vcon-${this.name}`,
+        'iconfont',
+        `vc-icon-${this.name}`,
         {
           [this.custom]: this.custom
         }
