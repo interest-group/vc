@@ -45,6 +45,7 @@ export default {
   border-radius: 5px;
   border: 1px solid #eee;
   transition: all 0.5s ease;
+  margin: 20px 0;
   &:hover {
     border-color: transparent;
     box-shadow: 0 2px 7px rgba(0,0,0,.15);
