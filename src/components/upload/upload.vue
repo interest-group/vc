@@ -1,24 +1,24 @@
 <template>
   <div>
     <form action
-          name="upload">
-      <div class="upload-box">
-        <div class="img-list"
+          name="vc-upload">
+      <div class="vc-upload-box">
+        <div class="vc-img-list"
              v-for="(item,index) of imgList"
              :key="index"
              v-show="imgList.length!=0">
-          <div class="img-item"
+          <div class="vc-img-item"
                @mouseover="mouseOver(index)"
                @mouseout="mouseOut">
             <img v-if="item.file.type.indexOf('image') !== -1"
                  :src="item.file.src" />
-            <div class="upload-icon"
+            <div class="vc-upload-icon"
                  v-show="index==activeNum">
               <i @click="fileDel(index)">×</i>
             </div>
           </div>
         </div>
-        <div class="img-add"
+        <div class="vc-img-add"
              v-show="addState">
           <span>十</span>
           <input id="inpu"

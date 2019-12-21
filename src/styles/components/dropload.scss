@@ -1,15 +1,15 @@
-.upload-drop {
+.vc-upload-drop {
   font-size: 14px;
 
-  .upload-content {
-    .drag-area {
+  .vc-upload-content {
+    .vc-drag-area {
       height: 200px;
       width: 300px;
       border: dashed 1px gray;
       margin-bottom: 10px;
       color: #777;
 
-      .upload-tips {
+      .vc-upload-tips {
         text-align: center;
         height: 200px;
         line-height: 200px;
@@ -22,22 +22,22 @@
     }
   }
 
-  .upload-footer {
-    .file-name {
+  .vc-upload-footer {
+    .vc-file-name {
       text-align: center;
       height: 20px;
       line-height: 20px;
       display: flex;
       width: 300px;
 
-      .file-txt {
+      .vc-file-txt {
         width: 280px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
       }
 
-      .file-icon {
+      .vc-file-icon {
         width: 20px;
       }
 

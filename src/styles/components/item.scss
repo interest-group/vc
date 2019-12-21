@@ -1,0 +1,15 @@
+.vc-swiper-slide {
+  height: 200px;
+
+  &:nth-child(1) {
+    background: #2d8cf0;
+  }
+
+  &:nth-child(2) {
+    background: #999;
+  }
+
+  &:nth-child(3) {
+    background: #c6e2ff;
+  }
+}

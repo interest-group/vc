@@ -1,6 +1,5 @@
 # 上传图片
 
-demo
 
 ::: demo
 
@@ -8,10 +7,16 @@ demo
 <template>
   <vc-upload :limit='limit' :img-size="imgSize" @ajaxRequest='ajaxRequest'></vc-upload>
 </template>
+```
+:::
+::: demo menu
+
+``` html
 <template>
    <vc-dropload :maxfile-size="imgSize" @fileImg='fileImg'></vc-dropload>
 </template>
-
+```
+:::
 <script>
 export default {
   name:'upload',
@@ -36,17 +41,13 @@ export default {
 }
 </script>
 
-<style scoped="" lang="scss">
+## API
 
-</style>
-```
 
-表格
-
-| 属性    | 说明     | 类型   | 默认值 |
-| ------- | -------- | ------ | ------ |
-| limit   | 数量     | number | 9      |
-| imgSize | 限制大小 | number | 1024   |
+|属性|说明|类型|默认值|
+|-|-|-|-|
+|limit|数量|Number|9|
+|imgSize|限制大小|number|1024|
 
 Methods
 | 方法名 | 说明 |  
