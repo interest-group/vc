@@ -1,21 +1,21 @@
 
-.upload-box { 
+.vc-upload-box { 
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  .img-list {
+  .vc-img-list {
     position: relative;
     width: 80px;
     height: 80px;
     padding: 0 5px;
-    .img-item{
+    .vc-img-item{
       position: relative;
       img {
         width: 80px;
         height: 80px;
         border-radius: 5px;
       }
-      .upload-icon {
+      .vc-upload-icon {
         position: absolute;
         top: 0;
         left: 0;
@@ -36,7 +36,7 @@
       }
     }
   }
-  .img-add  {
+  .vc-img-add  {
     width: 80px;
     height: 80px;
     line-height: 80px;

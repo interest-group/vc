@@ -1,28 +1,28 @@
 <template>
-  <div class="upload-drop">
-    <div class="upload-content">
-      <div class="drag-area"
+  <div class="vc-upload-drop">
+    <div class="vc-upload-content">
+      <div class="vc-drag-area"
            @dragover.prevent="fileDragover"
            @drop.prevent="fileDrop">
-        <div class="upload-tips">
+        <div class="vc-upload-tips">
           <span>将文件拖拽至此，或</span>
           <label for="fileInput">点此上传</label>
         </div>
       </div>
     </div>
-    <div class="upload-footer">
+    <div class="vc-upload-footer">
       <input type="file"
              id="fileInput"
              @change="chooseUploadFile"
              style="display: none;">
       <!-- <label for="fileInput" v-if="fileName" style="color: #11A8FF; cursor: pointer">选择文件</label> -->
-      <div :class="['file-name',activeNum==index ?'active' : '']"
+      <div :class="['vc-file-name',activeNum==index ?'active' : '']"
            v-for="(item,index) in fileName"
            :key="index"
            @mouseover="mouseOver(index)"
            @mouseout="mouseOut">
-        <p class="file-txt">{{item.file.name}}</p>
-        <i class='file-icon'
+        <p class="vc-file-txt">{{item.file.name}}</p>
+        <i class='vc-file-icon'
            @click="deleteChange(index)">{{activeNum==index ? 'X' : '√'}}</i>
       </div>
       <!-- <button @click="uploadOk">提交</button> -->

@@ -1,11 +1,11 @@
 <template >
-  <div :class="['vc-switch', index===0 ? 'vc-background-start' : 'vc-background-end']"
-       ref="switch">
-    <div class="vc-switch-active-bg"
+  <div class="vc-tab"
+       ref="tab">
+    <div class="vc-tab-active-bg"
          :class="{transition: styles}"
          :style="styles"></div>
-    <div class="vc-switch-items">
-      <div class="vc-switch-item"
+    <div class="vc-tab-items">
+      <div class="vc-tab-item"
            ref="item"
            v-for="(item,i) in nav"
            :key="i"
@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  name: 'vc-switch',
+  name: 'vc-tabs',
   props: {
     // 用来双向绑定的index
     value: {
@@ -27,13 +27,15 @@ export default {
     },
     nav: {
       type: Array,
-      default: () => [{ name: 'map', txt: '地图' }, { name: 'table', txt: '表格' }]
+      default: () => []
     }
   },
   data () {
     return {
+      typeId: 'map',
       index: this.value,
-      styles: null
+      styles: null,
+      backgroundStyles: null
     }
   },
   computed: {
@@ -55,19 +57,16 @@ export default {
     handleClick (item, index) {
       this.index = index
       this.$emit('input', index)
-      this.$emit('change', item) // 向父组件传递事件;
+      this.$emit('change', item)
     },
     // 动画
     setActive () {
-      this.$refs.item.forEach(el => {
-        el.style['color'] = ''
-      })
       const node = this.$refs.item[this.index]
-      node.style['color'] = `${this.txtColor}`
       // 激活的节点
       if (node) {
         this.styles = {
-          left: `${node.offsetLeft}px`,
+          transform: `translateX(${node.offsetLeft}px)`,
+          // left: `${node.offsetLeft}px`,    //这两种都可以
           width: `${node.getBoundingClientRect().width}px`
         }
       }

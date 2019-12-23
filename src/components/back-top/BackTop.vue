@@ -1,11 +1,11 @@
 <template>
   <!-- 组件本身就应该是按钮，而不是容器 -->
   <transition name="fade-in">
-    <div class="back-top"
+    <div class="vc-back-top"
          v-if="visible"
          @click="handleClick">
       <slot>
-        <div class="back-top-target">返回</div>
+        <div class="vc-back-top-target">返回</div>
       </slot>
     </div>
   </transition>
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: 'vc-backtop',
+  name: `vc-backtop`,
   props: {
     // 滚动容器，默认为父组件$el
     target: {

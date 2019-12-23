@@ -33,19 +33,19 @@
         display
       </vc-menu-item>
       <vc-menu-item name="2">
-        <vc-icon name="vc-icon-laptop"></vc-icon>
+        <vc-icon name="laptop"></vc-icon>
         laptop
       </vc-menu-item>
       <vc-menu-item name="3" disabled>
-        <vc-icon name="vc-icon-mobile"></vc-icon>
+        <vc-icon name="mobile"></vc-icon>
         mobile
       </vc-menu-item>
       <vc-menu-item name="4">
-        <vc-icon name="vc-icon-tablet"></vc-icon>
+        <vc-icon name="tablet"></vc-icon>
         tablet
       </vc-menu-item>
       <vc-menu-item name="5">
-        <vc-icon name="vc-icon-tv"></vc-icon>
+        <vc-icon name="tv"></vc-icon>
         tv
       </vc-menu-item>
     </vc-menu>
@@ -55,19 +55,19 @@
         display
       </vc-menu-item>
       <vc-menu-item name="2">
-        <vc-icon name="vc-icon-laptop"></vc-icon>
+        <vc-icon name="laptop"></vc-icon>
         laptop
       </vc-menu-item>
       <vc-menu-item name="3" disabled>
-        <vc-icon name="vc-icon-mobile"></vc-icon>
+        <vc-icon name="mobile"></vc-icon>
         mobile
       </vc-menu-item>
       <vc-menu-item name="4">
-        <vc-icon name="vc-icon-tablet"></vc-icon>
+        <vc-icon name="tablet"></vc-icon>
         tablet
       </vc-menu-item>
       <vc-menu-item name="5">
-        <vc-icon name="vc-icon-tv"></vc-icon>
+        <vc-icon name="tv"></vc-icon>
         tv
       </vc-menu-item>
     </vc-menu>
@@ -88,29 +88,29 @@
   <vc-menu>
     <vc-menu-group title="device">
       <vc-menu-item name="1">
-        <vc-icon name="vc-icon-laptop"></vc-icon>
+        <vc-icon name="laptop"></vc-icon>
         laptop
       </vc-menu-item>
       <vc-menu-item name="2" disabled>
-        <vc-icon name="vc-icon-mobile"></vc-icon>
+        <vc-icon name="mobile"></vc-icon>
         mobile
       </vc-menu-item>
       <vc-menu-item name="3">
-        <vc-icon name="vc-icon-tablet"></vc-icon>
+        <vc-icon name="tablet"></vc-icon>
         tablet
       </vc-menu-item>
     </vc-menu-group>
     <vc-menu-group title="system">
       <vc-menu-item name="4">
-        <vc-icon name="vc-icon-android"></vc-icon>
+        <vc-icon name="android"></vc-icon>
         android
       </vc-menu-item>
       <vc-menu-item name="5">
-        <vc-icon name="vc-icon-appleinc"></vc-icon>
+        <vc-icon name="appleinc"></vc-icon>
         iOS
       </vc-menu-item>
       <vc-menu-item name="6">
-        <vc-icon name="vc-icon-windows8"></vc-icon>
+        <vc-icon name="windows8"></vc-icon>
         windows
       </vc-menu-item>
     </vc-menu-group>
@@ -135,29 +135,29 @@
     <vc-menu>
       <vc-sub-menu name="device" title="device">
         <vc-menu-item name="1">
-          <vc-icon name="vc-icon-laptop"></vc-icon>
+          <vc-icon name="laptop"></vc-icon>
           laptop
         </vc-menu-item>
         <vc-menu-item name="2" disabled>
-          <vc-icon name="vc-icon-mobile"></vc-icon>
+          <vc-icon name="mobile"></vc-icon>
           mobile
         </vc-menu-item>
         <vc-menu-item name="3">
-          <vc-icon name="vc-icon-tablet"></vc-icon>
+          <vc-icon name="tablet"></vc-icon>
           tablet
         </vc-menu-item>
       </vc-sub-menu>
       <vc-sub-menu name="system" title="system">
         <vc-menu-item name="4">
-          <vc-icon name="vc-icon-android"></vc-icon>
+          <vc-icon name="android"></vc-icon>
           android
         </vc-menu-item>
         <vc-menu-item name="5">
-          <vc-icon name="vc-icon-appleinc"></vc-icon>
+          <vc-icon name="appleinc"></vc-icon>
           iOS
         </vc-menu-item>
         <vc-menu-item name="6">
-          <vc-icon name="vc-icon-windows8"></vc-icon>
+          <vc-icon name="windows8"></vc-icon>
           windows
         </vc-menu-item>
       </vc-sub-menu>
@@ -165,29 +165,29 @@
     <vc-menu :open-names="['device']">
       <vc-sub-menu name="device" title="device">
         <vc-menu-item name="1">
-          <vc-icon name="vc-icon-laptop"></vc-icon>
+          <vc-icon name="laptop"></vc-icon>
           laptop
         </vc-menu-item>
         <vc-menu-item name="2" disabled>
-          <vc-icon name="vc-icon-mobile"></vc-icon>
+          <vc-icon name="mobile"></vc-icon>
           mobile
         </vc-menu-item>
         <vc-menu-item name="3">
-          <vc-icon name="vc-icon-tablet"></vc-icon>
+          <vc-icon name="tablet"></vc-icon>
           tablet
         </vc-menu-item>
       </vc-sub-menu>
       <vc-sub-menu name="system" title="system">
         <vc-menu-item name="4">
-          <vc-icon name="vc-icon-android"></vc-icon>
+          <vc-icon name="android"></vc-icon>
           android
         </vc-menu-item>
         <vc-menu-item name="5">
-          <vc-icon name="vc-icon-appleinc"></vc-icon>
+          <vc-icon name="appleinc"></vc-icon>
           iOS
         </vc-menu-item>
         <vc-menu-item name="6">
-          <vc-icon name="vc-icon-windows8"></vc-icon>
+          <vc-icon name="windows8"></vc-icon>
           windows
         </vc-menu-item>
       </vc-sub-menu>
@@ -195,29 +195,29 @@
     <vc-menu :open-names="['device']" accordion>
       <vc-sub-menu name="device" title="device">
         <vc-menu-item name="1">
-          <vc-icon name="vc-icon-laptop"></vc-icon>
+          <vc-icon name="laptop"></vc-icon>
           laptop
         </vc-menu-item>
         <vc-menu-item name="2" disabled>
-          <vc-icon name="vc-icon-mobile"></vc-icon>
+          <vc-icon name="mobile"></vc-icon>
           mobile
         </vc-menu-item>
         <vc-menu-item name="3">
-          <vc-icon name="vc-icon-tablet"></vc-icon>
+          <vc-icon name="tablet"></vc-icon>
           tablet
         </vc-menu-item>
       </vc-sub-menu>
       <vc-sub-menu name="system" title="system">
         <vc-menu-item name="4">
-          <vc-icon name="vc-icon-android"></vc-icon>
+          <vc-icon name="android"></vc-icon>
           android
         </vc-menu-item>
         <vc-menu-item name="5">
-          <vc-icon name="vc-icon-appleinc"></vc-icon>
+          <vc-icon name="appleinc"></vc-icon>
           iOS
         </vc-menu-item>
         <vc-menu-item name="6">
-          <vc-icon name="vc-icon-windows8"></vc-icon>
+          <vc-icon name="windows8"></vc-icon>
           windows
         </vc-menu-item>
       </vc-sub-menu>

@@ -24,6 +24,9 @@ export default {
 <style scoped="" lang="scss">
   .app {
     height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    min-width: 1000px;
     &-header {
       box-sizing: border-box;
       height: 80px;
