@@ -6,11 +6,12 @@
 ```html
 <template>
   <div>
-    <p><vc-progress v-model="value1"/></p>
-    <p>&nbsp;</p>
-    <p><vc-progress :value="30"/></p>
-    <p>&nbsp;</p>
-    <p><vc-progress :value="100"/></p>
+    <p><vc-progress v-model="value1" :border="26"/></p>
+    <p><vc-progress :value="30" :border="26"/></p>
+    <p><vc-progress :value="100" :border="26"/>自定义100%</p>
+    <p><vc-progress :value="90" :border="26" status="waring"/>警告90%</p>
+    <p><vc-progress :value="90" :border="26" status="success"/>成功90%</p>
+    <p><vc-progress :value="90" :border="26" status="danger"/>错误90%</p>
   </div>
 </template>
 <script>
@@ -31,13 +32,13 @@
 <template>
   <div>
     <p>设置宽高</p>
-    <p><vc-progress :value="50" :radius="300" :border="10"/></p>
-    <p>&nbsp;</p>
+    <p><vc-progress :value="50" :radius="300" :border="26"/></p>
     <p>设置背景和进度颜色</p>
-    <p><vc-progress :value="30" color="#ddd" borderColor="rgb(255, 73, 73)"/></p>
-    <p>&nbsp;</p>
+    <p><vc-progress :value="30" color="#ddd" borderColor="rgb(255, 73, 73)" :border="26"/></p>
+    <p>设置状态</p>
+    <p><vc-progress :value="30" color="#ddd" status="danger" :border="26"/></p>
     <p>进度文字固定位置</p>
-    <p><vc-progress :value="80" :followText="false"/></p>
+    <p><vc-progress :value="80" :followText="false" :border="26"/></p>
   </div>
 </template>
 <script>
@@ -65,11 +66,11 @@
     
     <vc-progress :value="50" :radius="50" :border="8" type="circle"></vc-progress>
     
-    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" borderColor="rgb(255, 73, 73)" type="circle"></vc-progress>
+    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" status="danger" type="circle" ></vc-progress>
     
     <vc-progress :value="100" :radius="50" :border="8" type="circle"></vc-progress>
     
-    <vc-progress :value="80" :radius="50" :border="8" type="circle" :showText="false">自定义显示内容</vc-progress>
+    <vc-progress :value="80" :radius="50" :border="8" type="circle" >自定义</vc-progress>
     
   </div>
 </template>
