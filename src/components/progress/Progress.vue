@@ -1,9 +1,6 @@
-<!--Created by 337547038 on 2017/12/14.-->
-<!--example
-<ProgressBar :value="30" :radius="400" :border="10" color="#999" borderColor="#f60" type="line"></ProgressBar>-->
 <template>
   <div class="vc-progress">
-    <div :style="{width:radius?radius+'px':'',background:color,minHeight:border?border+'px':''}"
+    <div :style="{width:radius && radius+'px',background: color, minHeight: border ? border+'px':''}"
          :class="[className,'vc-progress-line']"
          v-if="type==='line'">
       <slot></slot>
@@ -64,13 +61,10 @@ export default {
     value: {// 进度
       type: Number,
       default: 0
-      /* validator: function (value) {
-                 return value >= 0 && value <= 100;
-                 } */
     },
     radius: {// 外半径
       type: Number,
-      default: 0
+      default: 300
 
     },
     border: {// 边框
@@ -123,14 +117,6 @@ export default {
         transition: `all ${this.duration / 1000}s`
       }
     },
-    /* lineStyleText () {
-      if (this.follow && this.showText) {
-        return {
-          right: (100 - this.percent) + '%',
-          transition: `all ${this.duration / 1000}s`
-        }
-      }
-    }, */
     circleStyle2 () {
       // value大于50%时显示完整，小于50%，显示右半边360/100
       if (this.percent > 50) {

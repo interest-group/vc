@@ -41,30 +41,26 @@ export default {
   methods: {
     toggleRouter () {
       this.router = !this.router
-      console.log(this.router)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .component-page {
   height: 100%;
   &__aside {
-    height: 100%;
     overflow: auto;
-    padding: 50px 0;
+    padding: 50px 15px 90px 0;
+    min-width: 230px;
     .title {
       padding: 15px 20px;
       font-weight: bold;
     }
   }
   &__body {
-    padding: 50px 0;
-    height: 100%;
+    padding: 50px 30px 90px 40px;
     overflow: auto;
-    padding-left: 20px;
-    padding-right: 30px;
   }
 }
 </style>

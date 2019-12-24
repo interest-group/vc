@@ -21,12 +21,14 @@ export default {
 }
 </script>
 
-<style scoped="" lang="scss">
+<style lang="scss">
   .app {
     height: 100%;
     width: 90%;
     margin: 0 auto;
     min-width: 1000px;
+    display: flex;
+    flex-direction: column;
     &-header {
       box-sizing: border-box;
       height: 80px;
@@ -78,7 +80,8 @@ export default {
       }
     }
     &-container {
-      height: calc(100% - 80px);
+      flex: 1;
+      overflow-y: hidden;
     }
   }
 </style>
