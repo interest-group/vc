@@ -6,7 +6,7 @@
         <div class="vc-modal__header" v-if="!hideHeader">
           <slot name="header">
             <div class="vc-modal__title">{{title}}</div>
-            <div class="vc-modal__close-icon" @click="hide">
+            <div class="vc-modal__close-icon" @click="onCancel">
               <vc-icon name="close"></vc-icon>
             </div>
           </slot>
@@ -14,8 +14,8 @@
         <div class="vc-modal__body"><slot>内容(⊙︿⊙)...</slot></div>
         <div class="vc-modal__footer" v-if="!hideFooter">
           <slot>
-            <vc-button @click="hide">取消</vc-button>
-            <vc-button type="info" @click="hide">确定</vc-button>
+            <vc-button @click="onCancel">取消</vc-button>
+            <vc-button type="info" @click="onOk">确定</vc-button>
           </slot>
         </div>
       </div>
@@ -79,6 +79,14 @@ export default {
       this.isModal = false
       this.$emit('input', this.isModal)
       this.$emit('change', this.isModal)
+    },
+    onOk () {
+      this.hide()
+      this.$emit('on-ok')
+    },
+    onCancel () {
+      this.hide()
+      this.$emit('on-cancel')
     },
     hide () {
       if (typeof this.beforeClose === 'function') {

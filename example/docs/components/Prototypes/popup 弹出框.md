@@ -30,6 +30,10 @@ export default {
           }, 'popup')
         }
       })
+
+      setTimeout(() => {
+        popup.close()
+      }, 2000)
     },
     open2 () {
       const popup = this.$popup({
