@@ -3,8 +3,9 @@
     <!--线型进度条-->
     <template v-if="type==='line'">
       <div :style="{width: radius ? radius + 'px' : '400px',background: color, height: border ? border + 'px':'15px'}"
-          :class="[className, 'vc-progress-line', `vc-progress-${status}`]">
+          :class="[className, 'vc-progress-line']">
         <span class="vc-progress-bar"
+              :class="vcBarProgress"
               :style="lineStyle">
           <span class="vc-progress-line-text" v-if="showText && followText">
             <slot>{{percent}}%</slot>
@@ -30,9 +31,12 @@
             :style="circleStyle2">
           <span class="vc-circle-left"
                 v-style.left="circleStyle"
-                :style="circleRotateStyle"></span>
+                :class="vcCirCleClass"
+                :style="circleRotateStyleLeft"></span>
           <span class="vc-circle-right"
                 v-style.right="circleStyle"
+                :class="vcCirCleClass"
+                :style="circleRotateStyleRight"
                 v-if="percent >= 50"></span>
         </div>
       </div>
@@ -48,8 +52,7 @@ export default {
       circleStyle: {
         radius: this.radius,
         border: this.border,
-        color: this.color,
-        borderColor: this.borderColor ? this.borderColor : this.$vcColor[this.status]
+        color: this.color
       },
       percent: 0
     }
@@ -124,11 +127,21 @@ export default {
     }
   },
   computed: {
+    vcBarProgress () {
+      return [
+        `vc-progress-bar-${this.status}`
+      ]
+    },
+    vcCirCleClass () {
+      return [
+        `vc-progress-circle-${this.status}`
+      ]
+    },
     lineStyle () {
       return {
         height: this.border ? this.border + 'px' : '15px',
         width: this.percent + '%',
-        background: this.borderColor ? this.borderColor : this.$vcColor[this.status],
+        background: this.borderColor,
         transition: `all ${this.duration / 1000}s`,
         lineHeight: this.border ? this.border + 'px' : '15px'
       }
@@ -145,11 +158,18 @@ export default {
         }
       }
     },
-    circleRotateStyle () {
+    circleRotateStyleLeft () {
       // 左半圆根据value值旋转即可，360度/100=3.6
       return {
         transform: 'rotate(' + 3.6 * this.percent + 'deg)',
-        webkitTransform: 'rotate(' + 3.6 * this.percent + 'deg)'
+        borderColor: this.borderColor,
+        borderWidth: `${this.border}px`
+      }
+    },
+    circleRotateStyleRight () {
+      return {
+        borderColor: this.borderColor,
+        borderWidth: `${this.border}px`
       }
     }
   },
@@ -180,10 +200,8 @@ export default {
           style.left = `-${value.border}px`
           style.top = `-${value.border}px`
         } else if (type.left) {
-          style.border = `${value.border}px solid ${value.borderColor}`
           style.clip = `rect(0, ${value.radius}px, ${value.radius * 2}px, 0px)`
         } else if (type.right) {
-          style.border = `${value.border}px solid ${value.borderColor}`
           style.clip = `rect(0, ${value.radius * 2}px, ${value.radius * 2}px, ${value.radius}px)`
         }
       }

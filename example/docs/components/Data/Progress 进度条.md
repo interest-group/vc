@@ -31,11 +31,11 @@
 <template>
   <div>
     <p>设置宽高</p>
-    <p><vc-progress :value="50" :radius="300" :border="26"/></p>
+    <p><vc-progress :value="50" :radius="300" :border="26" /></p>
     <p>设置背景和进度颜色</p>
     <p><vc-progress :value="30" color="#ddd" borderColor="rgb(255, 73, 73)" :border="26"/></p>
     <p>设置状态</p>
-    <p><vc-progress :value="30" color="#ddd" status="danger" :border="26"/></p>
+    <p><vc-progress :value="30" color="#ddd" status="success" :border="26" /></p>
     <p>进度文字固定位置</p>
     <p><vc-progress :value="80" :followText="false" :border="26"/></p>
   </div>
@@ -61,11 +61,11 @@
   
     <vc-progress :value="0" :radius="50" :border="8" type="circle"></vc-progress>
     
-    <vc-progress :value="30" :radius="50" :border="8" type="circle"></vc-progress>
+    <vc-progress :value="30" :radius="50" :border="18" type="circle" ></vc-progress>
     
     <vc-progress :value="50" :radius="50" :border="8" type="circle"></vc-progress>
     
-    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" status="danger" type="circle" ></vc-progress>
+    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" status="danger" borderColor="red" type="circle" ></vc-progress>
     
     <vc-progress :value="100" :radius="50" :border="8" type="circle"></vc-progress>
     

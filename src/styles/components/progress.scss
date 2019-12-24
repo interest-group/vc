@@ -6,7 +6,6 @@
     position: relative;
     border-radius: 50%;
     box-sizing: border-box;
-    border-color: #999;
 
     .vc-circle-circle {
       display: block;
@@ -68,5 +67,32 @@
       top: 50%;
       transform: translate(100%, -50%);
     }
+  }
+
+  .vc-progress-bar-primary {
+    background: $color-primary;
+  }
+  .vc-progress-bar-success {
+    background: $color-success;
+  }
+  .vc-progress-bar-warning {
+    background: $color-warning;
+  }
+  .vc-progress-bar-danger {
+    background: $color-danger;
+  }
+
+  .vc-progress-circle-primary {
+    border: 8px solid $color-primary;
+    // border-color: $color-primary;
+  }
+  .vc-progress-circle-success {
+    border: 8px solid $color-success;
+  }
+  .vc-progress-circle-warning {
+    border: 8px solid $color-warning;
+  }
+  .vc-progress-circle-danger {
+    border: 8px solid $color-danger;
   }
 }
