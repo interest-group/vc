@@ -9,7 +9,7 @@
 @import "./components/menu";
 @import "./components/modal";
 
-@import url('//at.alicdn.com/t/font_1572091_ycvmy3hyqk.css');
+@import url('//at.alicdn.com/t/font_1572091_cv3o2311cwo.css');
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -67,4 +67,31 @@ html, body {
 a {
   color: $black-color;
   text-decoration: none;
+}
+
+.vc-popup-list {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0, .4);
+
+	.vc-popup {
+		display: inline-block;
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		min-width: 500px;
+		padding: 2em;
+
+		background-color: #fff;
+
+		.icon-close {
+			position: absolute;
+			right: 1em;
+			top: 1em;
+		}
+	}
 }

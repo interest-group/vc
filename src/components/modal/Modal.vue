@@ -3,16 +3,16 @@
     <div class="vc-modal__wrapper" v-if="isModal">
       <div class="vc-modal__mask" v-if="mask" @click="onMaskClick"></div>
       <div class="vc-modal" :style="{width: width}">
-        <div class="vc-modal__header" v-if="header">
+        <div class="vc-modal__header" v-if="!hideHeader">
           <slot name="header">
             <div class="vc-modal__title">{{title}}</div>
             <div class="vc-modal__close-icon" @click="hide">
-              <vc-icon name="sad"></vc-icon>
+              <vc-icon name="close"></vc-icon>
             </div>
           </slot>
         </div>
         <div class="vc-modal__body"><slot>内容(⊙︿⊙)...</slot></div>
-        <div class="vc-modal__footer" v-if="footer">
+        <div class="vc-modal__footer" v-if="!hideFooter">
           <slot>
             <vc-button @click="hide">取消</vc-button>
             <vc-button type="info" @click="hide">确定</vc-button>
@@ -49,13 +49,13 @@ export default {
       default: true
     },
     beforeClose: Function,
-    header: {
+    hideHeader: {
       type: Boolean,
-      default: true
+      default: false
     },
-    footer: {
+    hideFooter: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   watch: {
