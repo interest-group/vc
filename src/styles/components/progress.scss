@@ -64,9 +64,9 @@
     }
     .vc-progress-fixed-text {
       position: absolute;
-      right: -40px;
+      right: -5px;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translate(100%, -50%);
     }
   }
 }

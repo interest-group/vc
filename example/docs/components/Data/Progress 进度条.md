@@ -1,7 +1,8 @@
 <!-- Created by 337547038 on 2019/8/6 0006. -->
 # Progress 进度条
+用于显示当前操作进度
  
-### 基础用法
+### 线形进度条
 :::demo 
 ```html
 <template>
@@ -9,9 +10,7 @@
     <p><vc-progress v-model="value1" :border="26"/></p>
     <p><vc-progress :value="30" :border="26"/></p>
     <p><vc-progress :value="100" :border="26"/>自定义100%</p>
-    <p><vc-progress :value="90" :border="26" status="waring"/>警告90%</p>
-    <p><vc-progress :value="90" :border="26" status="success"/>成功90%</p>
-    <p><vc-progress :value="90" :border="26" status="danger"/>错误90%</p>
+    <p><vc-progress :value="100" :border="26" :followText="false"/>自定义100%</p>
   </div>
 </template>
 <script>
@@ -87,16 +86,22 @@
 :::
 
 ## API
-### Progress
-|参数|类型|说明|
-|-|-|-|
-|value          | Array          |v-model双向绑定|
-|type           | String         |进度条类型，支持两种line直线、circle圆环|
-|radius         | Number         |圆环半径，单位px。line时为宽|
-|border         | Number         |进度条宽，单位px。line时为高|
-|color          | String         |背景颜色|
-|borderColor    | String         |进度颜色|
-|duration       | Number/1000    |持续时间，单位毫秒|
-|showText       | Boolean/true   |显示进度文字|
-|followText     | Boolean/true   |进度文字跟随进度的位置,type=line时有效|
-|className      | String         |类名|
+### Progress Attributes
+|参数|类型|说明|可选值|默认值|
+|-|-|-|-|-|
+|value          | String          |v-model双向绑定|0-100|0
+|type           | String         |进度条类型|line/circle|line
+|radius         | Number         |圆环半径，单位px。line时为宽|--|0
+|border         | Number         |进度条宽，单位px。line时为高|--|0
+|color          | String         |背景颜色|--|#ebeef5
+|borderColor    | String         |进度颜色|--|#409eff
+|duration       | Number/1000    |持续时间，单位毫秒|--|1000毫秒
+|showText       | Boolean   |是否显示进度文字|--|true
+|followText     | Boolean   |进度文字是否跟随进度的位置,type=line时有效|--|true
+|className      | String         |类名|--|--
+|status      | String         |状态|primary/warning/success/danger|primary
+
+### Progress slots
+|name|说明|
+|-|-|
+|--|自定义内容

@@ -11,9 +11,9 @@
       </vc-slide-down>
     </vc-main>
     <vc-footer>
-      <div class="demo-footer">
+      <div class="demo-footer" @click="handleClick">
         <!--todo 替换 button / icon 组件-->
-        <span class="demo-footer-btn" @click="handleClick">{{text}}</span>
+        <span class="demo-footer-btn">{{text}}</span>
       </div>
     </vc-footer>
   </vc-container>
@@ -65,12 +65,10 @@ export default {
   &-footer{
     text-align: center;
     padding: 10px 0;
-    &-btn{
-      cursor: pointer;
-      &:hover{
+    cursor: pointer;
+    &:hover{
         color: #6190e8;
       }
-    }
   }
 }
 </style>

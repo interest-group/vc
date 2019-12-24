@@ -40,21 +40,16 @@
   </div>
 </template>
 <script>
-const barColor = {
-  'primary': '#409eff',
-  'waring': '#e6a23c',
-  'success': '#67c23a',
-  'danger': '#f56c6c'
-}
 export default {
   name: 'vc-progress',
   data () {
     return {
-      circleStyle: {// 定义个方便传到指令去
+      // 定义个方便传到指令去
+      circleStyle: {
         radius: this.radius,
         border: this.border,
         color: this.color,
-        borderColor: this.borderColor ? this.borderColor : barColor[this.status]
+        borderColor: this.borderColor ? this.borderColor : this.$vcColor[this.status]
       },
       percent: 0
     }
@@ -133,7 +128,7 @@ export default {
       return {
         height: this.border ? this.border + 'px' : '15px',
         width: this.percent + '%',
-        background: this.borderColor ? this.borderColor : barColor[this.status],
+        background: this.borderColor ? this.borderColor : this.$vcColor[this.status],
         transition: `all ${this.duration / 1000}s`,
         lineHeight: this.border ? this.border + 'px' : '15px'
       }
