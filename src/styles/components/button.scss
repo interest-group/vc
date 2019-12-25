@@ -8,7 +8,7 @@ $btn-prefix: #{$prefix}-btn;
     background-color: darken($backgroundColor, 10%);
   }
 
-  &.disabled {
+  &:disabled {
     background-color: lighten($backgroundColor, 10%);
   }
 }
@@ -39,6 +39,7 @@ $btn-prefix: #{$prefix}-btn;
 
   &:disabled {
     background-color: $grey-color;
+    cursor: not-allowed;
   }
 
   &.#{$btn-prefix}__info {
