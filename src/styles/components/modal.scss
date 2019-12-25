@@ -66,7 +66,7 @@ $modal-prefix: #{$prefix}-modal;
   }
 
   &__body {
-    height: $modal-body-min-height;
+    min-height: $modal-body-min-height;
     padding: 1em 0;
   }
 

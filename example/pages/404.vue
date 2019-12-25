@@ -15,6 +15,7 @@ export default {
 .not-found__page {
   position: relative;
   height: 100%;
+  min-height: 400px;
 
   img {
     position: absolute;

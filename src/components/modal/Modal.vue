@@ -13,7 +13,7 @@
         </div>
         <div class="vc-modal__body"><slot>内容(⊙︿⊙)...</slot></div>
         <div class="vc-modal__footer" v-if="!hideFooter">
-          <slot>
+          <slot name="footer">
             <vc-button @click="onCancel">取消</vc-button>
             <vc-button type="info" @click="onOk">确定</vc-button>
           </slot>

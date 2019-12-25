@@ -1,4 +1,4 @@
-import createPopup from './popup'
+import createModal from './modal'
 
 export default {
   /**
@@ -8,9 +8,9 @@ export default {
   install (Vue, options = {}) {
     let namespace = options.scope ? typeof options.scope === 'boolean' ? 'vc' : options.scope : false
     if (namespace) {
-      Vue.prototype[namespace]['$popup'] = createPopup
+      Vue.prototype[namespace]['$modal'] = createModal
     } else {
-      Vue.prototype['$popup'] = createPopup
+      Vue.prototype['$modal'] = createModal
     }
   }
 }
