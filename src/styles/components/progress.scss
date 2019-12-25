@@ -1,0 +1,98 @@
+
+.vc-progress {
+  display: inline-block;
+
+  .vc-progress-circle {
+    position: relative;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    .vc-circle-circle {
+      display: block;
+      border-radius: 50%;
+      box-sizing: border-box;
+      position: absolute;
+      overflow: hidden;
+
+      .vc-circle-left {
+        position: absolute;
+        display: block;
+        box-sizing: border-box;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+      }
+
+      .vc-circle-right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        box-sizing: border-box;
+        border-radius: 50%;
+      }
+    }
+
+    .vc-progress-circle-text {
+      text-align: center;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      position: absolute;
+      font-size: 20px;
+    }
+  }
+
+  .vc-progress-line {
+    position: relative;
+    border-radius: 100px;
+    background: #999;
+    .vc-progress-bar {
+      position: absolute;
+      width: 0;
+      left: 0;
+      top: 0;
+      border-radius: 100px;
+      text-align: right;
+      font-size: 12px;
+      color: #fff;
+    }
+    .vc-progress-line-text {
+      margin: 0 5px;
+    }
+    .vc-progress-fixed-text {
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translate(100%, -50%);
+    }
+  }
+
+  .vc-progress-bar-primary {
+    background: $color-primary;
+  }
+  .vc-progress-bar-success {
+    background: $color-success;
+  }
+  .vc-progress-bar-warning {
+    background: $color-warning;
+  }
+  .vc-progress-bar-danger {
+    background: $color-danger;
+  }
+
+  .vc-progress-circle-primary {
+    border: 8px solid $color-primary;
+    // border-color: $color-primary;
+  }
+  .vc-progress-circle-success {
+    border: 8px solid $color-success;
+  }
+  .vc-progress-circle-warning {
+    border: 8px solid $color-warning;
+  }
+  .vc-progress-circle-danger {
+    border: 8px solid $color-danger;
+  }
+}

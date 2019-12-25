@@ -1,0 +1,36 @@
+
+.vc-tab {
+  background: rgb(255, 73, 73);
+  display: inline-block;
+  position: relative;
+
+  // transition all 0.5s ease
+  &-items {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &-item {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &.active {
+      color: #FFF;
+    }
+  }
+
+  &-active-bg {
+    background-color: #2d8cf0;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+
+    &.transition {
+      transition: all 0.5s ease;
+    }
+  }
+}
