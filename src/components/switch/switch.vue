@@ -1,5 +1,5 @@
 <template>
-  <div @click="disabled ? null : onChange()" :class="switchClasses">
+  <div @click="!disabled && onChange()" :class="switchClasses">
     <span class="vc-switch_text_close vc-switch_text" :class="textCloseClasses" v-if="inactiveText">
       <span>{{inactiveText}}</span>
     </span>
