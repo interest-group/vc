@@ -3,6 +3,7 @@ export default {
   data() {
     return{
       checked: false,
+      checkedNumber: 1,
       checked1: true,
       checked2: false,
       checked3: true,
@@ -18,6 +19,9 @@ export default {
         next()
       }, 1000)
     },
+    change(val) {
+      console.log(val)
+    }
   }
 }
 </script>
@@ -32,9 +36,31 @@ export default {
 <vc-switch v-model="checked"></vc-switch>
 <script>
 export default {
-  data(){
+  data() {
     return{
       checked: false,
+    }
+  }
+}
+</script>
+```
+:::
+
+### 类型改变
+如果通过```v-model```绑定的值是整型，那么回调出来的值也将是整型
+::: demo
+```html
+<vc-switch v-model="checkedNumber" @change="change"></vc-switch>
+<script>
+export default {
+  data() {
+    return{
+      checkedNumber: 1,
+    }
+  },
+  methods: {
+    change(val) {
+      console.log(val) // => 0 || 1
     }
   }
 }
@@ -54,7 +80,7 @@ export default {
   inactive-text="关闭"/>
 <script>
 export default {
-  data(){
+  data() {
     return{
       checked1: true
     }
@@ -79,7 +105,7 @@ export default {
 </vc-switch>
 <script>
 export default {
-  data(){
+  data() {
     return{
       checked2: false,
       checked3: true
@@ -115,7 +141,7 @@ export default {
   inactiveColor="#ff4949" />
 <script>
 export default {
-  data(){
+  data() {
     return{
       checked4: false
     }
@@ -129,7 +155,7 @@ export default {
 ### Switch Attributes
 |参数|类型|说明|可选值|默认值|
 |-|-|-|-|-|
-|v-model|Boolean|绑定值|-|-|
+|v-model|Boolean / Number|绑定值|-|-|
 |disabled|Boolean|是否禁用|-|false|
 |inactive-color|String|关闭时的颜色|-|#dcdfe6|
 |active-color|String|打开时的颜色|-|#67c23a|
@@ -138,7 +164,7 @@ export default {
 |inactive-text|String|关闭时的文字描述|-|-|
 |beforeChange|Function|改变之前的钩子函数，回调参数为```next()```方法|-|-|
 
-### Progress Events
+### Switch Events
 |事件名称|说明|回调参数|
 |-|-|-|
 |change|switch 状态发生变化时的回调函数|新状态的值

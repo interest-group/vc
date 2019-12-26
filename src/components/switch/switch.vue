@@ -19,7 +19,7 @@ export default {
   },
   props: {
     value: {
-      type: Boolean,
+      type: [Boolean, Number],
       default: false
     },
     // 关闭时的颜色
@@ -78,7 +78,7 @@ export default {
         return this.value
       },
       set (val) {
-        this.$emit('change', val)
+        this.$emit('change', typeof this.value === 'number' ? Number(val) : Boolean(val))
       }
     },
     classes () {
