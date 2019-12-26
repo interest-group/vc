@@ -1,75 +1,127 @@
-<template >
-  <div :class="['vc-switch', index===0 ? 'vc-background-start' : 'vc-background-end']"
-       ref="switch">
-    <div class="vc-switch-active-bg"
-         :class="{transition: styles}"
-         :style="styles"></div>
-    <div class="vc-switch-items">
-      <div class="vc-switch-item"
-           ref="item"
-           v-for="(item,i) in nav"
-           :key="i"
-           :class="{active: i === index}"
-           @click="handleClick(item, i)">
-        {{item.txt}}
-      </div>
-    </div>
+<template>
+  <div @click="disabled ? null : onChange()" :class="switchClasses">
+    <span class="vc-switch_text_close vc-switch_text" :class="textCloseClasses" v-if="inactiveText">
+      <span>{{inactiveText}}</span>
+    </span>
+    <div class="vc-switch_success" :class="classes" :style="styles"></div>
+    <span class="vc-switch_text_open vc-switch_text" :class="textOpenClasses" v-if="activeText">
+      <span>{{activeText}}</span>
+    </span>
   </div>
 </template>
+
 <script>
 export default {
   name: 'vc-switch',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
-    // 用来双向绑定的index
     value: {
-      type: Number,
-      default: 0
+      type: Boolean,
+      default: false
     },
-    nav: {
-      type: Array,
-      default: () => [{ name: 'map', txt: '地图' }, { name: 'table', txt: '表格' }]
+    // 关闭时的颜色
+    inactiveColor: {
+      type: String,
+      default: ''
+    },
+    //  打开时的颜色
+    activeColor: {
+      type: String,
+      default: ''
+    },
+    // switch宽度
+    width: {
+      type: Number,
+      default: 40
+    },
+    // 打开时文字描述
+    activeText: {
+      type: String,
+      default: ''
+    },
+    // 关闭时文字描述
+    inactiveText: {
+      type: String,
+      default: ''
+    },
+    // 禁用
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    // 改变前的钩子函数
+    beforeChange: {
+      type: Function,
+      default: null
     }
   },
   data () {
     return {
-      index: this.value,
-      styles: null
+      // 钩子是否执行完
+      isbeforenFinish: false
     }
   },
   computed: {
-  },
-  watch: {
-    value (value) {
-      if (this.index !== value) {
-        this.index = value
+    switchClasses () {
+      return [
+        'vc-switch',
+        {
+          'vc-switch_disabled': this.disabled
+        }
+      ]
+    },
+    isChecked: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('change', val)
       }
     },
-    index () {
-      this.setActive()
+    classes () {
+      return [
+        'vc-switch_input',
+        {
+          'vc-switch_checked': this.isChecked
+        }
+      ]
+    },
+    styles () {
+      return {
+        backgroundColor: this.isChecked ? this.activeColor : this.inactiveColor,
+        width: `${this.width}px`
+      }
+    },
+    // 文字样式
+    textCloseClasses () {
+      return [
+        {
+          'vc-switch_active': !this.isChecked
+        }
+      ]
+    },
+    textOpenClasses () {
+      return [
+        {
+          'vc-switch_active': this.isChecked
+        }
+      ]
     }
   },
-  mounted () {
-    this.setActive()
-  },
   methods: {
-    handleClick (item, index) {
-      this.index = index
-      this.$emit('input', index)
-      this.$emit('change', item) // 向父组件传递事件;
-    },
-    // 动画
-    setActive () {
-      this.$refs.item.forEach(el => {
-        el.style['color'] = ''
-      })
-      const node = this.$refs.item[this.index]
-      node.style['color'] = `${this.txtColor}`
-      // 激活的节点
-      if (node) {
-        this.styles = {
-          left: `${node.offsetLeft}px`,
-          width: `${node.getBoundingClientRect().width}px`
-        }
+    onChange () {
+      if (!this.beforeChange) {
+        this.isChecked = !this.isChecked
+      } else {
+        if (this.isbeforenFinish) return
+        this.isbeforenFinish = true
+        this.beforeChange(() => {
+          this.isChecked = !this.isChecked
+          this.isbeforenFinish = false
+        })
       }
     }
   }
