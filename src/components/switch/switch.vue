@@ -1,10 +1,10 @@
 <template>
   <div @click="!disabled && onChange()" :class="switchClasses">
-    <span class="vc-switch_text_close vc-switch_text" :class="textCloseClasses" v-if="inactiveText">
+    <span class="vc-switch_text_close" :class="textCloseClasses" v-if="inactiveText">
       <span>{{inactiveText}}</span>
     </span>
     <div class="vc-switch_success" :class="classes" :style="styles"></div>
-    <span class="vc-switch_text_open vc-switch_text" :class="textOpenClasses" v-if="activeText">
+    <span class="vc-switch_text_open " :class="textOpenClasses" v-if="activeText">
       <span>{{activeText}}</span>
     </span>
   </div>
@@ -98,6 +98,7 @@ export default {
     // 文字样式
     textCloseClasses () {
       return [
+        'vc-switch_text',
         {
           'vc-switch_active': !this.isChecked
         }
@@ -105,6 +106,7 @@ export default {
     },
     textOpenClasses () {
       return [
+        'vc-switch_text',
         {
           'vc-switch_active': this.isChecked
         }
