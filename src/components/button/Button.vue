@@ -1,11 +1,13 @@
 <template>
-  <button :class="cls" :disabled=" disabled ? 'disabled' : false" @click="$emit('click')"><slot></slot></button>
+  <button :class="cls" :disabled=" disabled ? 'disabled' : false" @click="$emit('click')" @keydown.enter="onEnter"><slot></slot></button>
 </template>
 
 <script>
 export default {
   name: 'vc-button',
   props: {
+    keyEnter: Boolean,
+    ghost: Boolean,
     type: {
       type: String,
       validator: (value) => {
@@ -33,9 +35,17 @@ export default {
       return [
         this.prefixBtn,
         this.type ? `${this.prefixBtn}__${this.type}` : '',
+        this.ghost ? 'is-ghost' : '',
         `${this.prefixBtn}__${this.size}`,
         this.disabled ? `${this.prefixBtn}__disabled` : ''
       ]
+    }
+  },
+  methods: {
+    onEnter () {
+      if (this.keyEnter) {
+        this.$emit('click')
+      }
     }
   }
 }
