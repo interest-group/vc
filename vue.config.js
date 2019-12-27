@@ -23,6 +23,13 @@ module.exports = {
         ...configs
       })
   },
+  // css: {
+  //   loaderOptions: {
+  //     scss: {
+  //       prependData: `@import "./src/styles/aa.scss";`
+  //     }
+  //   }
+  // },
   devServer: {
     overlay: {
       warnings: true,

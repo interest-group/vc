@@ -22,14 +22,20 @@ section {
   h1 {
     font-size: 26px;
     margin: 20px 0;
+    font-weight: 400;
+    color: #1f2f3d;
   }
   h2 {
     font-size: 24px;
     margin: 50px 0 20px;
+    color: #1f2f3d;
+    font-weight: 400;
   }
   h3 {
     font-size: 20px;
     margin: 30px 0 20px;
+    color: #1f2f3d;
+    font-weight: 400;
   }
   ul {
     margin: 16px 0;
@@ -91,7 +97,7 @@ section {
     td{
       border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
-      padding: 10px 8px;
+      padding: 16px 8px;
     }
   }
   div.tip,

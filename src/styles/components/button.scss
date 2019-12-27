@@ -3,13 +3,32 @@ $btn-prefix: #{$prefix}-btn;
 @mixin sematic-button ($color, $backgroundColor) {
   color: $color;
   background-color: $backgroundColor;
+  border: 1px solid $backgroundColor;
 
   &:hover {
     background-color: darken($backgroundColor, 10%);
+    border: 1px solid darken($backgroundColor, 10%);
   }
 
-  &.disabled {
+  &:disabled {
     background-color: lighten($backgroundColor, 10%);
+    border: 1px solid lighten($backgroundColor, 10%);
+  }
+
+  &.is-ghost {
+    background-color: transparent;
+    border: 1px solid $backgroundColor;
+    color: $backgroundColor;
+
+    &:hover {
+      background-color: $backgroundColor;
+      color: $color;
+    }
+
+    &:disabled {
+      background-color: transparent;
+      color: $backgroundColor;
+    }
   }
 }
 
@@ -21,6 +40,7 @@ $btn-prefix: #{$prefix}-btn;
   border-radius: $button-border-radius;
   box-shadow: $button-border-box-shadow;
   background-color: $white-color;
+  box-sizing: border-box;
 
   font-size: $button-font-size;
   line-height: $button-line-height;
@@ -39,6 +59,18 @@ $btn-prefix: #{$prefix}-btn;
 
   &:disabled {
     background-color: $grey-color;
+    cursor: not-allowed;
+  }
+
+  &.is-ghost {
+    background-color: transparent;
+    border: 1px solid $white-color;
+    color: $white-color;
+
+    &:disabled {
+      background-color: transparent;
+      opacity: 0.8;
+    }
   }
 
   &.#{$btn-prefix}__info {

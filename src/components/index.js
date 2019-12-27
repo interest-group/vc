@@ -1,3 +1,5 @@
+import { color } from '../utils/variables'
+
 const requireComponents = require.context('../components', true, /\w+\/index\.js/)
 
 let list = []
@@ -15,5 +17,6 @@ export default {
       }
       Vue.component(key.name, key)
     }
+    Vue.prototype.$vcColor = color
   }
 }

@@ -1,5 +1,5 @@
-import UpLoad from './Upload.vue'
-import DropLoad from './DropLoad'
+import UpLoad from './upload.vue'
+import DropLoad from './dropLoad'
 export default [
   UpLoad,
   DropLoad

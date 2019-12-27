@@ -1,53 +1,58 @@
-<!--Created by 337547038 on 2017/12/14.-->
-<!--example
-<ProgressBar :value="30" :radius="400" :border="10" color="#999" borderColor="#f60" type="line"></ProgressBar>-->
 <template>
   <div class="vc-progress">
-    <div :style="{width:radius?radius+'px':'',background:color,minHeight:border?border+'px':''}"
-         :class="[className,'vc-progress-line']"
-         v-if="type==='line'">
-      <slot></slot>
-      <span class="vc-progress-bar"
-            :style="lineStyle">
-        <span class="vc-progress-text"
-              v-if="showText&&followText"><b>{{percent}}</b>%</span>
-      </span>
-      <span class="vc-progress-text vc-progress-fixed-text"
-            v-if="showText&&!followText"><b>{{percent}}</b>%</span>
-    </div>
+    <!--线型进度条-->
+    <template v-if="type==='line'">
+      <div :style="{width: radius ? radius + 'px' : '400px',background: color, height: border ? border + 'px':'15px'}"
+          :class="[className, 'vc-progress-line']">
+        <span class="vc-progress-bar"
+              :class="vcBarProgress"
+              :style="lineStyle">
+          <span class="vc-progress-line-text" v-if="showText && followText">
+            <slot>{{percent}}%</slot>
+          </span>
+        </span>
+        <span class="vc-progress-fixed-text"
+              v-if="showText && !followText">
+              <slot>{{percent}}%</slot>
+        </span>
+      </div>
+    </template>
 
-    <div v-style.pro="circleStyle"
-         :class="[className,'vc-progress-circle']"
-         v-else-if="type==='circle'">
-      <div class="vc-custom-content">
-        <slot></slot>
+    <!--圆形进度条-->
+    <template v-else-if="type === 'circle'">
+      <div v-style.pro="circleStyle"
+          :class="[className, 'vc-progress-circle']"
+          >
+        <span class="vc-progress-circle-text" v-if="showText">
+          <slot>{{percent}}%</slot>
+        </span>
+        <div class="vc-circle-circle"
+            v-style.circle="circleStyle"
+            :style="circleStyle2">
+          <span class="vc-circle-left"
+                v-style.left="circleStyle"
+                :class="vcCirCleClass"
+                :style="circleRotateStyleLeft"></span>
+          <span class="vc-circle-right"
+                v-style.right="circleStyle"
+                :class="vcCirCleClass"
+                :style="circleRotateStyleRight"
+                v-if="percent >= 50"></span>
+        </div>
       </div>
-      <span class="vc-progress-text"
-            v-if="showText"><b>{{percent}}</b>%</span>
-      <div class="vc-circle-circle"
-           v-style.circle="circleStyle"
-           :style="circleStyle2">
-        <span class="vc-circle-left"
-              v-style.left="circleStyle"
-              :style="circleRotateStyle"></span>
-        <span class="vc-circle-right"
-              v-style.right="circleStyle"
-              v-if="percent>=50"></span>
-      </div>
-    </div>
+    </template>
   </div>
 </template>
 <script>
-
 export default {
   name: 'vc-progress',
   data () {
     return {
-      circleStyle: {// 定义个方便传到指令去
+      // 定义个方便传到指令去
+      circleStyle: {
         radius: this.radius,
         border: this.border,
-        color: this.color,
-        borderColor: this.borderColor
+        color: this.color
       },
       percent: 0
     }
@@ -61,41 +66,48 @@ export default {
       }
     },
     className: String,
-    value: {// 进度
+    // 进度
+    value: {
       type: Number,
       default: 0
-      /* validator: function (value) {
-                 return value >= 0 && value <= 100;
-                 } */
     },
-    radius: {// 外半径
+    // 外半径
+    radius: {
       type: Number,
       default: 0
-
     },
-    border: {// 边框
+    // 边框
+    border: {
       type: Number,
       default: 0
     },
     color: {
       type: String,
-      default: '#999'
-    }, // 底环颜色
+      default: '#ebeef5'
+    },
     borderColor: {
       type: String,
-      default: '#2d8cf0'
-    }, // 进度条颜色
-    duration: {// 动画持续时间，单位毫秒
+      default: ''
+    },
+    // 动画持续时间，单位毫秒
+    duration: {
       type: Number,
       default: 1000
     },
-    showText: {// 显示进度数字
+    // 显示进度数字
+    showText: {
       type: Boolean,
       default: true
     },
-    followText: {// 进度数字跟进进度
+    // 进度数字跟进进度
+    followText: {
       type: Boolean,
       default: true
+    },
+    // 状态
+    status: {
+      type: String,
+      default: 'primary'
     }
   },
   created () {
@@ -115,22 +127,25 @@ export default {
     }
   },
   computed: {
+    vcBarProgress () {
+      return [
+        `vc-progress-bar-${this.status}`
+      ]
+    },
+    vcCirCleClass () {
+      return [
+        `vc-progress-circle-${this.status}`
+      ]
+    },
     lineStyle () {
       return {
-        height: this.border ? this.border + 'px' : '',
+        height: this.border ? this.border + 'px' : '15px',
         width: this.percent + '%',
         background: this.borderColor,
-        transition: `all ${this.duration / 1000}s`
+        transition: `all ${this.duration / 1000}s`,
+        lineHeight: this.border ? this.border + 'px' : '15px'
       }
     },
-    /* lineStyleText () {
-      if (this.follow && this.showText) {
-        return {
-          right: (100 - this.percent) + '%',
-          transition: `all ${this.duration / 1000}s`
-        }
-      }
-    }, */
     circleStyle2 () {
       // value大于50%时显示完整，小于50%，显示右半边360/100
       if (this.percent > 50) {
@@ -143,11 +158,18 @@ export default {
         }
       }
     },
-    circleRotateStyle () {
+    circleRotateStyleLeft () {
       // 左半圆根据value值旋转即可，360度/100=3.6
       return {
         transform: 'rotate(' + 3.6 * this.percent + 'deg)',
-        webkitTransform: 'rotate(' + 3.6 * this.percent + 'deg)'
+        borderColor: this.borderColor,
+        borderWidth: `${this.border}px`
+      }
+    },
+    circleRotateStyleRight () {
+      return {
+        borderColor: this.borderColor,
+        borderWidth: `${this.border}px`
       }
     }
   },
@@ -178,10 +200,8 @@ export default {
           style.left = `-${value.border}px`
           style.top = `-${value.border}px`
         } else if (type.left) {
-          style.border = `${value.border}px solid ${value.borderColor}`
           style.clip = `rect(0, ${value.radius}px, ${value.radius * 2}px, 0px)`
         } else if (type.right) {
-          style.border = `${value.border}px solid ${value.borderColor}`
           style.clip = `rect(0, ${value.radius * 2}px, ${value.radius * 2}px, ${value.radius}px)`
         }
       }

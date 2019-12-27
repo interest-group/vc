@@ -35,21 +35,25 @@ $fs-0: 0px;
 
 // 常用颜色
 
-$blue-color: #5575c8 !default;
-$blue-color__lighten: lighten($blue-color, 10%) !default;
-$blue-color__darken: darken($blue-color, 10%) !default;
+// 默认
+$color-primary: #409eff !default;
+$color-primary__lighten: lighten($color-primary, 10%) !default;
+$color-primary__darken: darken($color-primary, 10%) !default;
 
-$green-color: #63ce63 !default;
-$green-color__lighten: lighten($green-color, 10%) !default;
-$green-color__darken: darken($green-color, 10%) !default;
+// 成功
+$color-success: #67c23a !default;
+$color-success__lighten: lighten($color-success, 10%) !default;
+$color-success__darken: darken($color-success, 10%) !default;
 
-$orange-color: #ffbf2f !default;
-$orange-color__lighten: lighten($orange-color, 10%) !default;
-$orange-color__darken: darken($orange-color, 10%) !default;
+// 警告
+$color-warning: #e6a23c !default;
+$color-warning__lighten: lighten($color-warning, 10%) !default;
+$color-warning__darken: darken($color-warning, 10%) !default;
 
-$red-color: #e52b20 !default;
-$red-color__lighten: lighten($red-color, 10%) !default;
-$red-color__darken: darken($red-color, 10%) !default;
+// 失败
+$color-danger: #f56c6c !default;
+$color-danger__lighten: lighten($color-danger, 10%) !default;
+$color-danger__darken: darken($color-danger, 10%) !default;
 
 $white-color: #ffffff !default;
 $black-color: #353c42 !default;
@@ -58,17 +62,15 @@ $grey-color: #ececee !default;
 $light-color: #f9f9fb !default;
 
 // 主色
-
-$primary-color: $blue-color !default;
+$primary-color: $color-primary !default;
 $primary-color__lighten: lighten($primary-color, 10%) !default;
 $primary-color__darken: darken($primary-color, 10%) !default;
 
 // 语义色
-
-$error-color: $red-color !default;
-$warning-color: $orange-color !default;
-$info-color: $blue-color !default;
-$success-color: $green-color !default;
+$error-color: $color-danger !default;
+$warning-color: $color-warning !default;
+$info-color: $color-primary !default;
+$success-color: $color-success !default;
 
 // 字体
 
@@ -112,8 +114,8 @@ $paragraph-line-height: 32px !default;
 // 边框
 
 $border-color: #DCDFE6 !default;
-$border-color__lighten: lighten($blue-color, 10%) !default;
-$border-color__darken: darken($blue-color, 10%) !default;
+$border-color__lighten: lighten($color-primary, 10%) !default;
+$border-color__darken: darken($color-primary, 10%) !default;
 
 // 阴影
 
@@ -128,7 +130,7 @@ $cursor-disabled: not-allowed !default;
 
 $button-border-size: 0 !default;
 $button-border-style: solid !default;
-$button-border-color: $blue-color !default;
+$button-border-color: $color-primary !default;
 $button-border-radius: 4px !default;
 $button-border-box-shadow: 0px 1px 2px rgba(0, 0, 0, .12) !default;
 $button-font-size: 14px !default;
@@ -147,3 +149,10 @@ $button-font-size-middle: 14px;
 $button-padding-small: 6px 10px;
 $button-font-size-small: 12px;
 
+// 模态框 Modal
+
+$modal-box-shadow: $box-shadow;
+$modal-border-radius: 4px;
+$modal-padding: 6px 16px;
+$modal-min-width: 300px;
+$modal-body-min-height: 60px;
