@@ -40,7 +40,7 @@ export default {
         case 'success':
           return 'vc-icon-chenggong'
         case 'warning':
-          return 'vc-icon-dkw_jinggao' 
+          return 'vc-icon-dkw_jinggao'
         case 'error':
           return 'vc-icon-cuowu'
         default:
