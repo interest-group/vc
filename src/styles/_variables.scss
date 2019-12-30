@@ -55,6 +55,11 @@ $color-danger: #f56c6c !default;
 $color-danger__lighten: lighten($color-danger, 10%) !default;
 $color-danger__darken: darken($color-danger, 10%) !default;
 
+// 禁用
+$color-disabled: #C0C4CC !default;
+$color-disabled__lighten: lighten($color-disabled, 10%) !default;
+$color-disabled__darken: darken($color-disabled, 10%) !default;
+
 $white-color: #ffffff !default;
 $black-color: #353c42 !default;
 $dark-color: #ccced0 !default;

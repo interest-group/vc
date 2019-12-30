@@ -1,75 +1,144 @@
-<template >
-  <div class="vc-tab"
-       ref="tab">
-    <div class="vc-tab-active-bg"
-         :class="{transition: styles}"
-         :style="styles"></div>
-    <div class="vc-tab-items">
-      <div class="vc-tab-item"
-           ref="item"
-           v-for="(item,i) in nav"
-           :key="i"
-           :class="{active: i === index}"
-           @click="handleClick(item, i)">
-        {{item.txt}}
+<template>
+  <div class="vc-tabs" :class="tabsClasses">
+    <div class="vc-tabs_header" :class="tabsHeaderClasses">
+      <div class="vc-tabs_list" :class="tabsListClasses">
+        <div v-for="(item, index) in tabsList"
+        :key="index"
+        :class="navClasses(index, item)"
+        @click="!item.disabled && onSelectTab(item, index)"
+        ref="tabList">
+          {{item.label}}
+        </div>
+        <div class="vc-tabs_line" :style="lineStyles" v-if="type === 'tabs'"></div>
       </div>
+    </div>
+    <div class="vc-tabs_content">
+      <slot></slot>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'vc-tabs',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
-    // 用来双向绑定的index
     value: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     },
-    nav: {
-      type: Array,
-      default: () => []
+    // 选项卡样式
+    type: {
+      type: String,
+      default: 'tabs'
+    },
+    // 线条颜色
+    lineColor: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
-      typeId: 'map',
-      index: this.value,
-      styles: null,
-      backgroundStyles: null
+      tabsList: [],
+      // 底部线条宽度
+      lineWidth: 0,
+      // 当前活动导航
+      currentActive: '',
+      // 滚动距离
+      lineTransformX: 0,
+      // 当前选择值
+      activeValue: '',
+      activeEvent: {}
     }
   },
   computed: {
-  },
-  watch: {
-    value (value) {
-      if (this.index !== value) {
-        this.index = value
+    tabsClasses () {
+      return {
+        'vc-tabs-card': this.type === 'card'
       }
     },
-    index () {
-      this.setActive()
+    tabsHeaderClasses () {
+      return {
+        'vc-tabs_header_card': this.type === 'card'
+      }
+    },
+    tabsListClasses () {
+      return [
+        {
+          'vc-tabs_list-tabs': this.type === 'tabs',
+          'vc-tabs_list-card': this.type === 'card'
+        }
+      ]
+    },
+    // 底部线条
+    lineStyles () {
+      return {
+        width: `${this.lineWidth}px`,
+        transform: `translateX(${this.lineTransformX}px)`,
+        backgroundColor: `${this.lineColor}`
+      }
+    }
+  },
+  watch: {
+    value (val) {
+      this.currentActive = this.tabsList.findIndex(v => v.name === this.value)
+    },
+    tabsList (val) {
+      this.currentActive = val.findIndex(v => v.name === this.value)
+      this.showDiv()
+    },
+    currentActive (val) {
+      if (val < 0) return
+      this.$nextTick(() => {
+        if (val === 0) {
+          this.lineWidth = this.$refs.tabList[val].offsetWidth - 20
+          this.lineTransformX = this.$refs.tabList[val].offsetLeft
+        } else if (val === this.tabsList.length - 1) {
+          this.lineWidth = this.$refs.tabList[val].offsetWidth - 20
+          this.lineTransformX = this.$refs.tabList[val].offsetLeft + 20
+        } else {
+          this.lineWidth = this.$refs.tabList[val].offsetWidth - 40
+          this.lineTransformX = this.$refs.tabList[val].offsetLeft + 20
+        }
+        this.activeValue = this.tabsList[val].name
+        this.$emit('change', this.activeValue)
+        this.$emit('tab-change', this.tabsList[val], this.activeEvent)
+        this.showDiv()
+      })
     }
   },
   mounted () {
-    this.setActive()
+    this.tabsList = this.$children
   },
   methods: {
-    handleClick (item, index) {
-      this.index = index
-      this.$emit('input', index)
-      this.$emit('change', item)
-    },
-    // 动画
-    setActive () {
-      const node = this.$refs.item[this.index]
-      // 激活的节点
-      if (node) {
-        this.styles = {
-          transform: `translateX(${node.offsetLeft}px)`,
-          // left: `${node.offsetLeft}px`,    //这两种都可以
-          width: `${node.getBoundingClientRect().width}px`
+    navClasses (i, item) {
+      return [
+        'vc-tabs_list-nav',
+        item.disabled ? 'vc-tabs_list-disabled' : 'vc-tabs_list-nodisabled',
+        {
+          'vc-tabs_list-nav-first': i === 0,
+          'vc-tabs_list-nav-last': (this.tabsList.length - 1) === i,
+          'vc-tabs_list-nav-isactive': this.currentActive === i
         }
-      }
+      ]
+    },
+    // 选择导航
+    onSelectTab (item, index) {
+      this.currentActive = index
+      this.activeEvent = event || window.event
+    },
+    // 控制显示隐藏
+    showDiv () {
+      this.$children.map(v => {
+        v.show = false
+        if (v.name === this.activeValue) {
+          v.show = true
+        }
+      })
     }
   }
 }

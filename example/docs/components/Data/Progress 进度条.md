@@ -90,7 +90,7 @@
 |参数|类型|说明|可选值|默认值|
 |-|-|-|-|-|
 |value          | String          |v-model双向绑定|0-100|0
-|type           | String         |进度条类型|line/circle|line
+|type           | String         |进度条类型|line / circle|line
 |radius         | Number         |圆环半径，单位px。line时为宽|--|0
 |border         | Number         |进度条宽，单位px。line时为高|--|0
 |color          | String         |背景颜色|--|#ebeef5
@@ -99,7 +99,7 @@
 |showText       | Boolean   |是否显示进度文字|--|true
 |followText     | Boolean   |进度文字是否跟随进度的位置,type=line时有效|--|true
 |className      | String         |类名|--|--
-|status      | String         |状态|primary/warning/success/danger|primary
+|status      | String         |状态|primary / warning / success / danger|primary
 
 ### Progress slots
 |name|说明|
