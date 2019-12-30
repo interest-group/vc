@@ -1,8 +1,7 @@
-import Notification from './notification.vue'
+import Notification from './Notification.vue'
 import Vue from 'vue'
 
 Notification.newInstance = props => {
-  console.log(props)
   const Instance = new Vue({
     name: 'vc-notification',
     render: h => h(Notification, { props })

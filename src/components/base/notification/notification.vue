@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import Notice from './notice.vue'
+import Notice from './Notice.vue'
 import { transferIncrease } from '../../../utils/transfer'
 import { prefixCls } from '../../../utils/assist'
 

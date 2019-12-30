@@ -12,7 +12,7 @@
   </transition>
 </template>
 <script>
-import Notice from '../../message/message.vue'
+import Notice from '../../message/Message.vue'
 export default {
   name: 'vc-notice',
   components: {
