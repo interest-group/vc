@@ -37,3 +37,11 @@ export function broadcast (context, childName, eventName, ...params) {
     child.$emit(eventName, ...params)
   })
 }
+
+/**
+ * 组件类名
+ * **/
+const prefix = 'vc'
+export function prefixCls (type) {
+  return type ? `${prefix}-${type}` : prefix
+}

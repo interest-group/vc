@@ -1,58 +1,75 @@
 // 该文档用于定义样式动画
 
+// Message组件专用
+.vc-message-enter-active,
+.vc-message-leave-active {
+  transition: all 0.3s linear;
+}
+
+.vc-message-enter {
+  opacity: 0;
+  transform-origin: 0 0;
+  transform: translateY(-100%);
+}
+
+.vc-message-leave-to {
+  opacity: 0;
+  height: 0 !important;
+}
+
 // 拉下
-.vc-drop-down{
-  &-enter{
+.vc-drop-down {
+  &-enter {
     opacity: 0;
     transform: translateY(-20px);
   }
-  &-enter-active{
-    transition: all .2s;
+  &-enter-active {
+    transition: all 0.2s;
   }
 }
 
 // 上方滑入
-.vc-top-slide{
+.vc-top-slide {
   &-enter-active,
-  &-leave-active{
-    transition: transform .2s ease;
+  &-leave-active {
+    transition: transform 0.2s ease;
   }
   &-enter,
-  &-leave-to{
+  &-leave-to {
     transform: translateY(-100%);
   }
 }
 
 // 下方滑入
-.vc-bottom-slide{
+.vc-bottom-slide {
   &-enter-active,
-  &-leave-active{
-    transition: transform .2s ease;
+  &-leave-active {
+    transition: transform 0.2s ease;
   }
   &-enter,
-  &-leave-to{
+  &-leave-to {
     transform: translateY(100%);
   }
 }
 
 // 透明度
-.vc-opacity{
+.vc-opacity {
   &-enter-active,
-  &-leave-active{
-    transition: opacity .2s ease;
+  &-leave-active {
+    transition: opacity 0.2s ease;
   }
   &-enter,
-  &-leave-to{
+  &-leave-to {
     opacity: 0;
   }
 }
 
 // 旋转
-@keyframes vc-rotate{
-  0%{
+@keyframes vc-rotate {
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
