@@ -17,7 +17,13 @@
  export default {
    data(){
      return {
-       value1:0,
+      value1:0,
+      num1: 130254,
+      num2: 330254,
+      num3: 530254,
+      num4: 830254,
+      num5: 1030254,
+      num6: 830254
      }
    }
  }
@@ -45,7 +51,13 @@
    name: 'progress'
    data(){
      return {
-       value1:0,
+      value1:0,
+      num1: 130254,
+      num2: 330254,
+      num3: 530254,
+      num4: 830254,
+      num5: 1030254,
+      num6: 830254
      }
    }
  }
@@ -59,17 +71,17 @@
 <template>
   <div>
   
-    <vc-progress :value="0" :radius="50" :border="8" type="circle"></vc-progress>
+    <vc-progress :value="10" :radius="50" :border="8" type="circle" :num="num1"></vc-progress>
     
-    <vc-progress :value="30" :radius="50" :border="18" type="circle" ></vc-progress>
+    <vc-progress :value="30" :radius="50" :border="18" type="circle" :num="num2"></vc-progress>
     
-    <vc-progress :value="50" :radius="50" :border="8" type="circle"></vc-progress>
+    <vc-progress :value="50" :radius="50" :border="8" type="circle" :num="num3"></vc-progress>
     
-    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" status="danger" borderColor="red" type="circle" ></vc-progress>
+    <vc-progress :value="80" :radius="50" :border="8" color="#ddd" status="danger" borderColor="red" type="circle" :num="num4" ></vc-progress>
     
-    <vc-progress :value="100" :radius="50" :border="8" type="circle"></vc-progress>
+    <vc-progress :value="100" :radius="50" :border="8" type="circle" :num="num5"></vc-progress>
     
-    <vc-progress :value="80" :radius="50" :border="8" type="circle" >自定义</vc-progress>
+    <vc-progress :value="80" :radius="50" :border="8" type="circle" :num="num6">自定义</vc-progress>
     
   </div>
 </template>
@@ -77,7 +89,12 @@
  export default {
    data(){
      return {
-      
+        num1: 130254,
+        num2: 330254,
+        num3: 530254,
+        num4: 830254,
+        num5: 1030254,
+        num6: 830254
      }
    }
  }
@@ -89,7 +106,8 @@
 ### Progress Attributes
 |参数|类型|说明|可选值|默认值|
 |-|-|-|-|-|
-|value          | String          |v-model双向绑定|0-100|0
+|value          | Number          |v-model双向绑定|0-100|0
+|num            | Number          |显示数据|--|
 |type           | String         |进度条类型|line / circle|line
 |radius         | Number         |圆环半径，单位px。line时为宽|--|0
 |border         | Number         |进度条宽，单位px。line时为高|--|0

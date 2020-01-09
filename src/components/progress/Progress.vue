@@ -3,17 +3,18 @@
     <!--线型进度条-->
     <template v-if="type==='line'">
       <div :style="{width: radius ? radius + 'px' : '400px',background: color, height: border ? border + 'px':'15px'}"
-          :class="[className, 'vc-progress-line']">
+           :class="[className, 'vc-progress-line']">
         <span class="vc-progress-bar"
               :class="vcBarProgress"
               :style="lineStyle">
-          <span class="vc-progress-line-text" v-if="showText && followText">
+          <span class="vc-progress-line-text"
+                v-if="showText && followText">
             <slot>{{percent}}%</slot>
           </span>
         </span>
         <span class="vc-progress-fixed-text"
               v-if="showText && !followText">
-              <slot>{{percent}}%</slot>
+          <slot>{{percent}}%</slot>
         </span>
       </div>
     </template>
@@ -21,14 +22,17 @@
     <!--圆形进度条-->
     <template v-else-if="type === 'circle'">
       <div v-style.pro="circleStyle"
-          :class="[className, 'vc-progress-circle']"
-          >
-        <span class="vc-progress-circle-text" v-if="showText">
+           :class="[className, 'vc-progress-circle']">
+        <!-- <span class="vc-progress-circle-text" v-if="showText">
           <slot>{{percent}}%</slot>
+        </span> -->
+        <span class="vc-progress-circle-text"
+              v-if="showText"
+              :style="{color:borderColor}"><b>{{newValue}}</b>
         </span>
         <div class="vc-circle-circle"
-            v-style.circle="circleStyle"
-            :style="circleStyle2">
+             v-style.circle="circleStyle"
+             :style="circleStyle2">
           <span class="vc-circle-left"
                 v-style.left="circleStyle"
                 :class="vcCirCleClass"
@@ -54,7 +58,8 @@ export default {
         border: this.border,
         color: this.color
       },
-      percent: 0
+      percent: 0,
+      newValue: 0
     }
   },
   props: {
@@ -68,6 +73,11 @@ export default {
     className: String,
     // 进度
     value: {
+      type: Number,
+      default: 0
+    },
+    // 传入的数据
+    num: {
       type: Number,
       default: 0
     },
@@ -123,7 +133,15 @@ export default {
         } else {
           clearInterval(clearTime)
         }
-      }, this.duration / this.value)
+        if (this.newValue < this.num) {
+          this.newValue += Math.floor(this.num / this.value)
+          if (this.newValue === (Math.floor(this.num / this.value)) * this.value) {
+            this.newValue = this.num
+          }
+        } else {
+          clearInterval(clearTime)
+        }
+      }, 10)
     }
   },
   computed: {
