@@ -39,7 +39,8 @@ export default {
     lineColor: {
       type: String,
       default: ''
-    }
+    },
+    beforeChange: null
   },
   data () {
     return {
@@ -52,7 +53,9 @@ export default {
       lineTransformX: 0,
       // 当前选择值
       activeValue: '',
-      activeEvent: {}
+      temporaryValue: '',
+      activeEvent: {},
+      isFinish: false
     }
   },
   computed: {
@@ -128,8 +131,19 @@ export default {
     },
     // 选择导航
     onSelectTab (item, index) {
-      this.currentActive = index
-      this.activeEvent = event || window.event
+      this.temporaryValue = item.name
+      if (!this.beforeChange) {
+        this.currentActive = index
+        this.activeEvent = event || window.event
+      } else {
+        if (this.isFinish) return
+        this.isFinish = true
+        this.beforeChange(() => {
+          this.currentActive = index
+          this.activeEvent = event || window.event
+          this.isFinish = false
+        }, this.temporaryValue, this.activeValue)
+      }
     },
     // 控制显示隐藏
     showDiv () {
