@@ -7,6 +7,11 @@ import develop from './pages/develop'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 let pagesRoutes = [
   {
     path: '/',
@@ -31,7 +36,9 @@ let pagesRoutes = [
   }
 ]
 
-const componentRoutes = pagesRoutes.find(route => route.name === 'component-page').children = []
+const componentRoutes = (pagesRoutes.find(
+  route => route.name === 'component-page'
+).children = [])
 
 const groupNameList = []
 
@@ -43,11 +50,14 @@ requireRouter.keys().forEach(requireName => {
   // 分割文件字符串
   const fileNameList = fileName.split('/')
   // 得到md名
-  const mdName = fileNameList[fileNameList.length - 1].split(' ')[0].toLowerCase()
+  const mdName = fileNameList[fileNameList.length - 1]
+    .split(' ')[0]
+    .toLowerCase()
   // 得到文件夹名
   const eName = fileNameList[0]
   // 得到分组名
-  const groupName = (fileNameList && fileNameList.length === 3 && fileNameList[1]) || ''
+  const groupName =
+    (fileNameList && fileNameList.length === 3 && fileNameList[1]) || ''
 
   const route = {
     meta: {
@@ -59,7 +69,7 @@ requireRouter.keys().forEach(requireName => {
     },
     path: mdName,
     name: mdName,
-    component: (resolve) => require([`./docs/${fileName}.md`], resolve)
+    component: resolve => require([`./docs/${fileName}.md`], resolve)
   }
   componentRoutes.push(route)
 
@@ -69,13 +79,17 @@ requireRouter.keys().forEach(requireName => {
 
 export const groupList = groupNameList.map(v => ({
   title: v,
-  children: componentRoutes.filter(item => item.meta.groupName && item.meta.groupName === v)
+  children: componentRoutes.filter(
+    item => item.meta.groupName && item.meta.groupName === v
+  )
 }))
 
-export const guideList = componentRoutes.filter(v => v.meta.pageName === 'guide')
+export const guideList = componentRoutes.filter(
+  v => v.meta.pageName === 'guide'
+)
 
 const router = new VueRouter({
-  routes: [ ...pagesRoutes ]
+  routes: [...pagesRoutes]
 })
 
 export default router
