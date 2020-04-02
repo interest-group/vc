@@ -2,12 +2,15 @@ const path = require('path')
 const configs = require('./md')
 
 module.exports = {
+  pages: {
+    index: {
+      entry: 'example/main.js',
+      template: 'public/index.html',
+      filename: 'index.html'
+    }
+  },
   lintOnSave: 'error',
   chainWebpack: config => {
-    config.entryPoints
-      .get('app')
-      .clear()
-      .add(path.resolve(__dirname, 'example/main.js'))
     config.resolve.alias
       .delete('@')
       .set('@', path.resolve(__dirname, 'example'))
