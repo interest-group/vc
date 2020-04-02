@@ -9,6 +9,7 @@ module.exports = {
       filename: 'index.html'
     }
   },
+  publicPath: '/vc/',
   lintOnSave: 'error',
   chainWebpack: config => {
     config.resolve.alias
