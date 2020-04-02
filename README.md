@@ -1,17 +1,24 @@
-# vc
+# 项目说明
 
-**vc** is a Vue Component lib for Web.
+本组件库目前还在开发中，仅提供用来学习
 
-# 项目架设
+## 项目目录说明
 
-    ├── src // 组件代码
-    ├── example // 示例代码
-    ├── public
-    ├── md
-    ├── package.json
-    ├── babel.config.js
-    ├── vue.config.js
-    └── README.md // 项目介绍
+```
+.
+├── dist // 打包输出的文档页面文件
+├── example // 未打包文档页面源码文件
+├── lib // 组件库打包后的lib文件
+└── src // 组件库源码文件
+```
+
+## 命令说明
+
+- server：开发模式下运行文档页面
+- build-home：打包输出文档页面文件
+- build-lib：打包输出库文件
+- deploy: 推送代码到github仓库gh-pages分支
+
 
 ## 组件代码
 
@@ -51,7 +58,7 @@
 直接在 `docs/` 目录下创建 `**.md` 文件作为组件文档，已经自动引入vue-router配置。
 
 
-### 关于组件文件
+## 关于组件文件
 
 格式：
 
@@ -90,7 +97,7 @@ export default [
 <vc-button>..</vc-button>
 ```
 
-### 关于组件文档
+## 关于组件文档
 
 格式：
 
@@ -103,12 +110,12 @@ export default [
         └── index.scss
 
 
-文档内嵌组件
+## 文档内嵌组件
 
 ``` md
 // *.md 文档
 
-# ...组件介绍
+...组件介绍
 
 // demo为组件关键字，btn将渲染为组件class="doc-btn"，作为样式选择器。
 ::: demo btn
@@ -125,7 +132,7 @@ export default {}
 
 ```
 
-文档内嵌组件样式
+## 文档内嵌组件样式
 
 ``` scss
 // index.scss
