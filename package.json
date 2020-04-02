@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build-home": "vue-cli-service build",
     "build-lib": "vue-cli-service build --target lib --name vc --dest lib ./src/index.js",
+    "deploy": "node ./deploy.js",
     "lint": "vue-cli-service lint --mode production",
     "output": "vue inspect > output.js"
   },
