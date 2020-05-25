@@ -1,50 +1,82 @@
 <template>
-  <button :class="cls" :disabled=" disabled ? 'disabled' : false" @click="$emit('click')" @keydown.enter="onEnter"><slot></slot></button>
+  <button :class="classes" :disabled="disabled" @click="handleClick" @keydown.enter="onEnter">
+    <v-icon class="v-button-icon__loading" name="loading" v-if="loading"></v-icon>
+    <v-icon v-if="icon" :name="icon"></v-icon><span v-if="$slots.default"><slot></slot></span><v-icon v-if="suffixIcon" :name="suffixIcon"></v-icon>
+  </button>
 </template>
 
 <script>
+import { oneOf } from '../../utils/assist'
+import VIcon from '../icon'
 export default {
-  name: 'vc-button',
+  name: 'v-button',
+  components: {
+    VIcon
+  },
   props: {
-    keyEnter: Boolean,
-    ghost: Boolean,
     type: {
-      type: String,
-      validator: (value) => {
-        if (!value) return true
-        return ~['info', 'success', 'warning', 'error'].indexOf(value)
-      }
+      validator: (value) => oneOf(value, ['default', 'info', 'success', 'warning', 'error', 'text']),
+      default: 'default'
     },
     size: {
-      type: String,
-      validator: (value) => {
-        if (!value) return true
-        return ~['large', 'middle', 'small'].indexOf(value)
-      },
+      validator: (value) => oneOf(value, ['small', 'middle', 'large']),
       default: 'middle'
     },
-    disabled: Boolean
-  },
-  data () {
-    return {
-      prefixBtn: 'vc-btn'
+    keyEnter: {
+      type: Boolean,
+      default: false
+    },
+    ghost: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    // 前置Icon
+    icon: {
+      type: String,
+      default: ''
+    },
+    // 后置Icon
+    suffixIcon: {
+      type: String,
+      default: ''
+    },
+    long: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
-    cls () {
+    classes () {
       return [
-        this.prefixBtn,
-        this.type ? `${this.prefixBtn}__${this.type}` : '',
-        this.ghost ? 'is-ghost' : '',
-        `${this.prefixBtn}__${this.size}`,
-        this.disabled ? `${this.prefixBtn}__disabled` : ''
+        'v-button',
+        `v-button__${this.size}`,
+        `v-button__${this.type}`,
+        {
+          'v-button__disabled': this.disabled,
+          'v-button__ghost': this.ghost,
+          'v-button__long': this.long,
+          'v-button__loading': this.loading
+        }
       ]
     }
   },
   methods: {
-    onEnter () {
+    onEnter (event) {
       if (this.keyEnter) {
-        this.$emit('click')
+        this.handleClick(event)
+      }
+    },
+    handleClick (event) {
+      if (!this.disabled) {
+        this.$emit('click', event)
       }
     }
   }

@@ -1,46 +1,46 @@
 <template>
-  <vc-container class="component-page">
-    <vc-aside class="component-page__aside">
-      <div>
+  <div class="component-page">
+    <v-scrollbar class="component-page__aside" autoshow>
+      <v-menu>
         <h2 class="title">开发指南</h2>
-        <vc-menu v-model="menu">
-          <vc-menu-item v-for="(route, index) in guideList" :key="index"
-                        :name="route.name" :to="route">{{route.meta.name}}</vc-menu-item>
-        </vc-menu>
-      </div>
-      <div>
+        <template v-for="route in guide">
+          <v-menu-item :name="route.name" :key="route.meta.name" :to="route">{{route.meta.name}}</v-menu-item>
+        </template>
         <h2 class="title">组件</h2>
-        <vc-menu v-model="menu">
-          <vc-menu-group v-for="(item, index) in groupList" :key="index" :title="item.title">
-            <vc-menu-item :name="c.name" v-for="(c, i) in item.children" :key="i" :to="c">
-              {{c.meta.name}}
-            </vc-menu-item>
-          </vc-menu-group>
-        </vc-menu>
-      </div>
-    </vc-aside>
-    <vc-main class="component-page__body">
+        <v-menu-group v-for="(group, index) in menus" :key="index" :title="group.module">
+            <v-menu-item v-for="(route, i) in group.children" :name="route.name"
+                         :key="i" :to="route">{{route.meta.name}}</v-menu-item>
+        </v-menu-group>
+      </v-menu>
+    </v-scrollbar>
+    <v-content class="component-page__body">
       <router-view></router-view>
-    </vc-main>
-  </vc-container>
+    </v-content>
+  </div>
 </template>
 
 <script>
-import { groupList, guideList } from '@/router'
+import guide from '../router/guide'
+import components from '../router/components'
+
+const menus = []
+
+components.forEach(route => {
+  const { module } = route.meta
+  let parent = menus.find(d => d.module === module)
+  if (!parent) {
+    parent = { module, children: [] }
+    menus.push(parent)
+  }
+  parent.children.push(route)
+})
+
 export default {
   name: 'component-page',
-  components: {
-  },
   data () {
     return {
-      menu: this.$route.name,
-      guideList,
-      groupList
-    }
-  },
-  methods: {
-    toggleRouter () {
-      this.router = !this.router
+      guide,
+      menus
     }
   }
 }
@@ -48,17 +48,23 @@ export default {
 
 <style lang="scss">
 .component-page {
-  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
   &__aside {
-    overflow: auto;
-    padding: 50px 15px 90px 0;
-    min-width: 230px;
+    background-color: #fafafa;
+    position: fixed !important;
+    height: auto !important;
+    width: 230px !important;
+    top: 80px;
+    bottom: 0;
     .title {
       padding: 15px 20px;
       font-weight: bold;
     }
   }
   &__body {
+    margin-left: 230px;
     padding: 50px 30px 90px 40px;
     overflow: auto;
   }

@@ -4,25 +4,25 @@
 ## 组件概述
 
 
-`<vc-container></vc-container>` : 布局容器组件
+`<v-container></v-container>` : 布局容器组件
 
-`<vc-main></vc-main>` : 内容容器组件
+`<v-main></v-main>` : 内容容器组件
 
-`<vc-header></vc-header>` : 顶部组件
+`<v-header></v-header>` : 顶部组件
 
-`<vc-footer></vc-footer>` : 底部组件
+`<v-footer></v-footer>` : 底部组件
 
-`<vc-aside></vc-aside>` : 侧边栏组件
+`<v-aside></v-aside>` : 侧边栏组件
 
-`<vc-article></vc-article>` : 内容组件
+`<v-article></v-article>` : 内容组件
 
-`<vc-nav></vc-nav>` : 导航组件
+`<v-nav></v-nav>` : 导航组件
 
-两个容器组件 `<vc-container></vc-container><vc-main></vc-main>` , 其余都是嵌套的子组件。
+两个容器组件 `<v-container></v-container><v-main></v-main>` , 其余都是嵌套的子组件。
 
 容器组件采用flex布局，默认主轴为 `flex-direction：column` 垂直方向。
 
-当容器内部有侧边栏组件`<vc-aside></vc-aside>`, 那容器组件主轴会变成 `flex-direction：row` 水平方向。
+当容器内部有侧边栏组件`<v-aside></v-aside>`, 那容器组件主轴会变成 `flex-direction：row` 水平方向。
 
 可为容器指定direction属性，强制设置容器组件的主轴方向
 
@@ -41,29 +41,29 @@
 ``` html
 <template>
   <div>
-    <vc-container>
-      <vc-header>vc-header</vc-header>
-      <vc-container>vc-container</vc-container>
-      <vc-footer>vc-footer</vc-footer>
-    </vc-container>
+    <v-container>
+      <v-header>v-header</v-header>
+      <v-container>v-container</v-container>
+      <v-footer>v-footer</v-footer>
+    </v-container>
 
-    <vc-container>
-      <vc-header>vc-header</vc-header>
-      <vc-container>
-        <vc-aside>vc-aside</vc-aside>
-        <vc-main>vc-main</vc-main>
-      </vc-container>
-      <vc-footer>vc-footer</vc-footer>
-    </vc-container>
+    <v-container>
+      <v-header>v-header</v-header>
+      <v-container>
+        <v-aside>v-aside</v-aside>
+        <v-main>v-main</v-main>
+      </v-container>
+      <v-footer>v-footer</v-footer>
+    </v-container>
 
-    <vc-container>
-      <vc-aside>vc-aside</vc-aside>
-      <vc-container>
-        <vc-header>vc-header</vc-header>
-        <vc-main>vc-main</vc-main>
-        <vc-footer>vc-footer</vc-footer>
-      </vc-container>
-    </vc-container>
+    <v-container>
+      <v-aside>v-aside</v-aside>
+      <v-container>
+        <v-header>v-header</v-header>
+        <v-main>v-main</v-main>
+        <v-footer>v-footer</v-footer>
+      </v-container>
+    </v-container>
   </div>
 </template>
 ```

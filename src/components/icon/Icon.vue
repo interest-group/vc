@@ -1,46 +1,28 @@
 <template>
-  <i :class="classes" :style="styles" @click="handleClick"></i>
+  <i :class="classes" @click="handleClick"></i>
 </template>
 <script>
 export default {
-  name: 'vc-icon',
+  name: 'v-icon',
   props: {
     name: {
       type: String,
       default: ''
     },
-    custom: {
+    icon: {
       type: String,
-      default: ''
-    },
-    color: {
-      type: String,
-      default: ''
-    },
-    size: {
-      type: [Number, String],
       default: ''
     }
   },
   computed: {
     classes () {
       return [
-        'iconfont',
-        `vc-icon-${this.name}`,
+        'vfont',
+        `vicon-${this.name}`,
         {
-          [this.custom]: this.custom
+          [this.icon]: this.icon
         }
       ]
-    },
-    styles () {
-      let style = {}
-      if (this.color) {
-        style.color = this.color
-      }
-      if (this.size) {
-        style['font-size'] = `${this.size}px`
-      }
-      return style
     }
   },
   methods: {

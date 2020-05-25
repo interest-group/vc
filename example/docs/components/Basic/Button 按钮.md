@@ -4,84 +4,127 @@
 
 ## 代码示例
 
-### 基本使用
+### type
+
+使用`type`属性定义按钮类型
 
 ::: demo button
 
 ```html
 <template>
-  <vc-button>default</vc-button>
-  <vc-button type="info">info</vc-button>
-  <vc-button type="error">error</vc-button>
-  <vc-button type="warning">warning</vc-button>
-  <vc-button type="success">success</vc-button>
-  <br />
-  <br />
-  <div style="background-color: #282828; padding: 1em;">
-    <vc-button ghost>default</vc-button>
-    <vc-button type="info" ghost>info</vc-button>
-    <vc-button type="error" ghost>error</vc-button>
-    <vc-button type="warning" ghost>warning</vc-button>
-    <vc-button type="success" ghost>success</vc-button>
+  <v-button type="default">default</v-button>
+  <v-button type="info">info</v-button>
+  <v-button type="error">error</v-button>
+  <v-button type="warning">warning</v-button>
+  <v-button type="success">success</v-button>
+  <v-button type="text">text</v-button>
+  <div class="ghost">
+    <v-button ghost>default</v-button>
+    <v-button type="info" ghost>info</v-button>
+    <v-button type="error" ghost>error</v-button>
+    <v-button type="warning" ghost>warning</v-button>
+    <v-button type="success" ghost>success</v-button>
+    <v-button type="text" ghost>text</v-button>
   </div>
 </template>
 ```
 :::
 
-### 尺寸
+### size
+
+使用`size`属性定义按钮大小
 
 ::: demo button
 
 ```html
 <template>
-  <vc-button type="info" size="large">default</vc-button>
-  <vc-button type="info">default</vc-button>
-  <vc-button size="small">default</vc-button>
-  <br />
-  <br />
-  <vc-button type="error" size="large">error</vc-button>
-  <vc-button type="error" size="middle">error</vc-button>
-  <vc-button type="error" size="small">error</vc-button>
+  <v-button type="info" size="small">small</v-button>
+  <v-button type="info" size="middle">middle</v-button>
+  <v-button type="info" size="large">large</v-button>
 </template>
 ```
 :::
 
-### 禁用
+### disabled
+
+禁用
 
 ::: demo button
 
 ```html
 <template>
-  <vc-button>default</vc-button>
-  <vc-button type="info">info</vc-button>
-  <vc-button type="error">error</vc-button>
-  <vc-button type="warning">warning</vc-button>
-  <vc-button type="success">success</vc-button>
-  <br />
-  <br />
-  <vc-button disabled>default</vc-button>
-  <vc-button type="info" disabled>info</vc-button>
-  <vc-button type="error" disabled>error</vc-button>
-  <vc-button type="warning" disabled>warning</vc-button>
-  <vc-button type="success" disabled>success</vc-button>
-  <br />
-  <br />
-  <div style="background-color: #282828; padding: 1em;">
-    <vc-button ghost>default</vc-button>
-    <vc-button type="info" ghost>info</vc-button>
-    <vc-button type="error" ghost>error</vc-button>
-    <vc-button type="warning" ghost>warning</vc-button>
-    <vc-button type="success" ghost>success</vc-button>
+  <v-button>default</v-button>
+  <v-button type="info">info</v-button>
+  <v-button type="error">error</v-button>
+  <v-button type="warning">warning</v-button>
+  <v-button type="success">success</v-button>
+  <v-button type="text">text</v-button>
+  <div class="block">
+    <v-button disabled>default</v-button>
+    <v-button type="info" disabled>info</v-button>
+    <v-button type="error" disabled>error</v-button>
+    <v-button type="warning" disabled>warning</v-button>
+    <v-button type="success" disabled>success</v-button>
+    <v-button type="text" disabled>text</v-button>
   </div>
-  <br />
-  <br />
-  <div style="background-color: #282828; padding: 1em;">
-    <vc-button ghost disabled>default</vc-button>
-    <vc-button type="info" ghost disabled>info</vc-button>
-    <vc-button type="error" ghost disabled>error</vc-button>
-    <vc-button type="warning" ghost disabled>warning</vc-button>
-    <vc-button type="success" ghost disabled>success</vc-button>
+  <div class="ghost">
+    <v-button ghost>default</v-button>
+    <v-button ghost type="info">info</v-button>
+    <v-button ghost type="error">error</v-button>
+    <v-button ghost type="warning">warning</v-button>
+    <v-button ghost type="success">success</v-button>
+    <v-button ghost type="text">text</v-button>
+    <div class="block">
+      <v-button ghost disabled>default</v-button>
+      <v-button ghost type="info" disabled>info</v-button>
+      <v-button ghost type="error" disabled>error</v-button>
+      <v-button ghost type="warning" disabled>warning</v-button>
+      <v-button ghost type="success" disabled>success</v-button>
+      <v-button ghost type="text" disabled>text</v-button>
+    </div>
   </div>
+</template>
+```
+:::
+
+### icon & suffix-icon
+
+使用`icon`属性定义前置图标
+
+使用`suffix-icon`属性定义按钮后置图标
+
+::: demo button
+
+```html
+<template>
+  <v-button type="info" icon="search">search</v-button>
+  <v-button type="info" suffix-icon="Rightarrow">jump</v-button>
+</template>
+```
+:::
+
+### loading
+
+加载中
+
+::: demo button
+
+```html
+<template>
+  <v-button type="info" loading>loading</v-button>
+</template>
+```
+:::
+
+### long
+
+长按钮
+
+::: demo button
+
+```html
+<template>
+  <v-button type="info" long>长按钮</v-button>
 </template>
 ```
 :::
@@ -92,8 +135,11 @@
 
 | 属性     | 说明                                                              | 类型    | 默认值  |
 | -------- | ----------------------------------------------------------------- | ------- | ------- |
-| type     | 按钮类型，可选值为`info`, `warning`, `error`, `success`或者不设置 | String  | -       |
-| ghost     | 幽灵按钮，常用于有背景的场景 | Boolean  |  `false`     |
-| size     | 按钮大小，可选值为`large`, `middle`, `small`或者不设置            | String  | -       |
-| disabled | 设置按钮为禁用状态                                                | Boolean | `false` |
-| keyEnter | 设计监听`enter`键盘事件                                                | Boolean | `false` |
+| type     | 按钮类型，可选值为`default`, `info`, `success`, `warning`, `error`, `text` | String  | `default`       |
+| size     | 按钮大小，可选值为`large`, `middle`, `small`           | String  | `middle`      |
+| ghost     | 幽灵按钮，常用于有背景的场景                                      | Boolean  | false    |
+| disabled | 设置按钮为禁用状态                                                | Boolean | false |
+| icon | 前置图标                                                | String |  |
+| suffix-icon | 后置图标                                                | String |  |
+| loading | 设置加载状态                             | Boolean | false |
+| key-enter | 设置监听`enter`键盘事件                               | Boolean | false |

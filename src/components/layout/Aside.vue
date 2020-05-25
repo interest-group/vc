@@ -1,10 +1,10 @@
 <template>
-  <aside class="vc-aside" :style="styles"><slot></slot></aside>
+  <aside class="v-aside" :style="styles"><slot></slot></aside>
 </template>
 
 <script>
 export default {
-  name: 'vc-aside',
+  name: 'v-aside',
   props: {
     width: {
       type: [String, Number],

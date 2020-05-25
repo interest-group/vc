@@ -1,25 +1,25 @@
 <template>
   <li :class="classes">
-    <div class="vc-sub-menu-title" @click="handleClick">
+    <div class="v-sub-menu__title" @click="handleClick">
       <slot name="title">{{title}}</slot>
-      <Icon class="vc-sub-menu-icon" name="arrow-down2"></Icon>
+      <u-icon class="v-sub-menu__icon" type="chevron-bottom"></u-icon>
     </div>
-    <SlideDown v-model="active"><slot></slot></SlideDown>
+    <u-slide-down v-model="active"><slot></slot></u-slide-down>
   </li>
 </template>
 
 <script>
-import Icon from '../icon'
-import SlideDown from '../slide-down'
-import emitter from '../../mixins/emitter'
+import UIcon from '../icon'
+import USlideDown from '../slide-down'
+import { findParentComponents, findChildComponents } from '../../utils/findComponents'
+
 export default {
-  name: 'vc-sub-menu',
-  mixins: [emitter],
-  components: { SlideDown, Icon },
+  name: 'u-sub-menu',
+  components: { USlideDown, UIcon },
   props: {
     name: {
       type: [String, Number],
-      required: true
+      default: ''
     },
     title: {
       type: String
@@ -31,46 +31,45 @@ export default {
   },
   data () {
     return {
+      accordion: false,
       active: false
     }
   },
   computed: {
     classes () {
       return [
-        'vc-sub-menu',
+        'v-sub-menu',
         {
-          'vc-sub-menu-active': this.active,
-          'vc-sub-menu-disabled': this.disabled
+          'v-sub-menu__active': this.active,
+          'v-sub-menu__disabled': this.disabled
         }
       ]
     }
   },
-  mounted () {
-    this.$on('update-active', this.handleUpdateActive)
-    this.$on('sub-menu-active', this.handleUpdateOpened)
-  },
   methods: {
     handleClick () {
-      if (this.disabled) return
-      this.active = !this.active
-      if (this.active) {
-        // 通知父组件激活
-        this.bubbling(['vc-menu', 'vc-sub-menu'], false, 'sub-menu-active', this.name)
+      if (!this.disabled) {
+        this.active = !this.active
+        // 检查手风琴模式
+        this.handleAccordion()
       } else {
         // 关闭所有子嵌套组件
-        this.broadcast('vc-sub-menu', true, 'update-active', [])
+        this.closeSubMenus()
       }
     },
-    // 检查是否保持激活
-    handleUpdateActive (names) {
-      this.active = names.includes(this.name)
-    },
-    handleUpdateOpened (name) {
-      const [parent] = this.findParentComponents('vc-menu')
-      if (parent && parent.accordion) {
-        // 手风琴模式关闭其他子组件
-        this.broadcast('vc-sub-menu', false, 'update-active', [name])
+    handleAccordion () {
+      if (this.accordion) {
+        findParentComponents(this, ['v-menu', 'v-sub-menu']).forEach(ref => {
+          findChildComponents(ref, 'v-sub-menu').forEach(ref => {
+            ref.active = ref === this
+          })
+        })
       }
+    },
+    closeSubMenus () {
+      findChildComponents(this, 'v-sub-menu').forEach(ref => {
+        ref.active = false
+      })
     }
   }
 }
