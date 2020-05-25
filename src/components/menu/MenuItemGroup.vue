@@ -1,13 +1,13 @@
 <template>
-  <li class="vc-menu-group">
-    <div class="vc-menu-group-title"><slot name="title">{{title}}</slot></div>
-    <ul class="vc-menu-group-content"><slot></slot></ul>
+  <li class="v-menu-group">
+    <div class="v-menu-group__title"><slot name="title">{{title}}</slot></div>
+    <ul class="v-menu-group__content"><slot></slot></ul>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'vc-menu-group',
+  name: 'v-menu-group',
   props: {
     title: {
       type: String

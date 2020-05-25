@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'vc-slide-down',
+  name: 'v-slide-down',
   props: {
     value: {
       type: Boolean,

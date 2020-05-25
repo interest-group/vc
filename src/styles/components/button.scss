@@ -1,103 +1,98 @@
-$btn-prefix: #{$prefix}-btn;
-
-@mixin sematic-button ($color, $backgroundColor) {
+@mixin semantic-button ($color, $backgroundColor) {
   color: $color;
   background-color: $backgroundColor;
-  border: 1px solid $backgroundColor;
-
-  &:hover {
-    background-color: darken($backgroundColor, 10%);
-    border: 1px solid darken($backgroundColor, 10%);
-  }
-
-  &:disabled {
+  border: 1px solid darken($backgroundColor, 10%);
+  &.v-button__disabled {
+    cursor: $cursor-disabled;
     background-color: lighten($backgroundColor, 10%);
-    border: 1px solid lighten($backgroundColor, 10%);
+    border-color: lighten($backgroundColor, 10%);
   }
-
-  &.is-ghost {
+  &:not(.v-button__disabled):hover {
+    background-color: darken($backgroundColor, 10%);
+    border-color: darken($backgroundColor, 10%);
+  }
+  &.v-button__ghost {
     background-color: transparent;
     border: 1px solid $backgroundColor;
     color: $backgroundColor;
-
-    &:hover {
+    &.v-button__disabled {
+      opacity: 0.8;
+    }
+    &:not(.v-button__disabled):hover {
       background-color: $backgroundColor;
       color: $color;
-    }
-
-    &:disabled {
-      background-color: transparent;
-      color: $backgroundColor;
     }
   }
 }
 
-.#{$btn-prefix} {
+.v-button {
   display: inline-block;
-  padding: $button-padding;
-
-  border: $button-border-size $button-border-style $button-border-color;
+  user-select: none;
+  outline: none;
+  background-image: none;
   border-radius: $button-border-radius;
-  box-shadow: $button-border-box-shadow;
+  box-shadow: $button-box-shadow;
   background-color: $white-color;
   box-sizing: border-box;
-
-  font-size: $button-font-size;
   line-height: $button-line-height;
-
   transition: all .1s ease;
-
   cursor: pointer;
-
-  &:hover {
-    background-color: $light-color;
+  &__large {
+    padding: $button-large-padding;
+    font-size: $button-large-font-size;
+  }
+  &__middle {
+    padding: $button-middle-padding;
+    font-size: $button-middle-font-size;
+  }
+  &__small {
+    padding: $button-small-padding;
+    font-size: $button-small-font-size;
   }
 
-  &:active {
-    outline: none;
+  &__info {
+    @include semantic-button($white-color, $info-color)
   }
-
-  &:disabled {
-    background-color: $grey-color;
-    cursor: not-allowed;
+  &__success {
+    @include semantic-button($white-color, $success-color)
   }
-
-  &.is-ghost {
+  &__warning {
+    @include semantic-button($white-color, $warning-color)
+  }
+  &__error {
+    @include semantic-button($white-color, $error-color)
+  }
+  &__default {
+    @include semantic-button($font-color, $white-color)
+  }
+  &__text {
+    color: $primary-color;
     background-color: transparent;
-    border: 1px solid $white-color;
-    color: $white-color;
-
-    &:disabled {
-      background-color: transparent;
-      opacity: 0.8;
+    border-color: transparent;
+    box-shadow: none;
+    &.v-button__disabled {
+      cursor: $cursor-disabled;
+      color: $color-disabled;
+    }
+    &:not(.v-button__disabled):hover {
+      color: darken($primary-color, 20%);
     }
   }
-
-  &.#{$btn-prefix}__info {
-    @include sematic-button($white-color, $button-background-color-info)
+  &__long {
+    width: 100%;
   }
-  &.#{$btn-prefix}__success {
-    @include sematic-button($white-color, $button-background-color-success)
-  }
-  &.#{$btn-prefix}__warning {
-    @include sematic-button($white-color, $button-background-color-warning)
-  }
-  &.#{$btn-prefix}__error {
-    @include sematic-button($white-color, $button-background-color-error)
-  }
-
-  &.#{$btn-prefix}__large {
-    padding: $button-padding-large;
-    font-size: $button-font-size-large;
-  }
-  
-  &.#{$btn-prefix}__middle {
-    padding: $button-padding-middle;
-    font-size: $button-font-size-middle;
-  }
-
-  &.#{$btn-prefix}__small {
-    padding: $button-padding-small;
-    font-size: $button-font-size-small;
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & > span {
+      display: inline-block;
+      height: 0;
+      visibility: hidden;
+    }
+    .v-button-icon__loading {
+      transform-origin: center;
+      animation: v-rotate 1.5s linear infinite;
+    }
   }
 }
