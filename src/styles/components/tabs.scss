@@ -1,0 +1,63 @@
+.v-tabs {
+  position: relative;
+  &__header {
+    border-bottom: 1px solid #e4e7ed;
+    .tabs-item {
+      cursor: pointer;
+      line-height: 40px;
+      font-weight: 500;
+      height: 40px;
+      padding: 0 20px;
+      display: inline-block;
+      user-select: none;
+      box-sizing: border-box;
+      transition: color .3s ease;
+      &:not(.tabs-item__disabled):hover,
+      &__active {
+        color: $primary-color
+      }
+    }
+  }
+  &__content {
+    padding-top: 15px;
+  }
+
+  // tabs样式
+  &__tabs {
+    .tabs {
+      position: relative;
+    }
+    .tabs-line {
+      position: absolute;
+      left: 0;
+      height: 2px;
+      bottom: -1px;
+      background-color: $primary-color;
+      transition: all .3s;
+      z-index: 2;
+    }
+  }
+
+  // 卡片样式
+  &__card {
+    .tabs {
+      position: relative;
+    }
+    .tabs-item {
+      border-left: 1px solid #e4e7ed;
+      border-top: 1px solid #e4e7ed;
+      border-bottom: 1px solid #e4e7ed;
+      margin-bottom: -1px;
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+      &:last-child {
+        border-right: 1px solid #e4e7ed;
+        border-top-right-radius: 4px;
+      }
+      &__active {
+        border-bottom-color: #FFF;
+      }
+    }
+  }
+}

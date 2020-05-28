@@ -1,0 +1,143 @@
+section {
+  color: #3f536e;
+  font-size: 14px;
+  code, kbd, pre, samp{
+    font-family: Consolas,Menlo,Courier,monospace;
+  }
+  hr {
+    margin: 1.2em 0;
+    border: 0;
+    border-bottom: 1px solid #C5D9E8;
+  }
+  p {
+    padding: 0;
+    line-height: 1.7;
+    color: #3f536e;
+    font-size: 14px;
+  }
+  h1,h2,h3,h4,h5{
+    margin: 16px 0;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 26px;
+    margin: 20px 0;
+    font-weight: 400;
+    color: #1f2f3d;
+  }
+  h2 {
+    font-size: 24px;
+    margin: 50px 0 20px;
+    color: #1f2f3d;
+    font-weight: 400;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 30px 0 20px;
+    color: #1f2f3d;
+    font-weight: 400;
+  }
+  ul {
+    margin: 16px 0;
+    padding-left: 24px;
+    list-style: disc;
+    li {
+      line-height: 1.8;
+    }
+  }
+  pre {
+    margin: 0;
+    padding: 16px;
+    overflow: auto;
+    // background-color: #FAFAFA;
+    background-color: #edf0f5;
+    line-height: 1.4em;
+    code {
+      padding: 0;
+      font-size: 1em;
+      border: none;
+      border-radius: 0;
+      background-color: transparent;
+    }
+  }
+  code {
+    // color: red;
+    padding: .3em .5em;
+    font-size: .9em;
+    vertical-align: middle;
+    border: 1px solid #ECECEC;
+    border-radius: 2px;
+    background-color: #F7F7F7;
+  }
+  code.code_inline {
+    padding: 0.2em .5em;
+    margin: 0 0.2em;
+  }
+  img {
+    vertical-align: middle;
+  }
+  p+p {
+    margin-top: 8px;
+  }
+  a {
+    color: #6190e8;
+  }
+  table.table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    color: #5e6d82;
+    font-size: 14px;
+    overflow: auto;
+    margin-bottom: 50px;
+    th {
+      // background-color: #FAFBFC;
+      padding: 10px 8px;
+      text-align: left;
+      color: #AFAFAF;
+    }
+    td{
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 16px 0px;
+      max-width: 250px;
+    }
+  }
+  div.tip,
+  div.warning{
+    position: relative;
+    padding: 4px 24px;
+    margin: 12px;
+    border: 1px solid transparent;
+    transition: all 0.5s ease;
+    &:before{
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      bottom: -1px;
+      border-left: 10px solid transparent;
+    }
+    &:hover{
+      border-color: transparent;
+    }
+  }
+  div.tip{
+    border-color: #E6ECE7;
+    &:before{
+      border-left-color: #42b983;
+    }
+    &:hover{
+      box-shadow: 0 2px 7px rgba(85,137,113, 0.15);
+    }
+  }
+  div.warning{
+    border-color: #ECEBE6;
+    &:before{
+      border-left-color: #ffb24d;
+    }
+    &:hover{
+      box-shadow: 0 2px 7px rgba(137,124,85, 0.15);
+    }
+  }
+}

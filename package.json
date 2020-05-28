@@ -2,13 +2,22 @@
   "name": "vc",
   "version": "0.1.0",
   "private": true,
+  "main": "lib/vc.common.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve:docs": "vue-cli-service serve",
+    "build:docs": "vue-cli-service build",
+    "lint": "vue-cli-service lint --mode production",
+    "vc:js": "vue-cli-service build --target lib --name vc --dest lib ./src/index.js",
+    "vc:css": "sass src/styles/index.scss lib/vc.css && sass src/styles/index.scss lib/vc.min.css --style compressed",
+    "build:lib": "npm run vc:js && npm run vc:css",
+    "deploy": "node ./deploy.js",
+    "output": "vue inspect > output.js"
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "gemini-scrollbar": "^1.5.3",
+    "markdown-it": "^10.0.0",
+    "markdown-it-container": "^2.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
   },
@@ -16,29 +25,25 @@
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
+    "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
+    "babel-preset-env": "^1.7.0",
+    "cheerio": "^1.0.0-rc.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lint-staged": "^9.5.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "vue-markdown-loader": "^2.4.1",
     "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
+  },
+  "gitHooks": {
+    "pre-commit": "npm run lint"
   },
   "browserslist": [
     "> 1%",

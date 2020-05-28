@@ -1,0 +1,56 @@
+.v-modal__wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.v-modal__mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0, .2);
+  z-index: 1001;
+}
+
+.v-modal {
+  background-color: $modal-background-color;
+  border-radius: $modal-border-radius;
+  box-shadow: $modal-box-shadow;
+  min-width: $modal-min-width;
+  top: $modal-top;
+  position: relative;
+  z-index: 1002;
+  &__header {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    .close {
+      margin-left: auto;
+      cursor: pointer;
+    }
+  }
+  &__body {
+    min-height: $modal-body-min-height;
+    padding: 18px 20px;
+    box-sizing: border-box;
+  }
+  &__footer {
+    border-top: 1px solid $border-color;
+    padding: 18px 20px;
+    text-align: right;
+    .v-button {
+      margin-left: 15px;
+    }
+  }
+}

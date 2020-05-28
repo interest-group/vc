@@ -1,0 +1,32 @@
+.v-switch {
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #CCC;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  &-point {
+    transition: transform 0.2s ease;
+    transform: translate(2px, 2px);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #FFF;
+  }
+  &__active {
+    background-color: $checkbox-active-color;
+    .v-switch-point {
+      transform: translate(20px, 2px);
+    }
+  }
+  &__disabled {
+    cursor: $cursor-disabled;
+    &.v-switch__active {
+      background-color: lighten($checkbox-active-color, 10%);
+    }
+    .v-switch-point {
+      background-color: darken(#FFF, 10%);
+    }
+  }
+}

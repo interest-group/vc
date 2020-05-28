@@ -1,0 +1,23 @@
+.v-container{
+  display: flex;
+  align-self: stretch;
+  &__horizontal{
+    flex-direction: row;
+  }
+  &__vertical{
+    flex-direction: column;
+  }
+}
+
+.v-container,
+.v-content{
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.v-header,
+.v-footer,
+.v-aside{
+  flex: 0 0 auto;
+  align-self: stretch;
+}

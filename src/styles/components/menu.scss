@@ -1,0 +1,59 @@
+.v-menu {
+  padding: 0;
+  list-style: none;
+  user-select: none;
+  &-item{
+    color: $font-color;
+    text-decoration: none;
+    padding: 14px 20px;
+    line-height: 20px;
+    font-size: 14px;
+    display: block;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    &__disabled{
+      opacity: .25;
+      cursor: not-allowed;
+      background: none!important;
+    }
+    &__active{
+      color: $primary-color;
+    }
+    &:hover{
+      background-color: #E7F3FF;
+    }
+  }
+  &-group{
+    &__title{
+      color: $dark-color;
+      cursor: default;
+      padding: 14px 20px;
+      line-height: 20px;
+      font-size: 14px;
+    }
+    &__content{
+      padding: 0;
+      list-style: none;
+    }
+  }
+}
+
+.v-sub-menu {
+  &__title{
+    padding: 14px 10px;
+    line-height: 20px;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+  }
+  &__icon{
+    position: absolute;
+    right: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  &__active .v-sub-menu__icon{
+    transform: rotate(180deg);
+  }
+}

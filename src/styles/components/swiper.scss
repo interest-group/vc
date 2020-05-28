@@ -1,0 +1,45 @@
+.v-swiper {
+  display: flex;
+  &__container {
+    position: relative;
+    overflow: hidden;
+  }
+  &__direction {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    &.left {
+      left: 0;
+    }
+    &.right {
+      right: 0;
+    }
+    .vfont {
+      font-size: 30px;
+    }
+  }
+  &__control {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 0 4px;
+      border-radius: 100%;
+      background-color: #CCC;
+      cursor: pointer;
+      &.active {
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+
+.v-swiper-item {
+  flex-shrink: 0;
+  width: 100%;
+}

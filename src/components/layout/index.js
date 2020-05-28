@@ -1,18 +1,14 @@
-import leContainer from './le-container'
-import leHeader from './le-header'
-import leNav from './le-nav'
-import leMain from './le-main'
-import leArticle from './le-article'
-import leSection from './le-section'
-import leAside from './le-aside'
-import leFotter from './le-fotter'
 
-export const layoutList = [
-  leContainer, leHeader, leNav, leMain, leArticle, leSection, leAside, leFotter
+import Header from './Header'
+import Aside from './Aside'
+import Container from './Container'
+import Footer from './Footer'
+import Content from './Content'
+
+export default [
+  Container,
+  Header,
+  Aside,
+  Footer,
+  Content
 ]
-
-
-// export default {
-//   commentsList,
-// }
-

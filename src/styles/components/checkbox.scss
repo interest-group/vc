@@ -1,0 +1,66 @@
+.v-checkbox,
+.v-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  color: $font-color;
+  &__wrap {
+    display: inline-block;
+  }
+  &__label {
+    margin-left: 8px;
+  }
+  &__disabled {
+    cursor: $cursor-disabled;
+    color: $dark-color;
+  }
+}
+
+.v-checkbox-group .v-checkbox__wrap,
+.v-radio-group .v-radio__wrap, {
+  margin-right: 28px;
+}
+
+.v-checkbox-icon,
+.v-radio-icon {
+  .border,
+  .bg,
+  .tick {
+    transition: fill 0.2s ease;
+  }
+}
+.v-checkbox-icon,
+.v-radio-icon {
+  .border {
+    fill: darken($checkbox-disabled-color, 20%);
+  }
+  .bg {
+    fill: #FFF;
+  }
+  &__value {
+    .border {
+      fill: darken($checkbox-active-color, 20%);
+    }
+    .bg {
+      fill: $checkbox-active-color;
+    }
+    .tick {
+      fill: #FFF;
+    }
+  }
+  &__disabled {
+    .border {
+      fill: darken($checkbox-disabled-color, 20%);
+    }
+    .bg {
+      fill: $checkbox-disabled-color;
+    }
+    .tick {
+      fill: darken($checkbox-disabled-color, 20%);
+    }
+  }
+  &__hover .border {
+    fill: $checkbox-active-color;
+  }
+}

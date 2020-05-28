@@ -1,0 +1,34 @@
+.v-drawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 889;
+  background-color: #FFF;
+  &__mask {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 888;
+  }
+  &__left {
+    right: unset;
+    width: 20vw;
+  }
+  &__right {
+    left: unset;
+    width: 20vw;
+  }
+  &__top {
+    bottom: unset;
+    height: 20vw;
+  }
+  &__bottom {
+    top: unset;
+    height: 20vw;
+  }
+}

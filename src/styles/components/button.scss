@@ -1,0 +1,98 @@
+@mixin semantic-button ($color, $backgroundColor) {
+  color: $color;
+  background-color: $backgroundColor;
+  border: 1px solid darken($backgroundColor, 10%);
+  &.v-button__disabled {
+    cursor: $cursor-disabled;
+    background-color: lighten($backgroundColor, 10%);
+    border-color: lighten($backgroundColor, 10%);
+  }
+  &:not(.v-button__disabled):hover {
+    background-color: darken($backgroundColor, 10%);
+    border-color: darken($backgroundColor, 10%);
+  }
+  &.v-button__ghost {
+    background-color: transparent;
+    border: 1px solid $backgroundColor;
+    color: $backgroundColor;
+    &.v-button__disabled {
+      opacity: 0.8;
+    }
+    &:not(.v-button__disabled):hover {
+      background-color: $backgroundColor;
+      color: $color;
+    }
+  }
+}
+
+.v-button {
+  display: inline-block;
+  user-select: none;
+  outline: none;
+  background-image: none;
+  border-radius: $button-border-radius;
+  box-shadow: $button-box-shadow;
+  background-color: $white-color;
+  box-sizing: border-box;
+  line-height: $button-line-height;
+  transition: all .1s ease;
+  cursor: pointer;
+  &__large {
+    padding: $button-large-padding;
+    font-size: $button-large-font-size;
+  }
+  &__middle {
+    padding: $button-middle-padding;
+    font-size: $button-middle-font-size;
+  }
+  &__small {
+    padding: $button-small-padding;
+    font-size: $button-small-font-size;
+  }
+
+  &__info {
+    @include semantic-button($white-color, $info-color)
+  }
+  &__success {
+    @include semantic-button($white-color, $success-color)
+  }
+  &__warning {
+    @include semantic-button($white-color, $warning-color)
+  }
+  &__error {
+    @include semantic-button($white-color, $error-color)
+  }
+  &__default {
+    @include semantic-button($font-color, $white-color)
+  }
+  &__text {
+    color: $primary-color;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    &.v-button__disabled {
+      cursor: $cursor-disabled;
+      color: $color-disabled;
+    }
+    &:not(.v-button__disabled):hover {
+      color: darken($primary-color, 20%);
+    }
+  }
+  &__long {
+    width: 100%;
+  }
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & > span {
+      display: inline-block;
+      height: 0;
+      visibility: hidden;
+    }
+    .v-button-icon__loading {
+      transform-origin: center;
+      animation: v-rotate 1.5s linear infinite;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+
+.v-collapse-item {
+  border-top: 1px solid $border-color;
+  &__title {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 48px;
+  }
+  &:last-child {
+    border-bottom: 1px solid $border-color;
+  }
+  &__content {
+    padding-bottom: 20px;
+  }
+}

@@ -1,0 +1,109 @@
+@charset "utf-8";
+// 该文档用于定义样式动画
+
+// 拉下
+.vc-drop-down {
+  &-enter {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  &-enter-active {
+    transition: all 0.2s;
+  }
+}
+
+// 上方滑入
+.vc-top-slide {
+  &-enter-active,
+  &-leave-active {
+    transition: transform 0.2s ease;
+  }
+  &-enter,
+  &-leave-to {
+    transform: translateY(-100%);
+  }
+}
+
+// 滑入 top bottom
+.v-slide-top-enter-active,
+.v-slide-top-leave-active,
+.v-slide-bottom-enter-active,
+.v-slide-bottom-leave-active{
+  transition: all 0.2s ease;
+  opacity: 1;
+}
+
+// 滑入 top
+.v-slide-top-enter,
+.v-slide-top-leave-to {
+  transform: translateY(-20%);
+  opacity: 0;
+}
+
+// 滑入 bottom
+.v-slide-bottom-enter,
+.v-slide-bottom-leave-to {
+  transform: translateY(20%);
+  opacity: 0;
+}
+
+
+// 透明度 in left right top bottom
+
+.v-fade-in-enter-active,
+.v-fade-in-leave-active,
+.v-fade-left-enter-active,
+.v-fade-left-leave-active,
+.v-fade-right-enter-active,
+.v-fade-right-leave-active,
+.v-fade-top-enter-active,
+.v-fade-top-leave-active,
+.v-fade-bottom-enter-active,
+.v-fade-bottom-leave-active{
+  transition: all 0.2s ease;
+  opacity: 1;
+}
+
+// 透明度 in
+.v-fade-in-enter,
+.v-fade-in-leave-to {
+  opacity: 0;
+}
+
+// 透明度 left
+.v-fade-left-enter,
+.v-fade-left-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+// 透明度 right
+.v-fade-right-enter,
+.v-fade-right-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+// 透明度 top
+.v-fade-top-enter,
+.v-fade-top-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+// 透明度 bottom
+.v-fade-bottom-enter,
+.v-fade-bottom-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+// 旋转
+@keyframes v-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

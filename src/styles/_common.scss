@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+// 文字 - 颜色
+
+.v-text {
+  &-info {
+    color: $info-color;
+  }
+  &-success {
+    color: $success-color;
+  }
+  &-warning {
+    color: $warning-color;
+  }
+  &-error {
+    color: $error-color;
+  }
+}
+
+// 文本
+
+.v-text {
+  &-large {
+    font-weight: normal;
+    font-size: $regular-large-font-size;
+    line-height: $regular-large-line-height
+  }
+  &-middle {
+    font-weight: normal;
+    font-size: $regular-middle-font-size;
+    line-height: $regular-middle-line-height
+  }
+  &-small {
+    font-weight: normal;
+    font-size: $regular-small-font-size;
+    line-height: $regular-small-line-height
+  }
+  &-bold {
+    font-weight: 600;
+  }
+}
+
+// 标题
+
+.v-heading {
+  &-super {
+    font-size: $heading-super-font-size;
+    line-height: $heading-super-line-height
+  }
+  &-large {
+    font-size: $heading-large-font-size;
+    line-height: $heading-large-line-height
+  }
+  &-middle {
+    font-size: $heading-middle-font-size;
+    line-height: $heading-middle-line-height
+  }
+  &-small {
+    font-size: $heading-small-font-size;
+    line-height: $heading-small-line-height
+  }
+}
+
+// 段落
+
+.v-paragraph {
+  font-size: $paragraph-font-size;
+  line-height: $paragraph-line-height;
+}
+
+// 阴影
+
+.v-shadow {
+  box-shadow: $box-shadow;
+  &-light {
+    box-shadow: $box-shadow-lighten;
+  }
+  &-dark {
+    box-shadow: $box-shadow-darken;
+  }
+}
+
+// 边框
+
+.v-border {
+  border: 1px solid $grey-color;
+  &-top {
+    border-top: 1px solid $grey-color;
+  }
+  &-right {
+    border-right: 1px solid $grey-color;
+  }
+  &-bottom {
+    border-bottom: 1px solid $grey-color;
+  }
+  &-left {
+    border-left: 1px solid $grey-color;
+  }
+  &-info {
+    border-color: $info-color;
+  }
+  &-success {
+    border-color: $success-color;
+  }
+  &-warning {
+    border-color: $warning-color;
+  }
+  &-error {
+    border-color: $error-color;
+  }
+}
+
+
+.v-clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}

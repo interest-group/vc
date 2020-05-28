@@ -1,0 +1,17 @@
+.v-back-top {
+  position: fixed;
+  top: 80vh;
+  right: 5vw;
+  cursor: pointer;
+  &__target {
+    box-shadow: $box-shadow;
+    background-color: #FFF;
+    width: 50px;
+    height: 50px;
+    line-height:50px;
+    text-align: center;
+    .vfont {
+      font-size: 22px;
+    }
+  }
+}

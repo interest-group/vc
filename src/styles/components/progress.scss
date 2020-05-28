@@ -1,0 +1,67 @@
+
+.v-progress-line {
+  position: relative;
+  background-color: #EBEEF5;
+  &__info {
+    background-color: $info-color;
+  }
+  &__success {
+    background-color: $success-color;
+  }
+  &__warning {
+    background-color: $warning-color;
+  }
+  &__error {
+    background-color: $error-color;
+  }
+  &__percent {
+    transition: width 0.4s ease;
+  }
+  &__text {
+    padding: 0 5px;
+  }
+  &__inner {
+    color: #FFF;
+    text-align: right;
+  }
+  &__follow {
+    text-align: right;
+    .v-progress-line__text {
+      display: inline-block;
+      transform: translateX(100%);
+    }
+  }
+  &__none .v-progress-line__text {
+    display: none;
+  }
+}
+
+.v-progress-circle {
+  display: inline-block;
+  position: relative;
+  &__bg {
+    stroke: #EBEEF5;
+  }
+  &__info {
+    stroke: $info-color;
+  }
+  &__success {
+    stroke: $success-color;
+  }
+  &__warning {
+    stroke: $warning-color;
+  }
+  &__error {
+    stroke: $error-color;
+  }
+  &__inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
