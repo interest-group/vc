@@ -1,3 +1,7 @@
-import Progress from './Progress'
+import ProgressLine from './ProgressLine'
+import ProgressCircle from './ProgressCircle'
 
-export default Progress
+export default [
+  ProgressLine,
+  ProgressCircle
+]

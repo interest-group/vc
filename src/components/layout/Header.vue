@@ -1,9 +1,9 @@
 <template>
-  <header class="vc-header"><slot></slot></header>
+  <header class="v-header"><slot></slot></header>
 </template>
 
 <script>
 export default {
-  name: 'vc-header'
+  name: 'v-header'
 }
 </script>

@@ -1,30 +1,23 @@
-.vc-container,
-.vc-main{
+.v-container{
   display: flex;
+  align-self: stretch;
+  &__horizontal{
+    flex-direction: row;
+  }
+  &__vertical{
+    flex-direction: column;
+  }
 }
 
-.vc-container,
-.vc-main,
-.vc-section,
-.vc-article{
+.v-container,
+.v-content{
   flex: 1 1 auto;
   align-self: stretch;
 }
 
-.vc-header,
-.vc-footer,
-.vc-aside {
+.v-header,
+.v-footer,
+.v-aside{
   flex: 0 0 auto;
   align-self: stretch;
-}
-
-.vc-nav {
-  flex: 1 1 auto;
-}
-
-.vc-is-vertical {
-  flex-direction: column;
-}
-.vc-is-horizontal {
-  flex-direction: row;
 }

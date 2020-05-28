@@ -1,100 +1,68 @@
 <template>
-  <div class="vc-confirm-wrap">
-    <transition name="background-fade">
-      <div class="vc-confirm-background"
-           v-show="showFlag"></div>
+  <div class="v-drawer__wrap">
+    <transition name="v-fade-in">
+      <div class="v-drawer__mask" v-if="mask" v-show="visible" @click="handleMaskClick"></div>
     </transition>
-    <transition :name="transitionPosition">
-      <div class="vc-confirm"
-           v-show="showFlag"
-           @click="hide">
-        <div class="vc-confirm-wrapper">
-          <div class="vc-confirm-content"
-               :style="WidthHeight"
-               @click.stop>
-            <slot></slot>
-          </div>
-        </div>
+    <transition :name="`v-fade-${position}`">
+      <div class="v-drawer" :class="`v-drawer__${position}`" v-show="visible">
+        <slot></slot>
       </div>
     </transition>
   </div>
 </template>
 <script>
+import { oneOf } from '../../utils/assist'
+
 export default {
-  name: 'vc-drawer',
+  name: 'v-drawer',
   props: {
-    direction: {
-      type: String,
+    value: {
+      type: Boolean,
+      default: false
+    },
+    position: {
+      validator: (value) => oneOf(value, ['left', 'top', 'right', 'bottom']),
       default: ''
+    },
+    mask: {
+      type: Boolean,
+      default: true
+    },
+    maskClose: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
-      showFlag: false,
-      WidthHeight: null,
-      transitionPosition: 'fade-left-right'
+      visible: false
     }
   },
   watch: {
-    direction (newdirection) {
-      this.directionChange(newdirection)
+    value (value) {
+      if (this.visible !== value) {
+        this.visible = value
+      }
     }
   },
-  computed: {
+  mounted () {
+    if (this.value) {
+      this.visible = this.value
+    }
   },
   methods: {
-    directionChange (string) {
-      if (string === 'left') {
-        this.transitionPosition = 'fade-left'
-        this.WidthHeight = {
-          left: 0,
-          top: 0,
-          width: `${20}vw`,
-          height: `${100}vh`
-        }
-      } else if (string === 'top') {
-        this.transitionPosition = 'fade-top'
-        this.WidthHeight = {
-          left: 0,
-          top: 0,
-          width: `${100}vw`,
-          height: `${20}vh`
-        }
-      } else if (string === 'right') {
-        this.transitionPosition = 'fade-right'
-        this.WidthHeight = {
-          right: 0,
-          top: 0,
-          width: `${20}vw`,
-          height: `${100}vh`
-        }
-      } else if (string === 'bottom') {
-        this.transitionPosition = 'fade-bottom'
-        this.WidthHeight = {
-          right: 0,
-          bottom: 0,
-          width: `${100}vw`,
-          height: `${20}vh`
-        }
-      }
-    },
     show () {
-      this.showFlag = true
+      this.visible = true
+      this.$emit('input', this.visible)
     },
     hide () {
-      this.showFlag = false
+      this.visible = false
+      this.$emit('input', this.visible)
     },
-    // 点击X关闭
-    closeChange () {
-      this.showFlag = false
-    },
-    // 点击取消按钮
-    cancelChange () {
-      this.showFlag = false
-    },
-    affirmChange () {
-      this.showFlag = false
-      this.$emit('confirm', '你点击的确认')
+    handleMaskClick () {
+      if (this.maskClose) {
+        this.hide()
+      }
     }
   }
 }

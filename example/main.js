@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
-import VC from '../src'
+import examples from './component'
 import DemoBlock from '../md/demo-block'
+import VC from '../src'
 
-import '../src/styles/index.scss'
 import '../md/styles/index.scss'
 import './docs-styles/index.scss'
+import '../src/styles/index.scss'
 
+Vue.use(examples)
 Vue.use(VC)
 Vue.use(DemoBlock)
 

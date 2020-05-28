@@ -1,30 +1,24 @@
 <template>
-  <aside class="vc-aside" :style="styles"><slot></slot></aside>
+  <aside class="v-aside" :style="styles"><slot></slot></aside>
 </template>
 
 <script>
 export default {
-  name: 'vc-aside',
+  name: 'v-aside',
   props: {
     width: {
       type: [String, Number],
       default: 200
-    },
-    height: {
-      type: [String, Number],
-      default: ''
     }
   },
   computed: {
     styles () {
-      const styles = {}
-      if (this.width) {
-        styles.width = `${this.width}px`
+      return {
+        width: `${this.width}px`,
+        minWidth: `${this.width}px`,
+        maxWidth: `${this.width}px`,
+        flex: `0 0 ${this.width}px`
       }
-      if (this.height) {
-        styles.height = `${this.height}px`
-      }
-      return styles
     }
   }
 }

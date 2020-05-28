@@ -1,85 +1,59 @@
-$prefix-menu: $prefix + '-menu';
-
-.#{$prefix-menu} {
+.v-menu {
+  padding: 0;
   list-style: none;
   user-select: none;
-  height: 100%;
   &-item{
+    color: $font-color;
+    text-decoration: none;
     padding: 14px 20px;
     line-height: 20px;
     font-size: 14px;
     display: block;
     transition: all 0.2s ease;
     cursor: pointer;
-    &-disabled{
+    &__disabled{
       opacity: .25;
       cursor: not-allowed;
       background: none!important;
     }
+    &__active{
+      color: $primary-color;
+    }
+    &:hover{
+      background-color: #E7F3FF;
+    }
   }
   &-group{
-    &-title{
+    &__title{
+      color: $dark-color;
       cursor: default;
       padding: 14px 20px;
       line-height: 20px;
       font-size: 14px;
     }
-    &-content{
+    &__content{
+      padding: 0;
       list-style: none;
     }
   }
 }
 
-.#{$prefix}-sub-menu {
-  &-title{
+.v-sub-menu {
+  &__title{
     padding: 14px 10px;
     line-height: 20px;
     font-size: 14px;
     position: relative;
     cursor: pointer;
   }
-  &-icon{
+  &__icon{
     position: absolute;
     right: 10px;
     line-height: 20px;
     font-size: 14px;
     transition: all 0.2s ease;
   }
-  &-active .#{$prefix}-sub-menu-icon{
+  &__active .v-sub-menu__icon{
     transform: rotate(180deg);
-  }
-}
-
-$vc-menu-theme: (light, dark);
-
-$vc-menu-bg: (light: #FFF, dark: #545C64);
-$vc-menu-item-color: (light: #555, dark: #FFF);
-$vc-menu-item-gb-hover: (light: #ecf5ff, dark: #434A50);
-$vc-menu-item-color-active: (light: #409eff, dark: #FFD04B);
-$vc-menu-group-title-color: (light: #999, dark: #9096A2);
-
-@each $theme in $vc-menu-theme {
-  .#{$prefix-menu}-#{$theme} {
-    background-color: map-get($vc-menu-bg, $theme);
-    .#{$prefix-menu} {
-      &-item{
-        color: map-get($vc-menu-item-color, $theme);
-        &-active{
-          color: map-get($vc-menu-item-color-active, $theme);
-        }
-        &:hover{
-          background-color: map-get($vc-menu-item-gb-hover, $theme);
-        }
-      }
-      &-group-title{
-        color: map-get($vc-menu-group-title-color, $theme);
-      }
-    }
-    .#{$prefix}-sub-menu-title {
-      color: map-get($vc-menu-item-color, $theme);
-      &:hover{
-        background-color: map-get($vc-menu-item-gb-hover, $theme);
-      }
-    }
   }
 }

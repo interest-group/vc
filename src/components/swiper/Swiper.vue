@@ -1,301 +1,155 @@
 <template>
-  <div class="vc-swiper-container"
-       style="position: relative;overflow: hidden"
-       ref="container"
-       @touchstart="_touchStart"
-       @touchmove="_touchMove"
-       @touchend="_touchEnd"
-       @touchcancel="_touchEnd"
-       @mouseover="_mouseOver"
-       @mouseleave="_mouseLeave">
-    <div class="vc-swiper-wrapper"
-         :style="styleWrap">
+  <div class="v-swiper__container">
+    <div class="v-swiper" ref="swiper" :style="styles" @transitionend="afterSlide">
       <slot />
     </div>
-    <div class="vc-direction-nav"
-         v-if="directionNav">
-      <a href="javascript:;"
-         class="vc-swiper-prev"
-         @click="_directionNavClick(-1)"></a>
-      <a href="javascript:;"
-         class="vc-swiper-next"
-         @click="_directionNavClick(1)"></a>
-    </div>
-    <div class="vc-control-nav"
-         v-if="controlNav">
-      <a href="javascript:;"
-         v-for="(item,index) in swipes"
-         :class="{'vc-control-nav-active':index===current}"
-         :key="index"
-         @click="_controlNavClick(index)"></a>
+    <template v-if="direction">
+      <span class="v-swiper__direction left" @click="slideTo(currentValue - 1)">
+        <v-icon name="arrow-lift"></v-icon>
+      </span>
+      <span class="v-swiper__direction right" @click="slideTo(currentValue + 1)">
+        <v-icon name="arrow-right"></v-icon>
+      </span>
+    </template>
+    <div class="v-swiper__control" v-if="control">
+      <span v-for="(d, idx) in items" :class="{active: idx === currentValue}" :key="idx" @click="slideTo(idx)"></span>
     </div>
   </div>
 </template>
 <script>
+import VIcon from '../icon'
+import { findChildComponents } from '../../utils/findComponents'
+
 export default {
-  name: 'vc-swiper',
-  data () {
-    return {
-      containerWidth: '', // 组件宽
-      containerHeight: '',
-      swipes: [], // 切换的item，由item更新
-      translate: 0, // 移动的距离
-      duration2: '', // 切换时间
-      startX: 0, // 触摸点位置
-      current: this.active, // 从0开始，当前第几个
-      timer: '' // 控制自动播放
-    }
+  name: 'v-swiper',
+  components: {
+    VIcon
   },
   props: {
-    active: {// 当前第几个
+    // 当前第几个
+    value: {
       type: Number,
       default: 0
     },
-    showTime: {// 自动播放时动画停留时间，单位毫秒
-      type: Number,
-      default: 3000
-    },
-    autoPlay: {
-      type: Boolean,
-      default: true
-    },
-    slideBefore: Function,
-    slideAfter: Function,
-    distance: {// 触摸松开时触发距离，单位px
-      type: Number,
-      default: 50
-    },
-    duration: {// transition-duration过渡时间，单位毫秒
+    // 切换速度
+    speed: {
       type: Number,
       default: 500
     },
-    controlNav: {// 显示分页小圆点
-      type: Boolean,
-      default: true
-    },
-    directionNav: { // 显示前后控制
-      type: Boolean,
-      default: true
-    },
-    pauseOnHover: { // 鼠标滑过暂停
-      type: Boolean,
-      default: true
-    },
-    touch: { // 允许触摸
+    // 显示前后控制
+    direction: {
       type: Boolean,
       default: false
     },
-    /* loop: { // 循环
+    // 显示指示点
+    control: {
       type: Boolean,
       default: false
-    }, */
-    animation: { // 动画
-      default: 'slide',
-      validator: function (value) {
-        return ['fade', 'slide'].indexOf(value) !== -1
-      }
+    },
+    // 自动播放
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    // 自动播放时动画停留时间，单位毫秒
+    delay: {
+      type: Number,
+      default: 3000
     }
   },
-  watch: {
-    active (v) {
-      this.current = v
-      this._translate(v)
-    }
-  },
-  components: {},
-  methods: {
-    _getTouch (event) {
-      return event.changedTouches[0] || event.touches[0]
-    },
-    _touchStart (event) {
-      if (!this.touch || this.animation === 'fade') {
-        return
-      }
-      clearInterval(this.timer)
-      const touch = this._getTouch(event)
-      this.startX = touch.clientX
-      // 重置item项初始状态
-      event.preventDefault()
-    },
-    _touchMove (event) {
-      if (!this.touch || this.animation === 'fade') {
-        return
-      }
-      const touch = this._getTouch(event)
-      const distance = touch.clientX - this.startX
-      this._setItem(-distance)
-      this.duration2 = 0
-      this.translate = -this.containerWidth * this.current + distance
-      event.preventDefault()
-    },
-    _touchEnd (event) {
-      if (!this.touch || this.animation === 'fade') {
-        return
-      }
-      const index = this.current
-      this._slideBefore(index)
-      const touch = this._getTouch(event)
-      const distance = touch.clientX - this.startX// 大于0向右
-      if (Math.abs(distance) > this.distance) {
-        // 移动大于多少个单位触发
-        if (distance > 0) {
-          // 向右移，
-          this.current--
-        } else if (distance < 0) {
-          // 向左移
-          this.current++
-        }
-        const len = this.swipes.length - 1
-        if (this.current < 0) {
-          // this.current = len
-          this._setCurrent(len)
-        }
-        if (this.current > this.swipes.length - 1) {
-          // this.current = 0
-          this._setCurrent(0)
-        }
-      }
-      this._translate(this.current)
-      this._slideAfter(index)
-      this._autoPlay()
-    },
-    _setCurrent (current) {
-      setTimeout(() => {
-        this.current = current
-        // 将滑动恢复为0,0,0位置
-        this.swipes[current].offset = 0
-        this._translate(current, 0)
-      }, this.duration)
-    },
-    _translate (current, duration) {
-      this.duration2 = duration === 0 ? 0 : this.duration
-      this.translate = -this.containerWidth * current
-      if (this.animation === 'fade') {
-        this._swipesActive(current)
-      }
-      // this.swipes[current].active = true
-    },
-    _swipesActive (current) {
-      let len = this.swipes.length
-      if (current > len - 1) {
-        this.current = 0
-      }
-      if (current < 0) {
-        this.current = len - 1
-      }
-      for (let i = 0; i < len; i++) {
-        this.swipes[i].active = i === this.current
-      }
-      // console.log(this.current)
-      // 设置当前滑动的样式为active
-    },
-    _directionNavClick (direction) {
-      // direction -1 上一个，1下一个
-      // 开始滑动前回调
-      this._slideBefore(this.current)
-      if (this.animation === 'slide') {
-        const item = this._setItem(direction)
-        const moveFirstOrLast = item[0]
-        const index = item[1]
-        this.current = this.current + direction
-        // 向左或右移动一个单位
-        this._translate(this.current)
-        // this.translate = -this.containerWidth * this.current
-        // 移动完后，如果有将第一或最后一个移动了位置的
-        if (moveFirstOrLast) {
-          this.current = index
-          setTimeout(() => {
-            // this.duration2 = 0 // 这个时候不能有过渡时间
-            // this.translate = -this.containerWidth * index
-            this._translate(index, 0)
-            this.swipes[index].offset = 0
-          }, this.duration)
-        }
-      } else {
-        this.current = this.current + direction
-        // 向左或右移动一个单位
-        this._translate(this.current)
-      }
-      this._slideAfter(this.current)
-    },
-    _controlNavClick (index) {
-      this._slideBefore(index)
-      this.current = index
-      this._translate(index)
-      this._slideAfter(index)
-    },
-    _setItem (direction) {
-      // direction方向，大于0下一个，小于0上一个
-      // 触摸和前后点击共同项
-      const len = this.swipes.length
-      const offset = this.containerWidth * len// 最后或第一个将要偏移的距离
-      let moveFirstOrLast = false
-      let index = this.current
-      if (direction > 0 && this.current >= len - 1) {
-        // 到最后一个时，再下一个，先将第一个移到最后面
-        this.swipes[0].offset = offset
-        moveFirstOrLast = true
-        index = 0
-      }
-      if (direction < 0 && this.current <= 0) {
-        // 从第一个到时后一个时，先将最后一个移到最前面
-        this.swipes[len - 1].offset = -offset
-        moveFirstOrLast = true
-        index = len - 1
-      }
-      return [moveFirstOrLast, index]
-    },
-    _autoPlay () {
-      if (this.autoPlay) {
-        this.timer = setInterval(() => {
-          // 每隔一定的时单，点下一个
-          this._directionNavClick(1)
-        }, this.showTime)
-      }
-    },
-    _slideBefore (index) {
-      this.slideBefore && this.slideBefore(index)
-      this.$emit('slideBefore', index)
-    },
-    _slideAfter (index) {
-      setTimeout(() => {
-        this.slideAfter && this.slideAfter(index)
-        this.$emit('slideAfter', index)
-      }, this.duration)
-    },
-    _mouseOver () {
-      // 如果鼠标滑动过时暂停和自动播放时，鼠标移上暂停
-      if (this.pauseOnHover && this.autoPlay) {
-        clearInterval(this.timer)
-      }
-    },
-    _mouseLeave () {
-      this._autoPlay()
+  data () {
+    return {
+      currentValue: 0,
+      slideValue: 0,
+      items: [],
+      styles: null,
+      timer: 0 // 控制自动播放
     }
   },
   computed: {
-    styleWrap () {
-      let animation = {
-        width: this.containerWidth * this.swipes.length + 'px',
-        transform: `translate3d(${this.translate}px,0,0)`,
-        transition: `transform ${this.duration2}ms`
+  },
+  watch: {
+    value (value) {
+      if (this.currentValue !== value) {
+        this.currentValue = value
+        this.slideTo(this.currentValue)
       }
-      if (this.animation === 'fade') {
-        animation = {
-          height: this.containerHeight + 'px',
-          overflow: 'hidden',
-          position: 'relative'
-        }
+    },
+    currentValue (currentValue) {
+      if (this.value !== currentValue) {
+        this.$emit('input', currentValue)
       }
-      return animation
     }
   },
-  mounted () {
-    this.containerWidth = this.$refs.container.offsetWidth// 宽
-    this.containerHeight = this.$refs.container.offsetHeight
-    this._translate(this.current)
-    this._autoPlay()
+  created () {
+    this.cloneNodes = []
   },
-  filters: {}
+  mounted () {
+    this.update()
+    this.startAutoplay()
+  },
+  methods: {
+    // 更新实例
+    update () {
+      this.findSwiperItems()
+      this.slideTo(this.currentValue, 0)
+    },
+    // 切换到指定slide
+    slideTo (idx, speed = this.speed) {
+      this.stopAutoplay()
+      const { length } = this.items
+      const index = (idx + length) % length
+      this.slideValue = (idx + 1 + length + 2) % (length + 2)
+      this.$refs.swiper.style.transition = `transform ${speed}ms`
+      this.styles = {
+        transform: `translateX(-${100 * this.slideValue}%)`,
+        height: `${this.children[index].$el.getBoundingClientRect().height}px`
+      }
+      this.startAutoplay()
+    },
+    // 更新Items
+    findSwiperItems () {
+      // 清除原克隆节点
+      this.cloneNodes.forEach(dom => dom.parentNode.removeChild(dom))
+      this.children = findChildComponents(this, 'v-swipe-item')
+      this.items = new Array(this.children.length)
+      if (this.children.length) {
+        // 复制节点
+        const start = this.children[0].$el
+        const cloneStart = this.children[0].$el.cloneNode(true)
+        this.$refs.swiper.appendChild(cloneStart)
+        const cloneEnd = this.children[this.children.length - 1].$el.cloneNode(true)
+        this.$refs.swiper.insertBefore(cloneEnd, start)
+        this.cloneNodes = [cloneStart, cloneEnd]
+      }
+    },
+    // 切换完毕
+    afterSlide () {
+      if (this.slideValue === 0) {
+        // 已滚动至第一个
+        this.currentValue = this.items.length - 1
+        return this.slideTo(this.currentValue, 0)
+      } else if (this.slideValue === this.items.length + 1) {
+        // 已滚动至最后一个
+        this.currentValue = 0
+        return this.slideTo(this.currentValue, 0)
+      }
+      this.currentValue = this.slideValue - 1
+    },
+    startAutoplay () {
+      if (this.autoplay) {
+        // 每隔一定的时单，点下一个
+        this.timer = setTimeout(() => {
+          this.slideTo(this.currentValue + 1)
+        }, this.delay)
+      }
+    },
+    stopAutoplay () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = 0
+      }
+    }
+  }
 }
 </script>

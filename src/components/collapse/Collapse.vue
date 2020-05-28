@@ -1,27 +1,15 @@
 <template>
-  <div class="vc-collapse">
-    <div class="vc-collapse-item"
-         v-for="(item,index) in list"
-         :key="index"
-         @click="handleClick(item,index)">
-      <p class="vc-collapse-h">{{item.title}}</p>
-      <collapse-tansition>
-        <div v-show="item.flag">
-          <p class="vc-collapse-p">{{item.content}}</p>
-          <p class="vc-collapse-p">{{item.content}}</p>
-        </div>
-      </collapse-tansition>
-    </div>
-  </div>
+  <div class="v-collapse"><slot></slot></div>
 </template>
 <script>
-import collapseTansition from './elTransition'
+import { findChildComponents } from '../../utils/findComponents'
+
 export default {
-  name: 'vc-collapse',
+  name: 'v-collapse',
   props: {
-    list: {
-      type: Array,
-      default: () => []
+    accordion: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -29,17 +17,13 @@ export default {
     }
   },
   methods: {
-    handleClick (item, index) {
-      this.list.forEach(el => {
-        if (el.flag !== this.list[index].flag) {
-          el.flag = false
-        }
-      })
-      item.flag = !item.flag
+    handleChange (target) {
+      if (this.accordion) {
+        findChildComponents(this, 'v-collapse-item').forEach(ref => {
+          ref.visible = ref === target
+        })
+      }
     }
-  },
-  components: {
-    collapseTansition
   }
 }
 </script>

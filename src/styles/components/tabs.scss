@@ -1,85 +1,63 @@
-.vc-tabs {
+.v-tabs {
   position: relative;
-  .vc-tabs_header {
-    .vc-tabs_list {
+  &__header {
+    border-bottom: 1px solid #e4e7ed;
+    .tabs-item {
+      cursor: pointer;
+      line-height: 40px;
+      font-weight: 500;
+      height: 40px;
+      padding: 0 20px;
       display: inline-block;
-      position: relative;
-      .vc-tabs_list-nav {
-        display: inline-block;
-        padding: 0 20px;
-        height: 40px;
-        line-height: 40px;
-        font-weight: 500;
-        cursor: pointer;
-        user-select: none;
-        box-sizing: border-box;
-        &.vc-tabs_list-nav-isactive {
-          color: $color-primary
-        }
+      user-select: none;
+      box-sizing: border-box;
+      transition: color .3s ease;
+      &:not(.tabs-item__disabled):hover,
+      &__active {
+        color: $primary-color
       }
-      .vc-tabs_list-nodisabled {
-        &:hover {
-          color: $color-primary
-        }
-      }
-      .vc-tabs_list-disabled {
-        cursor: not-allowed;
-        color: $color-disabled;
-      }
-      // 线条样式
-      &.vc-tabs_list-tabs {
-        width: 100%;
-        .vc-tabs_list-nav-first {
-          padding-left: 0;
-        }
-        .vc-tabs_list-nav-last {
-          padding-right: 0;
-        }
-        &::after {
-          content: "";
-          display: block;
-          position: absolute;
-          left: 0;
-          width: 100%;
-          bottom: 0;
-          height: 2px;
-          background-color: #e4e7ed;
-          z-index: 1;
-        }
-      }
-
-      // 卡片样式
-      &.vc-tabs_list-card {
-        border: 1px solid #e4e7ed;
-        border-radius: 4px 4px 0 0;
-        border-bottom: 0;
-        margin-bottom: -1px;
-        .vc-tabs_list-nav {
-          transition: all .3s;
-          border-bottom: 1px solid transparent;
-        }
-        .vc-tabs_list-nav + .vc-tabs_list-nav {
-          border-left: 1px solid #e4e7ed;
-        }
-        .vc-tabs_list-nav-isactive {
-          border-bottom-color: #fff;
-        }
-      }
-      .vc-tabs_line {
-        position: absolute;
-        left: 0;
-        height: 2px;
-        bottom: 0;
-        background-color: $color-primary;
-        transition: all .3s;
-        z-index: 2;
-      }
-    }
-    &.vc-tabs_header_card {
-      border-bottom: 1px solid #e4e7ed;
     }
   }
-  .vc-tabs_content {
+  &__content {
     padding-top: 15px;
+  }
+
+  // tabs样式
+  &__tabs {
+    .tabs {
+      position: relative;
+    }
+    .tabs-line {
+      position: absolute;
+      left: 0;
+      height: 2px;
+      bottom: -1px;
+      background-color: $primary-color;
+      transition: all .3s;
+      z-index: 2;
+    }
+  }
+
+  // 卡片样式
+  &__card {
+    .tabs {
+      position: relative;
+    }
+    .tabs-item {
+      border-left: 1px solid #e4e7ed;
+      border-top: 1px solid #e4e7ed;
+      border-bottom: 1px solid #e4e7ed;
+      margin-bottom: -1px;
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+      &:last-child {
+        border-right: 1px solid #e4e7ed;
+        border-top-right-radius: 4px;
+      }
+      &__active {
+        border-bottom-color: #FFF;
+      }
+    }
   }
 }

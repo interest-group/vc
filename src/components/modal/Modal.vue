@@ -1,36 +1,42 @@
 <template>
-  <transition name="opacity">
-    <div class="vc-modal__wrapper" v-if="isModal">
-      <div class="vc-modal__mask" v-if="mask" @click="onMaskClick"></div>
-      <div class="vc-modal" :style="{width: width}">
-        <div class="vc-modal__header" v-if="!hideHeader">
-          <slot name="header">
-            <div class="vc-modal__title">{{title}}</div>
-            <div class="vc-modal__close-icon" @click="onCancel">
-              <vc-icon name="close"></vc-icon>
-            </div>
-          </slot>
+  <div class="v-modal__wrapper">
+    <transition name="v-fade-in">
+      <div class="v-modal__mask" v-if="mask && visible" @click="onMaskClick"></div>
+    </transition>
+    <transition :name="transition">
+      <div class="v-modal" v-if="visible">
+        <slot name="header">
+          <div class="v-modal__header">
+            <div class="title">{{title}}</div>
+            <v-icon class="close" name="close" @click="cancel"></v-icon>
+          </div>
+        </slot>
+        <div class="v-modal__body">
+          <slot></slot>
         </div>
-        <div class="vc-modal__body"><slot>内容(⊙︿⊙)...</slot></div>
-        <div class="vc-modal__footer" v-if="!hideFooter">
-          <slot name="footer">
-            <vc-button @click="onCancel">取消</vc-button>
-            <vc-button type="info" @click="onOk">确定</vc-button>
-          </slot>
-        </div>
+        <slot name="footer">
+          <div class="v-modal__footer">
+            <v-button @click="cancel">取消</v-button>
+            <v-button type="info" @click="confirm">确定</v-button>
+          </div>
+        </slot>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
+
 export default {
-  name: 'vc-modal',
+  name: 'v-modal',
   props: {
-    value: Boolean,
-    width: {
+    value: {
+      type: Boolean,
+      default: false
+    },
+    transition: {
       type: String,
-      default: '460px'
+      default: 'v-slide-top'
     },
     title: {
       type: String,
@@ -40,59 +46,63 @@ export default {
       type: Boolean,
       default: true
     },
-    closeByMask: {
+    maskClose: {
       type: Boolean,
       default: true
     },
-    closeIcon: {
-      type: Boolean,
-      default: true
-    },
-    beforeClose: Function,
-    hideHeader: {
-      type: Boolean,
-      default: false
-    },
-    hideFooter: {
-      type: Boolean,
-      default: false
-    }
-  },
-  watch: {
-    value (value) {
-      this.isModal = value
+    beforeClose: {
+      type: Function,
+      default: null
     }
   },
   data () {
     return {
-      isModal: this.value
+      visible: false
     }
   },
-  methods: {
-    onMaskClick () {
-      if (this.closeByMask) this.hide()
+  watch: {
+    value (value) {
+      if (this.visible !== value) {
+        this.visible = value
+      }
     },
+    visible (visible) {
+      if (this.value !== visible) {
+        this.$emit('input', visible)
+      }
+    }
+  },
+  mounted () {
+    this.visible = this.value
+  },
+  methods: {
     open () {
-      this.isModal = true
+      this.visible = true
     },
     close () {
-      this.isModal = false
-      this.$emit('input', this.isModal)
-      this.$emit('change', this.isModal)
+      if (this.visible) {
+        this.visible = false
+        this.$emit('close')
+      }
     },
-    onOk () {
+    confirm (event) {
       this.hide()
-      this.$emit('on-ok')
+      this.$emit('confirm', event)
     },
-    onCancel () {
+    cancel (event) {
       this.hide()
-      this.$emit('on-cancel')
+      this.$emit('cancel', event)
     },
     hide () {
-      if (typeof this.beforeClose === 'function') {
-        this.beforeClose(this.close)
+      if (this.beforeClose instanceof Function) {
+        this.beforeClose(() => this.close())
       } else {
         this.close()
+      }
+    },
+    onMaskClick () {
+      if (this.maskClose) {
+        this.hide()
       }
     }
   }

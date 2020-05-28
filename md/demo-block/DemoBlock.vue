@@ -1,27 +1,22 @@
 <template>
-  <vc-container class="vc-demo-block">
-    <vc-header>
-      <div class="demo-header">
-        <slot name="source"></slot>
-      </div>
-    </vc-header>
-    <vc-main>
-      <vc-slide-down class="demo-main" :value="visible">
+  <v-container class="v-demo-block">
+    <v-header class="v-demo-block__header">
+      <slot name="source"></slot>
+    </v-header>
+    <v-content>
+      <v-slide-down class="v-demo-block__body" :value="visible">
         <slot name="highlight"></slot>
-      </vc-slide-down>
-    </vc-main>
-    <vc-footer>
-      <div class="demo-footer" @click="handleClick">
-        <!--todo 替换 button / icon 组件-->
-        <span class="demo-footer-btn">{{text}}</span>
-      </div>
-    </vc-footer>
-  </vc-container>
+      </v-slide-down>
+    </v-content>
+    <v-footer class="v-demo-block__footer">
+      <v-button type="text" long @click="handleClick">{{text}}</v-button>
+    </v-footer>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'vc-demo-block',
+  name: 'v-demo-block',
   data () {
     return {
       visible: false
@@ -41,7 +36,7 @@ export default {
 </script>
 
 <style scoped="" lang="scss">
-.vc-demo-block {
+.v-demo-block {
   border-radius: 5px;
   border: 1px solid #eee;
   transition: all 0.5s ease;
@@ -50,25 +45,15 @@ export default {
     border-color: transparent;
     box-shadow: 0 2px 7px rgba(0,0,0,.15);
   }
-}
-.demo{
-  &-header{
+  &__header{
     padding: 24px 20px;
     position: relative;
     border-bottom: 1px solid #eee;
   }
-  &-main{
+  &__body{
     color: #333333;
     font-size: 13px;
     border-bottom: 1px solid #eee;
-  }
-  &-footer{
-    text-align: center;
-    padding: 10px 0;
-    cursor: pointer;
-    &:hover{
-        color: #6190e8;
-      }
   }
 }
 </style>

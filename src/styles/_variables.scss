@@ -1,64 +1,22 @@
-// 类名前缀
-
-$prefix: vc;
-
-//尺寸
-$fs-26: 26px;
-$fs-25: 25px;
-$fs-24: 24px;
-$fs-23: 23px;
-$fs-23: 23px;
-$fs-22: 22px;
-$fs-21: 21px;
-$fs-20: 20px;
-$fs-19: 19px;
-$fs-18: 18px;
-$fs-17: 17px;
-$fs-16: 16px;
-$fs-15: 15px;
-$fs-14: 14px;
-$fs-13: 13px;
-$fs-12: 12px;
-$fs-11: 11px;
-$fs-10: 10px;
-$fs-9: 9px;
-$fs-8: 8px;
-$fs-7: 7px;
-$fs-6: 6px;
-$fs-5: 5px;
-$fs-4: 4px;
-$fs-3: 3px;
-$fs-2: 2px;
-$fs-1: 1px;
-$fs-0: 0px;
-
+@charset "utf-8";
 
 // 常用颜色
 
 // 默认
 $color-primary: #409eff !default;
-$color-primary__lighten: lighten($color-primary, 10%) !default;
-$color-primary__darken: darken($color-primary, 10%) !default;
 
 // 成功
 $color-success: #67c23a !default;
-$color-success__lighten: lighten($color-success, 10%) !default;
-$color-success__darken: darken($color-success, 10%) !default;
 
 // 警告
 $color-warning: #e6a23c !default;
-$color-warning__lighten: lighten($color-warning, 10%) !default;
-$color-warning__darken: darken($color-warning, 10%) !default;
 
 // 失败
 $color-danger: #f56c6c !default;
-$color-danger__lighten: lighten($color-danger, 10%) !default;
-$color-danger__darken: darken($color-danger, 10%) !default;
 
 // 禁用
 $color-disabled: #C0C4CC !default;
-$color-disabled__lighten: lighten($color-disabled, 10%) !default;
-$color-disabled__darken: darken($color-disabled, 10%) !default;
+
 
 $white-color: #ffffff !default;
 $black-color: #353c42 !default;
@@ -68,8 +26,6 @@ $light-color: #f9f9fb !default;
 
 // 主色
 $primary-color: $color-primary !default;
-$primary-color__lighten: lighten($primary-color, 10%) !default;
-$primary-color__darken: darken($primary-color, 10%) !default;
 
 // 语义色
 $error-color: $color-danger !default;
@@ -78,6 +34,8 @@ $info-color: $color-primary !default;
 $success-color: $color-success !default;
 
 // 字体
+
+$font-color: $black-color !default;
 
 $font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 
@@ -89,19 +47,19 @@ $heading-super-line-height: 48px !default;
 $heading-large-font-size: 32px !default;
 $heading-large-line-height: 40px !default;
 
-$heading-middle-font-size: 27px !default;
+$heading-middle-font-size: 26px !default;
 $heading-middle-line-height: 32px !default;
 
-$heading-small-font-size: 19px !default;
-$heading-small-line-height: 27px !default;
+$heading-small-font-size: 20px !default;
+$heading-small-line-height: 26px !default;
 
 $bold-large-font-size: 16px !default;
-$bold-large-line-height: 27px !default;
+$bold-large-line-height: 26px !default;
 
 $bold-middle-font-size: 14px !default;
 $bold-middle-line-height: 16px !default;
 
-$bold-small-font-size: 11px !default;
+$bold-small-font-size: 12px !default;
 $bold-small-line-height: 16px !default;
 
 $regular-large-font-size: 16px !default;
@@ -119,8 +77,6 @@ $paragraph-line-height: 32px !default;
 // 边框
 
 $border-color: #DCDFE6 !default;
-$border-color__lighten: lighten($color-primary, 10%) !default;
-$border-color__darken: darken($color-primary, 10%) !default;
 
 // 阴影
 
@@ -129,35 +85,36 @@ $box-shadow-lighten: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
 $box-shadow-darken: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
 
 // cursor
+
 $cursor-disabled: not-allowed !default;
 
 // 按钮
 
-$button-border-size: 0 !default;
-$button-border-style: solid !default;
-$button-border-color: $color-primary !default;
 $button-border-radius: 4px !default;
-$button-border-box-shadow: 0px 1px 2px rgba(0, 0, 0, .12) !default;
-$button-font-size: 14px !default;
+$button-box-shadow: 0px 1px 2px rgba(0, 0, 0, .12) !default;
 $button-line-height: 1 !default;
-$button-padding: 10px 18px !default;
+
+$button-large-padding: 12px 20px !default;
+$button-large-font-size: 16px !default;
+$button-middle-padding: 10px 18px !default;
+$button-middle-font-size: 14px !default;
+$button-small-padding: 6px 10px !default;
+$button-small-font-size: 12px !default;
 
 $button-background-color-info: $info-color;
 $button-background-color-success: $success-color;
 $button-background-color-warning: $warning-color;
 $button-background-color-error: $error-color;
 
-$button-padding-large: 12px 20px;
-$button-font-size-large: 16px;
-$button-padding-middle: $button-padding;
-$button-font-size-middle: 14px;
-$button-padding-small: 6px 10px;
-$button-font-size-small: 12px;
-
 // 模态框 Modal
 
+$modal-background-color: $white-color;
 $modal-box-shadow: $box-shadow;
 $modal-border-radius: 4px;
-$modal-padding: 6px 16px;
-$modal-min-width: 300px;
-$modal-body-min-height: 60px;
+$modal-top: 15vh;
+$modal-min-width: 450px;
+$modal-body-min-height: 100px;
+
+
+$checkbox-active-color: $primary-color;
+$checkbox-disabled-color: #F5F5F5;
