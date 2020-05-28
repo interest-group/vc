@@ -134,7 +134,7 @@ export default {
         }
         values.push(value)
       })
-      return values.filter(({disabled}) => !disabled)
+      return values.filter(({ disabled }) => !disabled)
     }
   }
 }
