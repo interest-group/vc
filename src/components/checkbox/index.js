@@ -1,5 +1,5 @@
 import Checkbox from './Checkbox'
-import CheckboxGroup from './Group'
+import CheckboxGroup from './CheckboxGroup'
 export default [
   Checkbox,
   CheckboxGroup

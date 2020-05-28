@@ -1,139 +1,140 @@
 <template>
-  <div>
-    <form action
-          name="vc-upload">
-      <div class="vc-upload-box">
-        <div class="vc-img-list"
-             v-for="(item,index) of imgList"
-             :key="index"
-             v-show="imgList.length!=0">
-          <div class="vc-img-item"
-               @mouseover="mouseOver(index)"
-               @mouseout="mouseOut">
-            <img v-if="item.file.type.indexOf('image') !== -1"
-                 :src="item.file.src" />
-            <div class="vc-upload-icon"
-                 v-show="index==activeNum">
-              <i @click="fileDel(index)">×</i>
-            </div>
-          </div>
-        </div>
-        <div class="vc-img-add"
-             v-show="addState">
-          <span>十</span>
-          <input id="inpu"
-                 name="files"
-                 @change="fileChange($event)"
-                 type="file"
-                 ref="file"
-                 accept="image/*" />
-        </div>
-      </div>
-    </form>
-  </div>
+  <span class="v-upload" :class="{'v-upload__drag-hover': hover}" @click="handleClick" @paste="handlePaste"
+        @dragover.prevent="hover = true" @dragleave.prevent="hover = false" @drop.prevent="onDrop">
+    <slot :hover="hover"></slot>
+    <input ref="input" type="file" class="v-upload-input" :multiple="multiple"
+           @change="handleChange" :accept="accept">
+  </span>
 </template>
-
 <script>
-import { getFileBase64 } from './util'
-export default {
-  name: 'vc-upload',
-  props: {
-    // 允许上传的图片个数
-    limit: {
-      type: Number,
-      default: 9
+import Message from '../message'
+
+function getBaseModifiers (extList) {
+  return [
+    {
+      // 检查文件大小
+      name: 'size',
+      disabled: false,
+      check: (file) => file.size <= 5 * 1024 * 1024,
+      message: '上传文件最大不能超过5M'
     },
-    // 允许上传的图片大小
-    imgSize: {
-      type: Number,
-      default: 1024
+    {
+      // 检查文件扩展名
+      name: 'ext',
+      disabled: false,
+      check: (file) => {
+        if (!extList.length) return true
+        const name = typeof file.name === 'string' ? file.name : ''
+        const ext = name.substr(name.lastIndexOf('.') + 1).toUpperCase()
+        return extList.map(e => e.toUpperCase()).includes(ext.toUpperCase())
+      },
+      message: '文件类型不合法'
+    }
+  ]
+}
+
+export default {
+  name: 'v-upload',
+  props: {
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    paste: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    // input原生属性
+    accept: {
+      type: String
+    },
+    // 文件类型检查
+    ext: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    // 检查文件方法
+    modifiers: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    // 检查错误使用Message警告
+    warn: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
-      imgList: [],
-      addState: true,
-      activeNum: null
-    }
-  },
-  watch: {
-    imgList () {
-      if (this.imgList.length === this.limit) {
-        this.addState = false
-        console.log('上传已达到上限')
-      } else {
-        this.addState = true
-      }
+      hover: false
     }
   },
   methods: {
-    fileChange (el) {
-      // console.log(el)
-      if (!el.target.files[0].size) return
-      this.fileList(el.target)
-      el.target.value = ''
+    handleClick () {
+      if (this.disabled) return
+      this.$refs.input.click()
     },
-    fileList (fileList) {
-      let files = fileList.files
+    handleChange (e) {
+      const files = e.target.files
+      if (!files) return
+      this.uploadFiles(files)
+      this.$refs.input.value = null
+    },
+    onDrop (e) {
+      this.hover = false
+      if (this.disabled) return
+      this.uploadFiles(e.dataTransfer.files)
+    },
+    handlePaste (e) {
+      if (this.disabled) return
+      if (this.paste) {
+        this.uploadFiles(e.clipboardData.files)
+      }
+    },
+    uploadFiles (files) {
+      let fileList = Array.prototype.slice.call(files)
+      if (!this.multiple) fileList = fileList.slice(0, 1)
+      if (fileList.length > 0 && this.checkFiles(fileList)) {
+        this.$emit('change', fileList)
+      }
+    },
+    // 检查文件列表
+    checkFiles (files) {
+      const modifiers = this.getModifiers()
       for (let i = 0; i < files.length; i++) {
-        // 判断是否为文件夹
-        if (files[i].type !== '') {
-          this.fileAdd(files[i])
-        } else {
-          // 文件夹处理
-          this.folders(fileList.items[i])
-        }
-      }
-    },
-    // 文件夹处理
-    folders (files) {
-      let _this = this
-      // 判断是否为原生file
-      if (files.kind) {
-        files = files.webkitGetAsEntry()
-      }
-      files.createReader().readEntries(function (file) {
-        for (let i = 0; i < file.length; i++) {
-          if (file[i].isFile) {
-            _this.foldersAdd(file[i])
-          } else {
-            _this.folders(file[i])
+        const file = files[i]
+        for (let j = 0; j < modifiers.length; j++) {
+          const { check, message } = modifiers[j]
+          if (!check(file)) {
+            if (this.warn) {
+              Message.warning(message)
+            }
+            this.$emit('error', { file, modifier: modifiers[j] })
+            return false
           }
         }
-      })
-    },
-    foldersAdd (entry) {
-      let _this = this
-      entry.file(function (file) {
-        _this.fileAdd(file)
-      })
-    },
-    fileAdd (file) {
-      const size = Math.ceil(file.size / 1024)
-      if (size <= this.imgSize) {
-        getFileBase64(file).then(src => {
-          file.src = src
-          this.imgList.push({ file })
-          // console.log(this.imgList)
-          this.uploadImage()
-        })
-      } else {
-        console.log('上传不能超过this.imgSize')
       }
+      return true
     },
-    fileDel (index) {
-      this.imgList.splice(index, 1)
-    },
-    // 请求写在这里面
-    uploadImage () {
-      this.$emit('ajaxRequest')
-      // console.log('请求写这里')
-    },
-    mouseOver (num) {
-      this.activeNum = num
-    },
-    mouseOut (num) {
-      this.activeNum = null
+    // 获取检查文件方法
+    getModifiers () {
+      const values = getBaseModifiers(this.ext)
+      this.modifiers.forEach((value) => {
+        if (value.name) {
+          const index = values.findIndex(({ name }) => name && (name === value.name))
+          if (index >= 0) values.splice(index, 1)
+        }
+        values.push(value)
+      })
+      return values.filter(({disabled}) => !disabled)
     }
   }
 }

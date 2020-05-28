@@ -1,30 +1,26 @@
 <template>
-  <div class="vc-tabs" :class="tabsClasses">
-    <div class="vc-tabs_header" :class="tabsHeaderClasses">
-      <div class="vc-tabs_list" :class="tabsListClasses">
-        <div v-for="(item, index) in tabsList"
-        :key="index"
-        :class="navClasses(index, item)"
-        @click="!item.disabled && onSelectTab(item, index)"
-        ref="tabList">
-          {{item.label}}
-        </div>
-        <div class="vc-tabs_line" :style="lineStyles" v-if="type === 'tabs'"></div>
+  <div class="v-tabs" :class="`v-tabs__${type}`">
+    <div class="v-tabs__header">
+      <div class="tabs">
+        <template v-for="item in tabsList">
+          <div ref="tabs" :key="item.name" class="tabs-item" :class="tabsItemClasses(item)"
+               @click="handleSelect(item)">{{item.label}}</div>
+        </template>
+        <div class="tabs-line" :style="lineStyle" v-if="type === 'tabs'"></div>
       </div>
     </div>
-    <div class="vc-tabs_content">
+    <div class="v-tabs__content">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+import { oneOf } from '../../utils/assist'
+import { findChildComponents } from '../../utils/findComponents'
+
 export default {
-  name: 'vc-tabs',
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
+  name: 'v-tabs',
   props: {
     value: {
       type: String,
@@ -32,7 +28,7 @@ export default {
     },
     // 选项卡样式
     type: {
-      type: String,
+      validator: (value) => oneOf(value, ['card', 'tabs']),
       default: 'tabs'
     },
     // 线条颜色
@@ -45,114 +41,77 @@ export default {
   data () {
     return {
       tabsList: [],
-      // 底部线条宽度
-      lineWidth: 0,
-      // 当前活动导航
-      currentActive: '',
-      // 滚动距离
-      lineTransformX: 0,
-      // 当前选择值
-      activeValue: '',
-      temporaryValue: '',
-      activeEvent: {},
-      isFinish: false
+      currentValue: '',
+      lineStyle: null,
+      wait: false
     }
   },
   computed: {
-    tabsClasses () {
-      return {
-        'vc-tabs-card': this.type === 'card'
-      }
-    },
-    tabsHeaderClasses () {
-      return {
-        'vc-tabs_header_card': this.type === 'card'
-      }
-    },
-    tabsListClasses () {
-      return [
-        {
-          'vc-tabs_list-tabs': this.type === 'tabs',
-          'vc-tabs_list-card': this.type === 'card'
-        }
-      ]
-    },
-    // 底部线条
-    lineStyles () {
-      return {
-        width: `${this.lineWidth}px`,
-        transform: `translateX(${this.lineTransformX}px)`,
-        backgroundColor: `${this.lineColor}`
-      }
-    }
   },
   watch: {
-    value (val) {
-      this.currentActive = this.tabsList.findIndex(v => v.name === this.value)
-    },
-    tabsList (val) {
-      this.currentActive = val.findIndex(v => v.name === this.value)
-      this.showDiv()
-    },
-    currentActive (val) {
-      if (val < 0) return
-      this.$nextTick(() => {
-        if (val === 0) {
-          this.lineWidth = this.$refs.tabList[val].offsetWidth - 20
-          this.lineTransformX = this.$refs.tabList[val].offsetLeft
-        } else if (val === this.tabsList.length - 1) {
-          this.lineWidth = this.$refs.tabList[val].offsetWidth - 20
-          this.lineTransformX = this.$refs.tabList[val].offsetLeft + 20
-        } else {
-          this.lineWidth = this.$refs.tabList[val].offsetWidth - 40
-          this.lineTransformX = this.$refs.tabList[val].offsetLeft + 20
-        }
-        this.activeValue = this.tabsList[val].name
-        this.$emit('change', this.activeValue)
-        this.$emit('tab-change', this.tabsList[val], this.activeEvent)
-        this.showDiv()
-      })
+    value (value) {
+      this.setActive(value)
     }
   },
+  created () {
+    this.children = []
+  },
   mounted () {
-    this.tabsList = this.$children
+    this.updateChildren()
+    if (this.tabsList.length) {
+      this.initActive()
+    }
   },
   methods: {
-    navClasses (i, item) {
-      return [
-        'vc-tabs_list-nav',
-        item.disabled ? 'vc-tabs_list-disabled' : 'vc-tabs_list-nodisabled',
-        {
-          'vc-tabs_list-nav-first': i === 0,
-          'vc-tabs_list-nav-last': (this.tabsList.length - 1) === i,
-          'vc-tabs_list-nav-isactive': this.currentActive === i
-        }
-      ]
+    // 初始化选中值
+    initActive () {
+      this.currentValue = this.tabsList[0].name
+      if (this.value && this.value !== this.currentValue) {
+        this.currentValue = this.value
+      }
+      this.setActive(this.currentValue)
     },
-    // 选择导航
-    onSelectTab (item, index) {
-      this.temporaryValue = item.name
-      if (!this.beforeChange) {
-        this.currentActive = index
-        this.activeEvent = event || window.event
-      } else {
-        if (this.isFinish) return
-        this.isFinish = true
-        this.beforeChange(() => {
-          this.currentActive = index
-          this.activeEvent = event || window.event
-          this.isFinish = false
-        }, this.temporaryValue, this.activeValue)
+    // 更新子节点
+    updateChildren () {
+      this.children = findChildComponents(this, 'v-tabs-item')
+      this.tabsList = this.children.map(ref => ({ name: ref.name, label: ref.label }))
+    },
+    // 更新选中
+    setActive (value) {
+      this.currentValue = value
+      this.children.forEach(ref => (ref.visible = ref.name === value))
+      if (this.type === 'tabs') {
+        this.$nextTick(() => this.updateLine())
       }
     },
-    // 控制显示隐藏
-    showDiv () {
-      this.$children.map(v => {
-        v.show = false
-        if (v.name === this.activeValue) {
-          v.show = true
-        }
-      })
+    // 更新选中动画
+    updateLine () {
+      const index = this.tabsList.findIndex(({ name }) => name === this.currentValue)
+      const node = this.$refs.tabs[index]
+      this.lineStyle = {
+        backgroundColor: `${this.lineColor}`,
+        width: `${node.offsetWidth - 20}px`,
+        transform: `translateX(${node.offsetLeft + 10}px)`
+      }
+    },
+    handleSelect (item) {
+      if (item.disabled || this.wait) return
+      if (this.beforeChange instanceof Function) {
+        this.wait = true
+        this.beforeChange(() => {
+          this.wait = false
+          this.setActive(item.name)
+        }, item, this.currentValue)
+      } else {
+        this.setActive(item.name)
+      }
+      this.$emit('click', item)
+    },
+    tabsItemClasses (item) {
+      return {
+        'tabs-item__active': item.name === this.currentValue,
+        'tabs-item__disabled': item.disabled
+      }
     }
   }
 }

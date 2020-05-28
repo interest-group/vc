@@ -1,86 +1,85 @@
 
-.#{$prefix}-message {
-  box-sizing: border-box;
-  position: fixed;
-  margin-top: 24px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1010;
-}
-
-.#{$prefix}-message-box {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  background: #fff;
-  line-height: 1;
-  position: relative;
+.v-message-enter-active,
+.v-message-leave-active {
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-
-  &-short {
-    margin-left: 40%;
-  }
-
-  &-content {
-    padding: 16px;
-  }
+  transition: all 0.15s linear;
 }
 
-.#{$prefix}-message-content {
-  padding: 0 20px;
+.v-message-enter {
+  opacity: 0.5;
+  transform: translateY(-100%);
+}
+.v-message-leave-to {
+  opacity: 0.5;
+  height: 0 !important;
+}
+
+.v-message {
+  border-radius: 4px;
+  background-color: #FFF;
+  box-shadow: $box-shadow;
+  padding: 10px 20px;
+  margin-top: 10px;
+  width: 400px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  height:50px;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left:0;
-    bottom: 0;
-    width:100%;
-    opacity: 0.1;
+  &__wrap {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 14px;
+    z-index: 1010;
   }
 
-  &-info {
-      color: $color-primary;
-    &:before {
-      background-color: $color-primary;
+  .icon {
+    font-size: 20px;
+    width: 20px;
+    line-height: 1em;
+    margin-right: 10px;
+  }
+  .title {
+    margin: 0;
+    color: $font-color;
+    font-size: 14px;
+  }
+  .close {
+    margin-left: auto;
+    font-size: 16px;
+    width: 16px;
+    line-height: 1em;
+    cursor: pointer;
+    &:not(:hover) {
+      opacity: 0.5;
     }
   }
 
-  &-success {
-      color: $color-success;
-    &:before {
-      background-color: $color-success;
+  &__info {
+    background-color: lighten($info-color, 40%);
+    .title,
+    .icon {
+      color: $info-color;
     }
   }
-
-  &-warning {
-      color: $color-warning;
-    &:before {
-      background-color: $color-warning;
+  &__success {
+    background-color: lighten($success-color, 40%);
+    .title,
+    .icon {
+      color: $success-color;
     }
   }
-
-  &-error {
-      color: $color-danger;
-    &:before {
-      background-color: $color-danger;
+  &__warning {
+    background-color: lighten($warning-color, 40%);
+    .title,
+    .icon {
+      color: $warning-color;
     }
   }
-  &-icon {
-    line-height: 16px;
-    height:16px;
-    font-size: 14px!important;
-  }
-  &-desc {
-    height:12px;
-    line-height: 12px;
-    font-size: 12px;
-    margin-left: 10px;
+  &__error {
+    background-color: lighten($error-color, 40%);
+    .title,
+    .icon {
+      color: $error-color;
+    }
   }
 }

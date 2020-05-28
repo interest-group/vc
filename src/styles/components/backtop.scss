@@ -1,26 +1,17 @@
-.vc-back-top {
+.v-back-top {
   position: fixed;
   top: 80vh;
   right: 5vw;
   cursor: pointer;
-
-  &-target {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  &__target {
+    box-shadow: $box-shadow;
     background-color: #FFF;
     width: 50px;
     height: 50px;
     line-height:50px;
     text-align: center;
-  }
-
-  &.fade-in-enter-active, &.fade-in-leave-active {
-    // -webkit-transition opacity 0.3s ease
-    // transition opacity 0.3s ease
-    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
-    -webkit-transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
-  }
-
-  &.fade-in-enter, &.fade-in-leave-to {
-    opacity: 0;
+    .vfont {
+      font-size: 22px;
+    }
   }
 }

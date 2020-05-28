@@ -1,5 +1,5 @@
 <template>
-  <transition name="vc-slide-down" @before-enter="beforeEnter" @before-leave="beforeLeave"
+  <transition name="v-slide-down" @before-enter="beforeEnter" @before-leave="beforeLeave"
               @after-enter="clear" @after-leave="clear">
     <div v-show="value">
       <slot></slot>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'vc-slide-down',
+  name: 'v-slide-down',
   props: {
     value: {
       type: Boolean,

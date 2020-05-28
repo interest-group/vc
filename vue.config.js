@@ -2,16 +2,13 @@ const path = require('path')
 const configs = require('./md')
 
 module.exports = {
-  pages: {
-    index: {
-      entry: 'example/main.js',
-      template: 'public/index.html',
-      filename: 'index.html'
-    }
-  },
-  publicPath: '/vc/',
-  lintOnSave: 'error',
+  // lintOnSave: 'error',
+  lintOnSave: false,
   chainWebpack: config => {
+    config.entryPoints
+      .get('app')
+      .clear()
+      .add(path.resolve(__dirname, 'example/main.js'))
     config.resolve.alias
       .delete('@')
       .set('@', path.resolve(__dirname, 'example'))
@@ -27,13 +24,6 @@ module.exports = {
         ...configs
       })
   },
-  // css: {
-  //   loaderOptions: {
-  //     scss: {
-  //       prependData: `@import "./src/styles/aa.scss";`
-  //     }
-  //   }
-  // },
   devServer: {
     overlay: {
       warnings: true,

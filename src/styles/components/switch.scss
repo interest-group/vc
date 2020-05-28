@@ -1,56 +1,32 @@
-.vc-switch {
+.v-switch {
   display: inline-block;
-  position: relative;
-  margin: 10px 10px 10px 0;
+  width: 38px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #CCC;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  .vc-switch_input {
-    display: inline-block;
-    position: relative;
-    height: 20px;
-    border-radius: 10px;
-    background: #dcdfe6;
-    transition: all .3s;
-    vertical-align: middle;
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0;
-      margin-left: 1px;
-      display: block;
-      width: 16px;
-      height: 16px;
-      border-radius: 100%;
-      background-color: #fff;
-      transition: all .3s;
+  &-point {
+    transition: transform 0.2s ease;
+    transform: translate(2px, 2px);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #FFF;
+  }
+  &__active {
+    background-color: $checkbox-active-color;
+    .v-switch-point {
+      transform: translate(20px, 2px);
     }
   }
-  .vc-switch_checked {
-    background: $color-success;
-    &::after {
-      left: 100%;
-      margin-left: -1px;
-      transform: translate(-100%, -50%);
+  &__disabled {
+    cursor: $cursor-disabled;
+    &.v-switch__active {
+      background-color: lighten($checkbox-active-color, 10%);
     }
-  }
-  &.vc-switch_disabled {
-    cursor: not-allowed;
-    opacity: .6;
-  }
-  .vc-switch_active {
-    color: #409eff;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .vc-switch_text {
-    transition: all .2s;
-    user-select: none;
-  }
-  .vc-switch_text_close {
-    margin-right: 6px;
-  }
-  .vc-switch_text_open {
-    margin-left: 6px;
+    .v-switch-point {
+      background-color: darken(#FFF, 10%);
+    }
   }
 }

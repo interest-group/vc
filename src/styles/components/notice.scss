@@ -1,0 +1,76 @@
+
+.v-notice-enter-active,
+.v-notice-leave-active {
+  overflow: hidden;
+  transition: all 0.2s linear;
+}
+
+.v-notice-enter {
+  opacity: 0.5;
+  transform-origin: 0 0;
+  transform: translateX(100%);
+}
+.v-notice-leave-to {
+  opacity: 0.5;
+  height: 0 !important;
+}
+
+.v-notice {
+  border-radius: 4px;
+  background-color: #FFF;
+  box-shadow: $box-shadow;
+  padding: 20px;
+  margin-top: 10px;
+  width: 400px;
+  box-sizing: border-box;
+  &__wrap {
+    position: fixed;
+    top: 14px;
+    right: 24px;
+    z-index: 1010;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    .icon {
+      font-size: 24px;
+      width: 24px;
+      line-height: 1em;
+      margin-right: 10px;
+    }
+    .title {
+      margin: 0;
+      color: $font-color;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .close {
+      margin-left: auto;
+      font-size: 20px;
+      width: 20px;
+      line-height: 1em;
+      cursor: pointer;
+      &:not(:hover) {
+        opacity: 0.5;
+      }
+    }
+  }
+  &__desc {
+    font-size: 14px;
+    line-height: 21px;
+    margin-top: 10px;
+    text-align: justify;
+  }
+  &__info .icon {
+    color: $info-color;
+  }
+  &__success .icon {
+    color: $success-color;
+  }
+  &__warning .icon {
+    color: $warning-color;
+  }
+  &__error .icon {
+    color: $error-color;
+  }
+}

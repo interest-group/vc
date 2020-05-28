@@ -1,18 +1,16 @@
 <template>
-  <div class="vc-tabs_item" v-show="show">
-    <slot></slot>
-  </div>
+  <div class="v-tabs_item" v-show="visible"><slot></slot></div>
 </template>
 
 <script>
 export default {
-  name: 'vc-tabs-item',
+  name: 'v-tabs-item',
   props: {
-    label: {
-      type: String,
-      default: ''
-    },
     name: {
+      type: String,
+      required: true
+    },
+    label: {
       type: String,
       default: ''
     },
@@ -23,21 +21,8 @@ export default {
   },
   data () {
     return {
-      show: true
+      visible: false
     }
-  },
-  computed: {
-    parentValue () {
-      let parent = this.$parent
-      while (parent) {
-        if (parent.$options.name === 'vc-tabs') {
-          break
-        }
-        parent = parent.$parent
-      }
-      return parent
-    }
-  },
-  methods: { }
+  }
 }
 </script>

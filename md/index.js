@@ -23,9 +23,9 @@ module.exports = {
           // 1.获取第一行的内容使用markdown渲染html作为组件的class
           let demoInfo = tokens[idx].info.trim().match(/^demo\s+(.*)$/)
           let classes = (demoInfo && demoInfo.length > 1) ? demoInfo[1] : ''
-          return `<vc-demo-block><div slot="source" class="doc-${classes}">${tokens[idx + 1].content}</div><div slot="highlight">`
+          return `<v-demo-block><div slot="source" class="doc-${classes}">${tokens[idx + 1].content}</div><div slot="highlight">`
         } else {
-          return '</div></vc-demo-block>\n'
+          return '</div></v-demo-block>\n'
         }
       }
     }],

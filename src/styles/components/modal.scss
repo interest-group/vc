@@ -1,82 +1,56 @@
-$modal-prefix: #{$prefix}-modal;
-
-.#{$modal-prefix}__list {
+.v-modal__wrapper {
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
-
-  background-color: rgba(0,0,0, .2);
-}
-
-.#{$modal-prefix}__wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  height: 0;
   z-index: 1000;
-
-  > * {
-    box-sizing: border-box;
-  }
- }
-
-.#{$modal-prefix}__mask {
-  @extend .#{$modal-prefix}__wrapper;
-
-  background-color: rgba(0,0,0, .2);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.#{$modal-prefix} {
-  min-width: $modal-min-width;
-  margin: 0 auto;
-  padding: $modal-padding;
-
-  position: relative;
-  top: 200px;
+.v-modal__mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0, .2);
   z-index: 1001;
+}
 
-  background-color: $white-color;
-  box-shadow: $box-shadow;
+.v-modal {
+  background-color: $modal-background-color;
   border-radius: $modal-border-radius;
-
-  > *:not(:last-child) {
-    border-bottom: 1px solid $grey-color;
-  }
-
+  box-shadow: $modal-box-shadow;
+  min-width: $modal-min-width;
+  top: $modal-top;
+  position: relative;
+  z-index: 1002;
   &__header {
-    padding: 1em 0;
-
-    position: relative;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    .close {
+      margin-left: auto;
+      cursor: pointer;
+    }
   }
-
-  &__title {
-    font-size: 16px;
-  }
-
-  &__close-icon {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-
-    cursor: pointer;
-  }
-
   &__body {
     min-height: $modal-body-min-height;
-    padding: 1em 0;
+    padding: 18px 20px;
+    box-sizing: border-box;
   }
-
   &__footer {
-    padding: 1em 0;
-
+    border-top: 1px solid $border-color;
+    padding: 18px 20px;
     text-align: right;
-
-    button:not(:last-child) {
-      margin-right: 1em;
+    .v-button {
+      margin-left: 15px;
     }
   }
 }

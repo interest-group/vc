@@ -1,25 +1,25 @@
 <template>
-  <a v-if="to" :href="href" :target="target" :class="classes" @click="handleClick"><slot></slot></a>
-  <li v-else="" :class="classes" @click="!disabled && handleActive()"><slot></slot></li>
+  <router-link :to="to" v-slot="{ href, navigate, isActive }">
+    <component :is="tag" :href="href" class="v-menu-item" :target="target"
+               :class="{'v-menu-item__active': isActive, 'v-menu-item__disabled': disabled}"
+               @click="handleClick($event, navigate)">
+      <slot></slot>
+    </component>
+  </router-link>
 </template>
 
 <script>
 import { oneOf } from '../../utils/assist'
-import emitter from '../../mixins/emitter'
+
 export default {
-  name: 'vc-menu-item',
-  mixins: [emitter],
+  name: 'v-menu-item',
   props: {
-    name: {
-      type: [String, Number],
-      required: true
+    tag: {
+      type: String,
+      default: 'a'
     },
     to: {
-      type: [Object, String]
-    },
-    replace: {
-      type: Boolean,
-      default: false
+      default: '#'
     },
     disabled: {
       type: Boolean,
@@ -35,50 +35,13 @@ export default {
   },
   data () {
     return {
-      active: false
     }
-  },
-  computed: {
-    href () {
-      return typeof this.to === 'string' ? this.to : null
-    },
-    classes () {
-      return [
-        'vc-menu-item',
-        {
-          'vc-menu-item-active': this.active,
-          'vc-menu-item-disabled': this.disabled
-        }
-      ]
-    }
-  },
-  mounted () {
-    this.$on('update-active', (name) => {
-      this.active = this.name === name
-    })
   },
   methods: {
-    handleClick (event) {
-      // 禁用
-      if (this.disabled) return event.preventDefault()
-      // _blank 原生事件
-      if (this.target === '_blank') return
-      event.preventDefault()
-      this.handleJump(event)
-    },
-    handleJump (event) {
-      if (event.ctrlKey || event.metaKey) {
-        window.open(this.to)
-      } else if (this.$router) {
-        this.replace ? this.$router.replace(this.to) : this.$router.push(this.to)
-      } else {
-        window.location.href = this.to
+    handleClick (event, navigate) {
+      if (!this.disabled) {
+        navigate(event)
       }
-      this.handleActive()
-    },
-    handleActive () {
-      this.active = true
-      this.bubbling('vc-menu', false, 'menu-item-active', this.name)
     }
   }
 }

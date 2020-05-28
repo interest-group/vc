@@ -1,5 +1,12 @@
-.vc-confirm-wrap {
-  .vc-confirm-background {
+.v-drawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 889;
+  background-color: #FFF;
+  &__mask {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     left: 0;
@@ -7,71 +14,21 @@
     top: 0;
     bottom: 0;
     z-index: 888;
-
-    &.background-fade-enter-active, &.background-fade-leave-active {
-      transition: opacity 0.3s ease;
-    }
-
-    &.background-fade-enter, &.background-fade-leave-to {
-      opacity: 0;
-    }
   }
-
-  .vc-confirm {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 998;
-
-    &.fade-left-enter-active, &.fade-left-leave-active {
-      transition: all 0.3s ease;
-      opacity: 1;
-    }
-
-    &.fade-left-enter, &.fade-left-leave-to {
-      opacity: 0;
-      transform: translate3d(-20vw, 0, 0);
-    }
-
-    &.fade-right-enter-active, &.fade-right-leave-active {
-      transition: all 0.3s ease;
-      opacity: 1;
-    }
-
-    &.fade-right-enter, &.fade-right-leave-to {
-      opacity: 0;
-      transform: translate3d(20vw, 0, 0);
-    }
-
-    &.fade-top-enter-active, &.fade-top-leave-active {
-      transition: all 0.3s ease;
-      opacity: 1;
-    }
-
-    &.fade-top-enter, &.fade-top-leave-to {
-      opacity: 0;
-      transform: translate3d(0, -20vh, 0);
-    }
-
-    &.fade-bottom-enter-active, &.fade-bottom-leave-active {
-      transition: all 0.3s ease;
-      opacity: 1;
-    }
-
-    &.fade-bottom-enter, &.fade-bottom-leave-to {
-      opacity: 0;
-      transform: translate3d(0, 20vh, 0);
-    }
-
-    .vc-confirm-wrapper {
-      .vc-confirm-content {
-        position: fixed;
-        // width 20vw
-        // height 40vh
-        background: #fff;
-      }
-    }
+  &__left {
+    right: unset;
+    width: 20vw;
+  }
+  &__right {
+    left: unset;
+    width: 20vw;
+  }
+  &__top {
+    bottom: unset;
+    height: 20vw;
+  }
+  &__bottom {
+    top: unset;
+    height: 20vw;
   }
 }

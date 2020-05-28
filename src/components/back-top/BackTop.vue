@@ -1,67 +1,84 @@
 <template>
-  <!-- 组件本身就应该是按钮，而不是容器 -->
-  <transition name="fade-in">
-    <div class="vc-back-top"
-         v-if="visible"
-         @click="handleClick">
+  <transition name="v-fade-in">
+    <div class="v-back-top" v-if="visible" @click="handleClick">
       <slot>
-        <div class="vc-back-top-target">返回</div>
+        <div class="v-back-top__target"><v-icon name="rising1"></v-icon></div>
       </slot>
     </div>
   </transition>
-
 </template>
 <script>
+import VIcon from '../icon'
+import { debounce } from '../../utils/pipe'
+
+// 可滚动父级元素
+function findParentScroll (el) {
+  let parentNode = el.parentNode
+  while (parentNode) {
+    if (parentNode instanceof HTMLElement) {
+      if (parentNode.scrollTop > 0) {
+        return parentNode
+      } else {
+        parentNode.scrollTop++
+        const top = parentNode.scrollTop
+        if (top > 0) {
+          parentNode.scrollTop = 0
+          return parentNode
+        }
+      }
+      parentNode = parentNode.parentNode
+    } else {
+      break
+    }
+  }
+}
+
 export default {
-  name: `vc-backtop`,
+  name: 'v-back-top',
+  components: {
+    VIcon
+  },
   props: {
     // 滚动容器，默认为父组件$el
     target: {
-      validator (node) {
-        return !node || node.addEventListener
-      }
+      type: HTMLElement,
+      default: null
     },
     // 滚动多少距离开始显示组件!
     offset: {
       type: Number,
-      default: 60
+      default: 0
     }
   },
   data () {
     return {
-      visible: false, // 是否可见
-      container: null // 滚动容器
+      container: null, // 滚动容器
+      visible: this.offset <= 0, // 是否可见
+      scrollHandler: debounce((e) => this.handleScroll(e), 100)
     }
   },
   watch: {
-    // 监听target变化
     target () {
-      this.bindContainer()
+      this.setContainer()
     }
   },
   mounted () {
-    this.bindContainer()
+    this.setContainer()
   },
   beforeDestroy () {
-    this.unbindListener()
+    this.removeListener()
   },
   methods: {
     // 设置滚动容器
-    bindContainer () {
-      if (this.container) {
-        this.unbindListener()
-      }
-      this.container = this.target || this.$parent.$el
-      this.bindListener()
-    },
-    // 监听
-    bindListener () {
-      this.container.addEventListener('scroll', this.handleScroll)
+    setContainer () {
+      if (this.container) this.removeListener()
+      this.container = this.target || findParentScroll(this.$el)
+      this.container.addEventListener('scroll', this.scrollHandler)
     },
     // 取消监听
-    unbindListener () {
+    removeListener () {
       if (this.container) {
-        this.container.removeEventListener('scroll', this.handleScroll)
+        this.container.removeEventListener('scroll', this.scrollHandler)
         this.container = null
       }
     },

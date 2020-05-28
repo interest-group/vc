@@ -1,0 +1,43 @@
+.doc-demo-drawer,
+.doc-demo-notice{
+  .v-button {
+    margin-right: 20px;
+  }
+}
+.doc-demo-modal {
+  & > .v-button {
+    margin-right: 20px;
+  }
+}
+
+.doc-demo-swiper {
+  .page {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .page-1 {
+    color: #FFF;
+    background-color: #DB5C53;
+  }
+  .page-2 {
+    color: #FFF;
+    background-color: #A8E4B1;
+  }
+  .page-3 {
+    color: #FFF;
+    background-color: #4BA3BB;
+  }
+  .page-4 {
+    color: #FFF;
+    background-color: #316D75;
+  }
+}
+
+.doc-demo-upload {
+  .v-upload {
+    margin-right: 20px;
+  }
+}

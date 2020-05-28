@@ -1,16 +1,17 @@
 
-.vc-collapse {
-  width: 600px;
-  margin-top: 20px;
-
-  &-p {
-    height: 50px;
-    line-height: 50px;
+.v-collapse-item {
+  border-top: 1px solid $border-color;
+  &__title {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 48px;
   }
-
-  &-h {
-    height: 30px;
-    line-height: 30px;
-    background: #2d8cf0;
+  &:last-child {
+    border-bottom: 1px solid $border-color;
+  }
+  &__content {
+    padding-bottom: 20px;
   }
 }

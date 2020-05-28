@@ -1,6 +1,4 @@
-/**
- * Created by 337547038.
- */
 import Swiper from './Swiper'
-import SwiperItem from './Item'
+import SwiperItem from './SwiperItem'
+
 export default [Swiper, SwiperItem]
