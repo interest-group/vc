@@ -4,6 +4,8 @@ import home from '../pages/home'
 import component from '../pages/component'
 import notFound from '../pages/404'
 import develop from '../pages/develop'
+// import guide from './guide'
+// import components from './components'
 
 Vue.use(VueRouter)
 
