@@ -14,10 +14,12 @@
     "output": "vue inspect > output.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.4.0",
     "core-js": "^3.3.2",
     "gemini-scrollbar": "^1.5.3",
     "markdown-it": "^10.0.0",
     "markdown-it-container": "^2.0.0",
+    "v-click-outside-x": "^4.1.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
   },

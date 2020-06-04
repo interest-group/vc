@@ -1,0 +1,38 @@
+
+.v-poptip {
+  display: inline-block;
+  &__reference {
+    display: inline-block;
+  }
+  &__popper {
+    position: relative;
+    min-width: $poptip-min-width;
+    filter: drop-shadow(0 1px 4px rgba(44, 81, 56, 0.35));
+    background-color: $poptip-background-color;
+    border-radius: $poptip-border-radius;
+    padding: $poptip-padding;
+    font-size: $poptip-font-size;
+    line-height: $poptip-line-height;
+    & > [data-popper-arrow] {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      transform: rotate(45deg);
+      background-color: $poptip-background-color;
+      z-index: -1;
+    }
+    &[data-popper-placement^=right] > [data-popper-arrow] {
+      left: -4px;
+    }
+    &[data-popper-placement^=left] > [data-popper-arrow] {
+      right: -4px;
+    }
+    &[data-popper-placement^=top] > [data-popper-arrow] {
+      bottom: -4px;
+    }
+    &[data-popper-placement^=bottom] > [data-popper-arrow] {
+      top: -4px;
+    }
+  }
+}
+

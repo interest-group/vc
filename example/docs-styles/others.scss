@@ -41,3 +41,35 @@
     margin-right: 20px;
   }
 }
+
+
+.doc-demo-poptip {
+  position: relative;
+  .v-button {
+    white-space: nowrap;
+  }
+  .placement {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .around {
+    display: flex;
+    justify-content: space-around;
+    &:last-child {
+      margin-top: 20px;
+    }
+  }
+  .between {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .v-popper {
+    margin-right: 20px;
+  }
+}
+.doc-demo-drop-menu {
+  .v-drop-menu {
+    margin-right: 20px;
+  }
+}
