@@ -1,35 +1,12 @@
 @charset "utf-8";
 // 该文档用于定义样式动画
 
-// 拉下
-.vc-drop-down {
-  &-enter {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  &-enter-active {
-    transition: all 0.2s;
-  }
-}
-
-// 上方滑入
-.vc-top-slide {
-  &-enter-active,
-  &-leave-active {
-    transition: transform 0.2s ease;
-  }
-  &-enter,
-  &-leave-to {
-    transform: translateY(-100%);
-  }
-}
-
 // 滑入 top bottom
 .v-slide-top-enter-active,
 .v-slide-top-leave-active,
 .v-slide-bottom-enter-active,
 .v-slide-bottom-leave-active{
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   opacity: 1;
 }
 
@@ -51,7 +28,10 @@
 // 透明度 in left right top bottom
 
 .v-fade-in-enter-active,
-.v-fade-in-leave-active,
+.v-fade-in-leave-active {
+  transition: opacity 0.2s ease;
+}
+
 .v-fade-left-enter-active,
 .v-fade-left-leave-active,
 .v-fade-right-enter-active,
@@ -61,7 +41,6 @@
 .v-fade-bottom-enter-active,
 .v-fade-bottom-leave-active{
   transition: all 0.2s ease;
-  opacity: 1;
 }
 
 // 透明度 in

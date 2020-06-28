@@ -101,20 +101,42 @@ $button-middle-font-size: 14px !default;
 $button-small-padding: 6px 10px !default;
 $button-small-font-size: 12px !default;
 
-$button-background-color-info: $info-color;
-$button-background-color-success: $success-color;
-$button-background-color-warning: $warning-color;
-$button-background-color-error: $error-color;
-
 // 模态框 Modal
 
-$modal-background-color: $white-color;
-$modal-box-shadow: $box-shadow;
-$modal-border-radius: 4px;
-$modal-top: 15vh;
-$modal-min-width: 450px;
-$modal-body-min-height: 100px;
+$modal-background-color: $white-color !default;
+$modal-box-shadow: $box-shadow !default;
+$modal-border-radius: 4px !default;
+$modal-top: 15vh !default;
+$modal-min-width: 450px !default;
+$modal-body-min-height: 100px !default;
 
 
-$checkbox-active-color: $primary-color;
-$checkbox-disabled-color: #F5F5F5;
+$checkbox-active-color: $primary-color !default;
+$checkbox-disabled-color: #F5F5F5 !default;
+
+
+// Poptip
+$poptip-min-width: 150px !default;
+$poptip-background-color: #FFF !default;
+$poptip-border-radius: 6px !default;
+$poptip-padding: 10px 14px !default;
+$poptip-font-size: 12px !default;
+$poptip-line-height: 20px !default;
+
+
+// DropMenu
+
+$dm-min-width: 150px !default;
+$dm-background-color: #FFF !default;
+$dm-border-radius: 4px !default;
+$dm-padding: 4px 0 !default;
+
+$dm-line-margin: 4px 6px !default;
+$dm-line-bg: #DBE2EA !default;
+
+$dm-item-font-size: 12px !default;
+$dm-item-line-height: 20px !default;
+$dm-item-padding: 5px 11px !default;
+$dm-item-disabled-color: #BFBFBF !default;
+$dm-item-color: $font-color !default;
+$dm-item-hover-background-color: #EBF3FF !default;
